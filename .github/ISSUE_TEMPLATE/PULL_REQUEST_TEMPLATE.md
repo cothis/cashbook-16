@@ -10,7 +10,6 @@
 
 - [x] Warning Message가 발생하지 않았나요?
 - [x] Coding Convention을 준수했나요?
-- [x] 'npm run lint'나 'yarn lint'를 실행하였나요?
 
 ## :speech_balloon: 작업 내용
 
