@@ -1,0 +1,13 @@
+{
+  "name": "boilerplate_ts",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run --prefix client dev\" \"npm run --prefix server dev\""
+  },
+  "repository": "https://github.com/cothis/boilerplate_ts.git",
+  "author": "cothis <minho1030@naver.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
