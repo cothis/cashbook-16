@@ -3,7 +3,7 @@ name: Bug report
 about: 버그 제보
 title: ''
 labels: bug
-assignees: gomjellie, HobinLee
+assignees: gomjellie, cothis
 ---
 
 ## ⚠️ 버그 설명

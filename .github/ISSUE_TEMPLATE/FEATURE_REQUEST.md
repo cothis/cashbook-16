@@ -3,7 +3,7 @@ name: Feature request
 about: 추가해야 할 기능 제안
 title: ''
 labels: feature
-assignees: gomjellie, HobinLee
+assignees: gomjellie, cothis
 ---
 
 ## :hammer: 기능 설명
