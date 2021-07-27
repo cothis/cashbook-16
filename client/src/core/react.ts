@@ -7,7 +7,6 @@ const React = (function () {
       const Comp = Component();
       const $comp = Comp.render();
       if ($comp) {
-        $dom.innerHTML = '';
         $dom.appendChild($comp);
       }
       return Comp;

@@ -5,8 +5,9 @@ const $app = <Element>document.querySelector('#App');
 
 const updateDOM = () => {
   window.requestAnimationFrame(() => {
-    let App;
-    App = React.render(Counter, $app);
+    let App = React.render(Counter, $app);
+    $app.innerHTML = '';
+    $app.appendChild(App.render());
   });
 };
 

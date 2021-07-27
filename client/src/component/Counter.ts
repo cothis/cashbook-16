@@ -7,14 +7,13 @@ const Counter: FC = () => {
 
   return {
     render: () => {
-      const $dom = html`
+      return html`
         <div>
           <button onClick=${() => setCount(count - 1)}>-</button>
           <span>${count}</span>
           <button onClick=${() => setCount(count + 1)}>+</button>
         </div>
       `;
-      return $dom;
     },
   };
 };
