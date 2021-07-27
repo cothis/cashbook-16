@@ -11,7 +11,7 @@ const updateDOM = () => {
   });
 };
 
-window.addEventListener('interuptUpdateDOM', () => {
+window.addEventListener('interruptUpdateDOM', () => {
   updateDOM();
 });
 

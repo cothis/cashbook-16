@@ -15,7 +15,7 @@ const React = (function () {
       _val = _val || initialState;
       function setState(newState: any) {
         _val = newState;
-        window.dispatchEvent(new CustomEvent('interuptUpdateDOM'));
+        window.dispatchEvent(new CustomEvent('interruptUpdateDOM'));
       }
       return [_val, setState];
     },
