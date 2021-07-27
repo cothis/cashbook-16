@@ -27,6 +27,7 @@
     "express-session": "^1.17.2",
     "mysql2": "^2.2.5",
     "nedb-session-store": "^1.1.2",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "typeorm": "^0.2.34"
   }
 }
