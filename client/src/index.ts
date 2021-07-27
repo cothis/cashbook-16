@@ -1,5 +1,19 @@
-const app = document.querySelector('#App');
+import React from './core/react';
+import Counter from './component/Counter';
 
-const template = document.createElement('template');
-template.innerHTML = `<div>안녕하세요! Welcome cothis boilerPlate</div>`;
-app?.appendChild(template.content);
+const $app = document.querySelector('#App');
+
+const updateDOM = () => {
+  window.requestAnimationFrame(() => {
+    if ($app) {
+      let App;
+      App = React.render(Counter, $app);
+    }
+  });
+};
+
+window.addEventListener('interuptUpdateDOM', () => {
+  updateDOM();
+});
+
+updateDOM();
