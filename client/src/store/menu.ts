@@ -1,4 +1,4 @@
-import Store, { BaseState } from './store';
+import Store, { BaseState } from '@/store/store';
 
 export interface MenuState extends BaseState {
   current: string;

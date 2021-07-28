@@ -1,4 +1,4 @@
-import MainView from './view/pages/main';
+import MainView from '@/view/pages/main';
 
 const $app = <HTMLElement>document.querySelector('#App');
 

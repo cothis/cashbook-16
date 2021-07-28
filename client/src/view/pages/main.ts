@@ -1,8 +1,8 @@
-import Page from './page';
-import Component from '../components/component';
-import UserInfoComponent from '../components/userinfo.comp';
-import html from '../../core/jsx';
-import MainController from '../../controller/main';
+import Page from '@/view/pages/page';
+import Component from '@/view/components/component';
+import UserInfoComponent from '@/view/components/userinfo.comp';
+import html from '@/core/jsx';
+import MainController from '@/controller/main';
 
 export default class MainView extends Page {
   userInfoComponent: Component;

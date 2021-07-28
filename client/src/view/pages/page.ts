@@ -1,4 +1,4 @@
-import View from '../view';
+import View from '@/view/view';
 
 export default abstract class Page implements View {
   $root: HTMLElement;

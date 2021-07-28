@@ -1,4 +1,4 @@
-import { cmpState } from '../utils';
+import { cmpState } from '@/utils';
 export interface BaseState {}
 
 export default class Store<S extends BaseState = BaseState> {

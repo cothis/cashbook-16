@@ -1,7 +1,7 @@
-import { BaseState } from '../store/store';
-import Controller from './controller';
-import UserStore, { UserState } from '../store/user';
-import MenuStore, { MenuState } from '../store/menu';
+import { BaseState } from '@/store/store';
+import Controller from '@/controller/controller';
+import UserStore, { UserState } from '@/store/user';
+import MenuStore, { MenuState } from '@/store/menu';
 
 interface State {
   user: UserState;

@@ -1,7 +1,7 @@
-import Component from './component';
-import html from '../../core/jsx';
-import MainController from '../../controller/main';
-import { UserState } from '../../store/user';
+import Component from '@/view/components/component';
+import html from '@/core/jsx';
+import MainController from '@/controller/main';
+import { UserState } from '@/store/user';
 
 export default class UserInfoComponent extends Component {
   state: UserState;
