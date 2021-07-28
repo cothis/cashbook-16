@@ -13,14 +13,14 @@ class MainController extends Controller<State> {
     super();
   }
 
-  async reduceFrom(key: keyof State) {
+  reduceFrom(key: keyof State) {
     let newState: BaseState;
     switch (key) {
       case 'user':
-        newState = await this.requestGetUser();
+        newState = this.requestGetUser();
         break;
       case 'menu':
-        newState = await this.requestGetMenu();
+        newState = this.requestGetMenu();
         break;
     }
 
@@ -28,22 +28,22 @@ class MainController extends Controller<State> {
   }
 
   /** UserStore */
-  async requestSetUser(user: Partial<UserState>) {
+  requestSetUser(user: Partial<UserState>) {
     const result = UserStore.setState(user);
     if (result) this.notify('user');
   }
 
-  async requestGetUser() {
+  requestGetUser() {
     return UserStore.getState();
   }
 
   /** MenuStore */
-  async requestSetMenu(menu: Partial<MenuState>) {
+  requestSetMenu(menu: Partial<MenuState>) {
     const result = MenuStore.setState(menu);
     if (result) this.notify('menu');
   }
 
-  async requestGetMenu() {
+  requestGetMenu() {
     return MenuStore.getState();
   }
 }

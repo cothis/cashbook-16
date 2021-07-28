@@ -1,5 +1,5 @@
 import { BaseState } from '@/store/store';
-import View from '../view/view';
+import { View } from '../view/view';
 
 export default abstract class Controller<S> {
   protected subscribers: Map<[string, View], Function>;

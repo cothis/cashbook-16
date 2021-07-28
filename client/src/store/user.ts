@@ -11,4 +11,4 @@ class UserStore extends Store<UserState> {
   }
 }
 
-export default new UserStore();
+export default new UserStore({ id: '', name: '' });

@@ -1,10 +1,17 @@
-import View from './view';
-import html from '../core/jsx';
-import MainController from '../controller/main';
+import Page from './page';
+import Component from '../components/component';
+import UserInfoComponent from '../components/userinfo.comp';
+import html from '../../core/jsx';
+import MainController from '../../controller/main';
 
-export default class MainView extends View {
+export default class MainView extends Page {
+  userInfoComponent: Component;
+
   constructor(root: HTMLElement) {
     super(root);
+
+    this.userInfoComponent = new UserInfoComponent();
+    this.userInfoComponent.render();
   }
 
   onInput(e: Event) {
@@ -17,11 +24,6 @@ export default class MainView extends View {
     const value: string = (<HTMLInputElement>e.target).value;
     console.log(value);
     MainController.requestSetUser({ name: value });
-  }
-
-  onMenuChange(e: Event) {
-    const value: string = (<HTMLInputElement>e.target).value;
-    MainController.requestSetMenu({ current: value });
   }
 
   createDom(): HTMLElement {
@@ -39,16 +41,7 @@ export default class MainView extends View {
           <input type="text" onInput=${this.onInputName} />
         </label>
       </div>
-      <div onChange=${this.onMenuChange}>
-        <label>
-          <span>menu1</span>
-          <input type="radio" name="menu" value="menu1" />
-        </label>
-        <label>
-          <span>menu2</span>
-          <input type="radio" name="menu" value="menu2" />
-        </label>
-      </div>
+      ${this.userInfoComponent.$this}
     </div>`;
   }
 }
