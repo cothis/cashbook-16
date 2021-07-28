@@ -10,7 +10,7 @@ export default class LoginPage extends Page {
     return html`<div>
       로그인 화면입니다.
       <div>첫번째 블록입니다.</div>
-      <a href="/auth/github">github login</a>
+      <a href="api/auth/github">github login</a>
       <router-link to="main">메인으로</router-link>
     </div>`;
   }

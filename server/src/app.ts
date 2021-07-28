@@ -5,6 +5,7 @@ import cors from 'cors';
 import session from 'express-session';
 import { createConnection } from 'typeorm';
 import { dbConnection } from './databases';
+import AuthRouter from './auth/auth.router';
 const NedbStore = require('nedb-session-store')(session);
 const app = express();
 
@@ -25,6 +26,8 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.use('/api/auth', AuthRouter);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
