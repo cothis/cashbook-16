@@ -1,5 +1,6 @@
-const app = document.querySelector('#App');
+import MainView from './view/main';
 
-const template = document.createElement('template');
-template.innerHTML = `<div>안녕하세요! Welcome cothis boilerPlate</div>`;
-app?.appendChild(template.content);
+const $app = <HTMLElement>document.querySelector('#App');
+
+const mainView = new MainView($app);
+mainView.render();
