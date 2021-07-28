@@ -1,39 +1,30 @@
 import { BaseState } from '../store/store';
+import Controller from './controller';
 import UserStore, { UserState } from '../store/user';
 import MenuStore, { MenuState } from '../store/menu';
-import View from '../view/view';
 
 interface State {
   user: UserState;
   menu: MenuState;
 }
 
-class MainController {
-  private subscribers: Map<[string, View], Function>;
-
+class MainController extends Controller<State> {
   constructor() {
-    this.subscribers = new Map();
+    super();
   }
 
-  subscribe(view: View, cb: Function, key: keyof State) {
-    this.subscribers.set([key as string, view], cb);
-  }
-
-  unsubscribe(view: View) {
-    // this.subscribers.delete(view);
-  }
-
-  async notify(key: keyof State) {
+  async reduceFrom(key: keyof State) {
     let newState: BaseState;
-    if (key === 'user') {
-      newState = await this.requestGetUser();
-    } else if (key === 'menu') {
-      newState = await this.requestGetMenu();
-    } else return;
+    switch (key) {
+      case 'user':
+        newState = await this.requestGetUser();
+        break;
+      case 'menu':
+        newState = await this.requestGetMenu();
+        break;
+    }
 
-    this.subscribers.forEach((cb, [currentKey, view]) => {
-      if (currentKey === key) cb.call(view, newState);
-    });
+    return newState;
   }
 
   /** UserStore */
