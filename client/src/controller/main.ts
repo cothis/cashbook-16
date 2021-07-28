@@ -38,22 +38,22 @@ class MainController {
 
   /** UserStore */
   async requestSetUser(user: Partial<UserState>) {
-    const result = await UserStore.setUser(user);
+    const result = UserStore.setState(user);
     if (result) this.notify('user');
   }
 
   async requestGetUser() {
-    return await UserStore.getUser();
+    return UserStore.getState();
   }
 
   /** MenuStore */
   async requestSetMenu(menu: Partial<MenuState>) {
-    const result = await MenuStore.setMenu(menu);
+    const result = MenuStore.setState(menu);
     if (result) this.notify('menu');
   }
 
   async requestGetMenu() {
-    return await MenuStore.getMenu();
+    return MenuStore.getState();
   }
 }
 
