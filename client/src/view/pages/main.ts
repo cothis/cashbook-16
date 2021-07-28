@@ -30,6 +30,7 @@ export default class MainView extends Page {
     return html`<div>
       메인화면입니다.
       <div>첫번째 블록입니다.</div>
+      <router-link to="@back">뒤로가기</router-link>
       <div>두번째 블록입니다.</div>
       <div>
         <label>
