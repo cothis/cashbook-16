@@ -28,5 +28,6 @@
   },
   "dependencies": {
     "core-js": "^3.15.2"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
