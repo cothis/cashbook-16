@@ -6,10 +6,12 @@ import cors from 'cors';
 import session from 'express-session';
 import logger from 'morgan';
 import { createConnection } from 'typeorm';
-import { dbConnection } from './databases';
+// import { dbConnection } from './databases';
 import githubLoginRouter from './routes/githublogin';
 import userRouter from './routes/user';
 import { PaymentHistory } from './entity/paymentHistory.entity';
+import { PaymentCategory } from './entity/paymentCategory.entity';
+import { PaymentMethod } from './entity/paymentMethod.entity';
 
 const COOKIE_SECRET = (process.env.cookie_secret as string) || 'set_this';
 
@@ -41,8 +43,15 @@ app.use(cors(corsConfig));
 app.use(session(sessionConfig));
 app.use(express.static(path.join(__dirname, '../public')));
 
-createConnection(dbConnection).then(async (connection) => {
-  const paymentHistory = new PaymentHistory();
+createConnection().then(async (connection) => {
+  const paymentHistory = PaymentHistory.create({
+    isIncome: false,
+    categoryName: '음식',
+    method_name: '현금',
+    amount: 3500,
+    content: '국밥',
+  });
+  // paymentHistory.save();
 });
 
 app.use('/api/githublogin', githubLoginRouter);

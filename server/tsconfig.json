@@ -17,7 +17,8 @@
     "types": ["node", "jest"],
     "outDir": "./dist",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "sourceMap": true
   },
   "include": ["src/index.ts", "src/app.ts", "**/*.spec.ts", "**/*.test.ts"],
   "exclude": ["node_modules", "build"]
