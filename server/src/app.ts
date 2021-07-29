@@ -6,7 +6,6 @@ import cors from 'cors';
 import session from 'express-session';
 import logger from 'morgan';
 import { createConnection } from 'typeorm';
-// import { dbConnection } from './databases';
 import githubLoginRouter from './routes/githubLogin';
 import userRouter from './routes/user';
 import { PaymentHistory } from './entity/paymentHistory.entity';

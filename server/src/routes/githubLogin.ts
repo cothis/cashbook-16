@@ -3,7 +3,7 @@ import 'dotenv-defaults/config';
 import rs from 'randomstring';
 import qs from 'querystring';
 import fetch from 'node-fetch';
-import { githubAccessToken, githubUser } from '../../DTO/githubLogin';
+import { githubAccessToken, githubUser } from '../DTO/githubLogin';
 
 const GITHUB_CLIENT_ID = process.env.github_client_id;
 const GITHUB_CLIENT_SECRETS = process.env.github_client_secrets;
