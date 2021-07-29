@@ -12,7 +12,7 @@ const githubLoginRouter = express.Router();
 
 let state;
 
-githubLoginRouter.get('/', (req: Request, res: Response) => {
+githubLoginRouter.get('/', (req: Request, res: Response, next) => {
   state = rs.generate();
 
   const url = 'https://github.com/login/oauth/authorize?';
@@ -30,13 +30,17 @@ githubLoginRouter.get('/', (req: Request, res: Response) => {
 githubLoginRouter.get(
   '/callback',
   async (req: Request, res: Response, next) => {
-    const { code } = req.query;
-    console.log(code);
+    try {
+      const { code } = req.query;
+      const access_token = await getAccessToken(code as string);
+      const userData = await getGithubUser(access_token);
 
-    const access_token = await getAccessToken(code as string);
-    const userData = await getGithubUser(access_token);
-    console.log(userData);
-    res.redirect('http://localhost:3000/');
+      req.session.githubId = userData.id;
+      req.session.username = userData.login;
+      res.redirect('http://localhost:3000/');
+    } catch {
+      res.redirect('http://localhost:3000/error');
+    }
   }
 );
 
