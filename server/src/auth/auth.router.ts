@@ -1,6 +1,6 @@
 import 'dotenv-defaults/config';
 import { Router } from 'express';
-import request from 'request';
+import fetch from 'node-fetch';
 import rs from 'randomstring';
 import qs from 'querystring';
 
@@ -22,32 +22,35 @@ router.get('/github', (req, res, next) => {
   res.redirect(`https://github.com/login/oauth/authorize?${query}`);
 });
 
-router.get('/github/login', (req, res, next) => {
+router.get('/github/login', async (req, res, next) => {
   const { code, state } = req.query;
   if (generatedState != state) return;
 
-  request.post(
-    {
-      url: 'https://github.com/login/oauth/access_token',
-      body: {
-        client_id,
-        client_secret,
-        code,
-      },
-      json: true,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  const options = {
+    method: 'post',
+    body: JSON.stringify({
+      client_id,
+      client_secret,
+      code,
+    }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    (err, response, body) => {
-      const { access_token, token_type, scope } = body;
-      console.log('access_token: ', access_token);
-      console.log('token_type: ', token_type);
-      console.log('scope: ', scope);
-      res.redirect('/');
-    }
+  };
+
+  const response = await fetch(
+    'https://github.com/login/oauth/access_token',
+    options
   );
+  const body = await response.json();
+
+  const { access_token, token_type, scope } = body;
+
+  console.log('access_token: ', access_token);
+  console.log('token_type: ', token_type);
+  console.log('scope: ', scope);
+  res.redirect('/');
 });
 
-router.get('/github/token');
 export default router;
