@@ -2,6 +2,12 @@
 
 ## 윤민호 오인규
 
+### Database 설계(EER)
+
+![스크린샷 2021-07-29 오후 7 53 31](https://user-images.githubusercontent.com/50898502/127479816-5bec5c69-a693-4812-a3f1-716fd50e4893.png)
+
+---
+
 ### 프로젝트 구조
 
 ```
