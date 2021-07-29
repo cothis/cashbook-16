@@ -106,3 +106,5 @@ dist
 sessionStore.db
 
 server/public/build.js
+
+ormconfig.json

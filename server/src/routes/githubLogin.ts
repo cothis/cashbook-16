@@ -35,8 +35,7 @@ githubLoginRouter.get(
       const access_token = await getAccessToken(code as string);
       const userData = await getGithubUser(access_token);
 
-      req.session.githubId = userData.id;
-      req.session.username = userData.login;
+      req.session.githubId = userData.login;
       req.session.avatar_url = userData.avatar_url;
       res.redirect('http://localhost:3000/');
     } catch {
