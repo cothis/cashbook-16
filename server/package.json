@@ -15,6 +15,7 @@
     "@types/jest": "^26.0.24",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.4.2",
+    "@types/node-fetch": "^2.5.12",
     "@types/randomstring": "^1.1.7",
     "jest": "^27.0.6",
     "pm2": "^5.1.0",
