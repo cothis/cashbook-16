@@ -27,6 +27,19 @@ githubLoginRouter.get('/', (req: Request, res: Response) => {
   res.redirect(githubAuthUrl);
 });
 
+githubLoginRouter.get(
+  '/callback',
+  async (req: Request, res: Response, next) => {
+    const { code } = req.query;
+    console.log(code);
+
+    const access_token = await getAccessToken(code as string);
+    const userData = await getGithubUser(access_token);
+    console.log(userData);
+    res.redirect('http://localhost:3000/');
+  }
+);
+
 async function getAccessToken(code: string): Promise<string> {
   const tokenURL = 'https://github.com/login/oauth/access_token';
   const accessTokenResponse = await fetch(tokenURL, {
@@ -58,18 +71,5 @@ async function getGithubUser(access_token: string): Promise<githubUser> {
   const userApiJson = await userApiResponse.json();
   return userApiJson;
 }
-
-githubLoginRouter.get(
-  '/callback',
-  async (req: Request, res: Response, next) => {
-    const { code } = req.query;
-    console.log(code);
-
-    const access_token = await getAccessToken(code as string);
-    const userData = await getGithubUser(access_token);
-    console.log(userData);
-    res.redirect('http://localhost:3000/');
-  }
-);
 
 export default githubLoginRouter;
