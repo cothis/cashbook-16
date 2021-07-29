@@ -6,6 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { PaymentCategory } from './paymentCategory.entity';
+import { PaymentMethod } from './paymentMethod.entity';
 
 @Entity()
 export class PaymentHistory extends BaseEntity {
@@ -15,15 +16,15 @@ export class PaymentHistory extends BaseEntity {
   @Column()
   content: string;
 
-  @Column()
-  method_name: string;
-
   @Column('decimal')
   amount: number;
 
   @Column()
   isIncome: boolean;
 
+  @ManyToOne(() => PaymentMethod, (method) => method.histories)
+  method: string;
+
   @ManyToOne(() => PaymentCategory, (category) => category.histories)
-  categoryName: string;
+  category: string;
 }

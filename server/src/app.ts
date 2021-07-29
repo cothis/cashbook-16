@@ -46,12 +46,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 createConnection().then(async (connection) => {
   const paymentHistory = PaymentHistory.create({
     isIncome: false,
-    categoryName: '음식',
-    method_name: '현금',
+    category: '식비',
+    method: '현대카드',
     amount: 3500,
     content: '국밥',
   });
-  // paymentHistory.save();
+  paymentHistory.save();
 });
 
 app.use('/api/githublogin', githubLoginRouter);

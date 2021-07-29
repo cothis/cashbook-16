@@ -9,6 +9,6 @@ export class PaymentCategory {
   @Column()
   color: string;
 
-  @OneToMany(() => PaymentHistory, (history) => history.categoryName)
-  histories: History[];
+  @OneToMany(() => PaymentHistory, (history) => history.category)
+  histories: PaymentHistory[];
 }
