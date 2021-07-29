@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "commonjs",
+    "moduleResolution": "node",
     "strict": true,
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,7 +15,9 @@
     },
     "resolveJsonModule": true,
     "types": ["node", "jest"],
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src/index.ts", "src/app.ts", "**/*.spec.ts", "**/*.test.ts"],
   "exclude": ["node_modules", "build"]
