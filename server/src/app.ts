@@ -4,19 +4,18 @@ import path from 'path';
 import cors from 'cors';
 import session from 'express-session';
 import logger from 'morgan';
-import history from 'connect-history-api-fallback';
-// import cookieSession from 'cookie-session';
 import { createConnection } from 'typeorm';
 import { dbConnection } from './databases';
 import githubLoginRouter from './routes/githublogin';
 import userRouter from './routes/user';
 
-const COOKIE_SECRET = process.env.cookie_secret;
+const COOKIE_SECRET = (process.env.cookie_secret as string) || 'set_this';
 
 declare module 'express-session' {
   interface SessionData {
     githubId: number;
     username: string;
+    avatar_url: string;
   }
 }
 
@@ -28,7 +27,7 @@ const corsConfig = {
   credentials: true,
 };
 const sessionConfig = {
-  secret: 'sample',
+  secret: COOKIE_SECRET,
   store: new NedbStore({
     filename: 'sessionStore.db',
   }),
@@ -38,19 +37,12 @@ const sessionConfig = {
 app.use(logger('dev'));
 app.use(cors(corsConfig));
 app.use(session(sessionConfig));
-
 app.use(express.static(path.join(__dirname, '../public')));
 
 createConnection(dbConnection);
 
 app.use('/api/githublogin', githubLoginRouter);
 app.use('/api/user', userRouter);
-// app.use(
-//   history({
-//     index: path.join(__dirname, '../public/index.html'),
-//   })
-// );
-
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });

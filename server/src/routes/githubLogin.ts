@@ -37,6 +37,7 @@ githubLoginRouter.get(
 
       req.session.githubId = userData.id;
       req.session.username = userData.login;
+      req.session.avatar_url = userData.avatar_url;
       res.redirect('http://localhost:3000/');
     } catch {
       res.redirect('http://localhost:3000/error');
