@@ -2,14 +2,14 @@ import express, { Request, Response } from 'express';
 const userRouter = express.Router();
 
 userRouter.get('/', (req: Request, res: Response) => {
-  const { username } = req.session;
-  if (username) {
+  const { githubId } = req.session;
+  if (githubId) {
     res.json({
-      username,
+      githubId,
     });
   } else {
     res.json({
-      username: 'not-logged-in',
+      githubId: 'not-logged-in',
     });
   }
 });
