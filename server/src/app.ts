@@ -17,8 +17,7 @@ const COOKIE_SECRET = (process.env.cookie_secret as string) || 'set_this';
 
 declare module 'express-session' {
   interface SessionData {
-    githubId: number;
-    username: string;
+    githubId: string;
     avatar_url: string;
   }
 }
@@ -45,6 +44,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 createConnection().then(async (connection) => {
   const paymentHistory = PaymentHistory.create({
+    githubId: 'cothis',
     isIncome: false,
     category: '식비',
     method: '현대카드',
