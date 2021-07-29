@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import 'dotenv-defaults/config';
 import express from 'express';
 import path from 'path';
@@ -8,6 +9,7 @@ import { createConnection } from 'typeorm';
 import { dbConnection } from './databases';
 import githubLoginRouter from './routes/githublogin';
 import userRouter from './routes/user';
+import { PaymentHistory } from './entity/paymentHistory.entity';
 
 const COOKIE_SECRET = (process.env.cookie_secret as string) || 'set_this';
 
@@ -39,7 +41,9 @@ app.use(cors(corsConfig));
 app.use(session(sessionConfig));
 app.use(express.static(path.join(__dirname, '../public')));
 
-createConnection(dbConnection);
+createConnection(dbConnection).then(async (connection) => {
+  const paymentHistory = new PaymentHistory();
+});
 
 app.use('/api/githublogin', githubLoginRouter);
 app.use('/api/user', userRouter);
