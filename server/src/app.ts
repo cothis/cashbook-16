@@ -42,12 +42,29 @@ app.use(cors(corsConfig));
 app.use(session(sessionConfig));
 app.use(express.static(path.join(__dirname, '../public')));
 
+const createDefaults = async () => {
+  const method = await PaymentMethod.findOne({ where: { name: '현대카드' } });
+  if (!method) {
+    await PaymentMethod.create({ name: '현대카드' }).save();
+  }
+  const category = await PaymentCategory.findOne({ where: { name: '식비' } });
+  if (!category) {
+    await PaymentCategory.create({ name: '식비', color: '#e0e0e0' }).save();
+  }
+};
+
 createConnection().then(async (connection) => {
+  await createDefaults();
+  const method = await PaymentMethod.findOneOrFail({
+    where: { name: '현대카드' },
+  });
+  const category = await PaymentCategory.findOne({ where: { name: '식비' } });
+
   const paymentHistory = PaymentHistory.create({
     githubId: 'cothis',
     isIncome: false,
-    category: '식비',
-    method: '현대카드',
+    category: category,
+    method: method,
     amount: 3500,
     content: '국밥',
   });
