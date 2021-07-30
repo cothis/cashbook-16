@@ -6,19 +6,27 @@ export default class LoginPage extends Page {
     super(root);
   }
 
-  fetchUser() {
-    fetch('http://localhost:3000/api/user', {
+  async fetchUser() {
+    const githubId = await fetch('/api/user', {
       credentials: 'include',
     })
       .then((res) => res.json())
-      .then(console.log);
+      .then((res) => res.githubId);
+    if (githubId !== 'not-logged-in') {
+      const routeEvent = new CustomEvent('route', {
+        detail: {
+          pathname: 'main',
+        },
+      });
+
+      window.dispatchEvent(routeEvent);
+    }
   }
 
   createDom(): HTMLElement {
     this.fetchUser();
     return html`<div>
-      로그인 화면입니다.
-      <a href="/api/githublogin">깃허브 요청</a>
+      <a href="/api/githublogin">깃허브 로그인</a>
       <router-link to="main">메인으로</router-link>
     </div>`;
   }
