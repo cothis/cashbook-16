@@ -1,4 +1,9 @@
-import Page from '@/view/pages/page';
+import Page from "@/view/pages/page";
+
+enum RenderOption {
+  RENDER,
+  DETACH,
+}
 
 export default class Router {
   history: Page[];
@@ -7,39 +12,41 @@ export default class Router {
   constructor() {
     this.history = [];
     this.map = new Map();
-
-    this.registerCustomEventListener();
-    this.registerPopstateEventListener();
+    this.registerEvents();
   }
 
-  registerPopstateEventListener() {
-    window.addEventListener('popstate', (e: Event) => {
-      const prevPage = this.history.pop();
-      if (prevPage) {
-        prevPage.$root.innerHTML = '';
-      }
-
-      const lastPage = this.history[this.history.length - 1];
-      if (lastPage) {
-        lastPage.render();
-      }
-    });
+  private registerEvents() {
+    window.addEventListener("popstate", this.popstateEventHandler);
+    window.addEventListener("route", this.routeEventHandler);
   }
 
-  registerCustomEventListener() {
-    window.addEventListener('route', (e: CustomEventInit) => {
-      const pathname = e.detail.pathname;
-      if (this.isBack(pathname)) {
-        window.history.back();
-        return;
-      }
+  private popstateEventHandler(e: Event) {
+    const prevPage = this.history.pop();
+    this.detachPage(prevPage);
 
-      this.route(pathname);
-    });
+    this.getLastPage().render();
+  }
+
+  private routeEventHandler(e: CustomEventInit): void {
+    const pathname = e.detail.pathname;
+    if (this.isBack(pathname)) {
+      window.history.back();
+      return;
+    }
+
+    this.route(pathname);
+  }
+
+  private detachPage(page?: Page) {
+    if (page) page.$root.innerHTML = "";
+  }
+
+  private getLastPage(): Page {
+    return this.history[this.history.length - 1];
   }
 
   private isBack(pathname: string) {
-    return pathname === '@back';
+    return pathname === "@back";
   }
 
   addRoutePath(pathname: string, page: Page) {
@@ -48,14 +55,11 @@ export default class Router {
 
   route(pathname: string) {
     const page = this.map.get(pathname);
-    if (!page) throw new Error('Route 페이지가 등록되지 않았습니다.');
+    if (!page) throw new Error("Route 페이지가 등록되지 않았습니다.");
 
-    const lastPage = this.history[this.history.length - 1];
-    if (lastPage) {
-      lastPage.$root.innerHTML = '';
-    }
+    this.detachPage(this.getLastPage());
 
-    window.history.pushState({}, 'view', pathname);
+    window.history.pushState({}, "view", pathname);
     this.history.push(page);
     page.render();
   }
