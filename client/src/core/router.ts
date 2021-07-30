@@ -1,9 +1,6 @@
-import Page from "@/view/pages/page";
+import Page from '@/view/pages/page';
 
-enum RenderOption {
-  RENDER,
-  DETACH,
-}
+const BACK_METHOD = '@back';
 
 export default class Router {
   history: Page[];
@@ -16,8 +13,8 @@ export default class Router {
   }
 
   private registerEvents() {
-    window.addEventListener("popstate", this.popstateEventHandler);
-    window.addEventListener("route", this.routeEventHandler);
+    window.addEventListener('popstate', this.popstateEventHandler);
+    window.addEventListener('route', this.routeEventHandler);
   }
 
   private popstateEventHandler(e: Event) {
@@ -38,7 +35,7 @@ export default class Router {
   }
 
   private detachPage(page?: Page) {
-    if (page) page.$root.innerHTML = "";
+    if (page) page.$root.innerHTML = '';
   }
 
   private getLastPage(): Page {
@@ -46,7 +43,7 @@ export default class Router {
   }
 
   private isBack(pathname: string) {
-    return pathname === "@back";
+    return pathname === BACK_METHOD;
   }
 
   addRoutePath(pathname: string, page: Page) {
@@ -55,11 +52,11 @@ export default class Router {
 
   route(pathname: string) {
     const page = this.map.get(pathname);
-    if (!page) throw new Error("Route 페이지가 등록되지 않았습니다.");
+    if (!page) throw new Error('Route 페이지가 등록되지 않았습니다.');
 
     this.detachPage(this.getLastPage());
 
-    window.history.pushState({}, "view", pathname);
+    window.history.pushState({}, 'view', pathname);
     this.history.push(page);
     page.render();
   }
