@@ -7,6 +7,7 @@ import { githubAccessToken, githubUser } from '../DTO/githubLogin';
 
 const GITHUB_CLIENT_ID = process.env.github_client_id;
 const GITHUB_CLIENT_SECRETS = process.env.github_client_secrets;
+const SELF_URL = process.env.self_url;
 
 const githubLoginRouter = express.Router();
 
@@ -18,7 +19,7 @@ githubLoginRouter.get('/', (req: Request, res: Response, next) => {
   const url = 'https://github.com/login/oauth/authorize?';
   const query = qs.stringify({
     client_id: GITHUB_CLIENT_ID,
-    redirect_uri: 'http://localhost:3000/api/githublogin/callback',
+    redirect_uri: `${SELF_URL}/api/githublogin/callback`,
     state: state,
     scope: 'user:email',
   });
@@ -37,9 +38,9 @@ githubLoginRouter.get(
 
       req.session.githubId = userData.login;
       req.session.avatar_url = userData.avatar_url;
-      res.redirect('http://localhost:3000/');
+      res.redirect(`${SELF_URL}/`);
     } catch {
-      res.redirect('http://localhost:3000/error');
+      res.redirect(`${SELF_URL}/error`);
     }
   }
 );
@@ -56,7 +57,7 @@ async function getAccessToken(code: string): Promise<string> {
       client_id: GITHUB_CLIENT_ID,
       client_secret: GITHUB_CLIENT_SECRETS,
       code: code as string,
-      redirect_uri: 'http://localhost:3000/',
+      redirect_uri: `${SELF_URL}/`,
     }),
   });
   const accessTokenJson =
