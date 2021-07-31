@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/calendar.css" />
+    <link rel="stylesheet" href="../styles/tailwind.css" />
+    <title>입출금</title>
+  </head>
+  <body id="app" class="dark:bg-gray-800">
+    <header
+      class="
+        container
+        flex flex-row
+        h-20
+        items-center
+        justify-start
+        gap-4
+        border-b-2 border-gray-50
+        box-border
+        mb-12
+      "
+    >
+      <span class="cursor-pointer w-16 h-16 ml-16 mr-4">
+        <img src="../assets/logo.png" alt="" class="object-cover" />
+      </span>
+      <button class="w-24 h-full hover:text-green-400 dark:text-white">
+        리스트
+      </button>
+      <button class="w-24 h-full bg-green-400 text-white hover:text-white">
+        캘린더
+      </button>
+      <button class="w-24 h-full hover:text-green-400 dark:text-white">
+        그래프
+      </button>
+    </header>
+    <section
+      class="
+        flex flex-col
+        h-screen
+        w-full
+        justify-start
+        items-center
+        bg-gray-50
+        dark:bg-gray-700
+        box-border
+        gap-16
+        pb-12
+      "
+    >
+      <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-white">
+        7 월 내 역
+      </h1>
+
+      <section class="calendar">
+        <div class="calendar-grid w-full h-full grid grid-cols-7 grid-rows-6">
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell pb-2">
+            <div class="absolute left-2 top-2 dark:text-purple-300">1</div>
+            <div class="h-3 text-xs rounded-md text-right text-green-400 mr-3">
+              +3000
+            </div>
+            <div class="h-3 text-xs rounded-md text-right text-red-400 mr-3">
+              -12,000
+            </div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">2</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">3</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">4</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">5</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">6</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">7</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">8</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">9</div>
+          </span>
+          <span class="calendar-cell">
+            <div class="absolute left-2 top-2 dark:text-purple-300">11</div>
+          </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+          <span class="calendar-cell"> </span>
+        </div>
+      </section>
+
+      <div class="fixed top-1/2 left-0 p-8 w-10 slide-btn"><</div>
+      <div class="fixed top-1/2 right-0 p-8 w-10 slide-btn">></div>
+    </section>
+  </body>
+</html>

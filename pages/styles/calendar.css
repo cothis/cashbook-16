@@ -1,0 +1,40 @@
+.calendar {
+  width: 100vw;
+  max-width: 1024px;
+  height: calc(100vw * 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .calendar {
+    width: 80vw;
+    height: calc(80vw * 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.calendar-grid {
+  height: 100%;
+  grid-column-gap: 0.8rem;
+  grid-row-gap: 0.5rem;
+}
+
+.calendar-cell {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 0.8rem;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.calendar-cell:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
