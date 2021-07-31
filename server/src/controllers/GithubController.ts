@@ -12,9 +12,11 @@ const SELF_URL = process.env.self_url;
 class GithubController {
   state: string;
 
-  constructor() {}
+  constructor() {
+    this.state = '';
+  }
 
-  githubLogin(req: Request, res: Response, next: NextFunction) {
+  githubLogin = (req: Request, res: Response, next: NextFunction) => {
     this.state = rs.generate();
 
     const url = 'https://github.com/login/oauth/authorize?';
@@ -27,9 +29,9 @@ class GithubController {
 
     const githubAuthUrl = url + query;
     res.redirect(githubAuthUrl);
-  }
+  };
 
-  async callback(req: Request, res: Response, next: NextFunction) {
+  callback = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { code } = req.query;
       const access_token = await this.getAccessToken(code as string);
@@ -41,9 +43,9 @@ class GithubController {
     } catch {
       res.redirect(`${SELF_URL}/error`);
     }
-  }
+  };
 
-  private async getAccessToken(code: string): Promise<string> {
+  private getAccessToken = async (code: string): Promise<string> => {
     const tokenURL = 'https://github.com/login/oauth/access_token';
     const accessTokenResponse = await fetch(tokenURL, {
       method: 'POST',
@@ -60,9 +62,9 @@ class GithubController {
     });
     const accessTokenJson: githubAccessToken = await accessTokenResponse.json();
     return accessTokenJson.access_token;
-  }
+  };
 
-  private async getGithubUser(access_token: string): Promise<githubUser> {
+  private getGithubUser = async (access_token: string): Promise<githubUser> => {
     const userApiResponse = await fetch('https://api.github.com/user', {
       method: 'GET',
       headers: {
@@ -72,7 +74,7 @@ class GithubController {
     });
     const userApiJson = await userApiResponse.json();
     return userApiJson;
-  }
+  };
 }
 
 export default new GithubController();

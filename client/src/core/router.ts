@@ -13,8 +13,8 @@ export default class Router {
   }
 
   private registerEvents() {
-    window.addEventListener('popstate', this.popstateEventHandler);
-    window.addEventListener('route', this.routeEventHandler);
+    window.addEventListener('popstate', this.popstateEventHandler.bind(this));
+    window.addEventListener('route', this.routeEventHandler.bind(this));
   }
 
   private popstateEventHandler(e: Event) {
