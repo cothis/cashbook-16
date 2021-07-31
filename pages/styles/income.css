@@ -2,3 +2,22 @@
   width: 100vw;
   height: 100vh;
 }
+
+.slide-btn {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.slide-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .slide-btn {
+    background-color: rgba(52, 211, 153, 0.1);
+  }
+
+  .slide-btn:hover {
+    background-color: rgba(52, 211, 153, 0.8);
+  }
+}

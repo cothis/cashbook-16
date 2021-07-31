@@ -23,7 +23,7 @@
         mb-12
       "
     >
-      <span class="w-16 h-16 ml-16">
+      <span class="cursor-pointer w-16 h-16 ml-16">
         <img src="../assets/logo.png" alt="" class="object-cover" />
       </span>
       <button class="ml-4 w-24 h-full bg-green-400 text-white hover:text-white">
@@ -45,13 +45,46 @@
         bg-gray-100
         dark:bg-gray-700
         box-border
+        gap-24
+        pb-12
       "
     >
-      <h1 class="mt-8 mb-8 text-4xl font-sans text-gray-600 dark:text-white">
+      <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-white">
         7 월 내 역
       </h1>
 
-      <section class="w-3/4 flex flex-col h-44">
+      <section class="w-3/4 flex flex-col">
+        <h2 class="text-lg text-green-400 dark:text-green-300">새 내역 추가</h2>
+        <form
+          action="/api"
+          method="post"
+          class="flex flex-row w-full h-12 items-center justify-between"
+        >
+          <input
+            type="text"
+            name="category"
+            id="category"
+            class="w-24 truncate dark:text-green-50"
+            placeholder="미분류"
+          />
+          <input
+            class="w-56 truncate dark:text-green-50"
+            placeholder="입/지출 내용"
+          />
+          <input
+            type="text"
+            class="w-40 truncate dark:text-green-50"
+            placeholder="결제수단"
+          />
+          <input
+            type="text"
+            class="w-32 truncate right-0 dark:text-green-50"
+            placeholder="금액"
+          />
+        </form>
+      </section>
+
+      <section class="w-3/4 flex flex-col">
         <h2 class="text-lg text-green-400 dark:text-green-300">7월 15일 목</h2>
         <div class="flex flex-row w-full h-12 items-center justify-between">
           <span class="w-24 truncate dark:text-green-50">문화/여가</span>
@@ -59,17 +92,21 @@
             >스트리밍서비스 정기 결제</span
           >
           <span class="w-40 truncate dark:text-green-50">현대카드</span>
-          <span class="w-32 right-0 dark:text-green-50">-10,900원</span>
+          <span class="w-32 truncate right-0 dark:text-green-50"
+            >-10,900원</span
+          >
         </div>
         <div class="flex flex-row w-full h-12 items-center justify-between">
           <span class="w-24 truncate dark:text-green-50">교통</span>
           <span class="w-56 truncate dark:text-green-50">후불 교통비 결제</span>
           <span class="w-40 truncate dark:text-green-50">현대카드</span>
-          <span class="w-32 right-0 dark:text-green-50">-45,340원</span>
+          <span class="w-32 truncate right-0 dark:text-green-50"
+            >-45,340원</span
+          >
         </div>
       </section>
 
-      <section class="w-3/4 flex flex-col h-44">
+      <section class="w-3/4 flex flex-col">
         <h2 class="text-lg text-green-400 dark:text-green-300">7월 13일 화</h2>
         <div class="flex flex-row w-full h-12 items-center justify-between">
           <span class="w-24 truncate dark:text-green-50">미분류</span>
@@ -77,11 +114,13 @@
             >온라인 세미나 신청</span
           >
           <span class="w-40 truncate dark:text-green-50">법카</span>
-          <span class="w-32 right-0 dark:text-green-50">-100,000원</span>
+          <span class="w-32 truncate right-0 dark:text-green-50"
+            >-100,000원</span
+          >
         </div>
       </section>
 
-      <section class="w-3/4 flex flex-col h-44">
+      <section class="w-3/4 flex flex-col">
         <h2 class="text-lg text-green-400 dark:text-green-300">7월 12일 월</h2>
         <div class="flex flex-row w-full h-12 items-center justify-between">
           <span class="w-24 truncate dark:text-green-50">미분류</span>
@@ -89,9 +128,39 @@
             >온라인 세미나 신청</span
           >
           <span class="w-40 truncate dark:text-green-50">법카</span>
-          <span class="w-32 right-0 dark:text-green-50">-100,000원</span>
+          <span class="w-32 truncate right-0 dark:text-green-50"
+            >-100,000원</span
+          >
         </div>
       </section>
+      <section class="w-3/4 flex flex-col">
+        <h2 class="text-lg text-green-400 dark:text-green-300">7월 12일 월</h2>
+        <div class="flex flex-row w-full h-12 items-center justify-between">
+          <span class="w-24 truncate dark:text-green-50">미분류</span>
+          <span class="w-56 truncate dark:text-green-50"
+            >온라인 세미나 신청</span
+          >
+          <span class="w-40 truncate dark:text-green-50">법카</span>
+          <span class="w-32 truncate right-0 dark:text-green-50"
+            >-100,000원</span
+          >
+        </div>
+      </section>
+      <section class="w-3/4 flex flex-col">
+        <h2 class="text-lg text-green-400 dark:text-green-300">7월 12일 월</h2>
+        <div class="flex flex-row w-full h-12 items-center justify-between">
+          <span class="w-24 truncate dark:text-green-50">미분류</span>
+          <span class="w-56 truncate dark:text-green-50"
+            >온라인 세미나 신청</span
+          >
+          <span class="w-40 truncate dark:text-green-50">법카</span>
+          <span class="w-32 truncate right-0 dark:text-green-50"
+            >-100,000원</span
+          >
+        </div>
+      </section>
+      <div class="fixed top-1/2 left-0 p-8 w-10 slide-btn"><</div>
+      <div class="fixed top-1/2 right-0 p-8 w-10 slide-btn">></div>
     </section>
   </body>
 </html>
