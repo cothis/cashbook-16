@@ -85,7 +85,7 @@
       </h1>
 
       <section class="w-full md:w-3/4 flex flex-col">
-        <h2 class="text-lg text-green-400 dark:text-green-300 mb-3">
+        <h2 class="text-lg text-green-400 dark:text-green-300 mb-4">
           새 내역 추가
         </h2>
         <form
@@ -109,18 +109,19 @@
             type="text"
             name="category"
             id="category"
-            class="sm:w-24 truncate dark:text-purple-300"
+            class="w-full sm:w-24 truncate dark:text-purple-300"
             placeholder="미분류"
             autocomplete="off"
+            autofocus
           />
           <input
-            class="sm:w-56 truncate dark:text-purple-300"
+            class="w-full sm:w-56 truncate dark:text-purple-300"
             placeholder="입/지출 내용"
             autocomplete="off"
           />
           <input
             type="text"
-            class="sm:w-40 truncate dark:text-purple-300"
+            class="w-full sm:w-40 truncate dark:text-purple-300"
             placeholder="결제수단"
             autocomplete="off"
             pattern="(카드|현금|현대카드)"
@@ -130,6 +131,7 @@
           <input
             type="number"
             class="
+              w-full
               sm:w-32
               truncate
               sm:right-0
