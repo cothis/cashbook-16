@@ -27,7 +27,9 @@
       class="
         container
         flex flex-row
-        h-20
+        md:h-20
+        sm:h-16
+        h-12
         items-center
         justify-start
         gap-4
@@ -36,18 +38,43 @@
         mb-12
       "
     >
-      <span class="cursor-pointer w-16 h-16 ml-16 mr-4">
-        <img src="../assets/logo.png" alt="" class="object-cover" />
+      <span class="cursor-pointer h-full sm:ml-16 ml-2 mr-4 p-2">
+        <img
+          src="../assets/logo.png"
+          alt=""
+          class="h-full w-auto object-fill"
+        />
       </span>
       <a class="h-full" href="income.html">
-        <button class="w-24 h-full hover:text-green-400 dark:text-white">
+        <button
+          class="
+            md:w-24
+            sm:w-20
+            w-16
+            h-full
+            hover:text-green-400
+            dark:text-white
+          "
+        >
           리스트
         </button>
       </a>
-      <button class="w-24 h-full bg-green-400 text-white hover:text-white">
+      <button
+        class="
+          md:w-24
+          sm:w-20
+          w-16
+          h-full
+          bg-green-400
+          text-white
+          hover:text-white
+        "
+      >
         캘린더
       </button>
-      <button class="w-24 h-full hover:text-green-400 dark:text-white">
+      <button
+        class="md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white"
+      >
         그래프
       </button>
     </header>
