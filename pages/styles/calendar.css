@@ -20,7 +20,7 @@
 .calendar-grid {
   height: 100%;
   grid-column-gap: 0.8rem;
-  grid-row-gap: 0.5rem;
+  grid-row-gap: 0.8rem;
 }
 
 .calendar-cell {
@@ -37,4 +37,16 @@
 .calendar-cell:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .calendar-cell {
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: scale(1.05);
+  }
+
+  .calendar-cell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
 }
