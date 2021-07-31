@@ -6,8 +6,7 @@ import cors from 'cors';
 import session from 'express-session';
 import logger from 'morgan';
 import { createConnection } from 'typeorm';
-import githubLoginRouter from './routes/githubLogin';
-import userRouter from './routes/user';
+import router from './routes/router';
 import { PaymentHistory } from './entity/paymentHistory.entity';
 import { PaymentCategory } from './entity/paymentCategory.entity';
 import { PaymentMethod } from './entity/paymentMethod.entity';
@@ -52,26 +51,25 @@ const createDefaults = async () => {
   }
 };
 
-createConnection().then(async (connection) => {
-  await createDefaults();
-  const method = await PaymentMethod.findOneOrFail({
-    where: { name: '현대카드' },
-  });
-  const category = await PaymentCategory.findOne({ where: { name: '식비' } });
+// createConnection().then(async (connection) => {
+//   await createDefaults();
+//   const method = await PaymentMethod.findOneOrFail({
+//     where: { name: '현대카드' },
+//   });
+//   const category = await PaymentCategory.findOne({ where: { name: '식비' } });
 
-  const paymentHistory = PaymentHistory.create({
-    githubId: 'cothis',
-    isIncome: false,
-    category: category,
-    method: method,
-    amount: 3500,
-    content: '국밥',
-  });
-  paymentHistory.save();
-});
+//   const paymentHistory = PaymentHistory.create({
+//     githubId: 'cothis',
+//     isIncome: false,
+//     category: category,
+//     method: method,
+//     amount: 3500,
+//     content: '국밥',
+//   });
+//   paymentHistory.save();
+// });
 
-app.use('/api/githublogin', githubLoginRouter);
-app.use('/api/user', userRouter);
+app.use('/api', router);
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
