@@ -8,9 +8,21 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/calendar.css" />
     <link rel="stylesheet" href="../styles/tailwind.css" />
-    <title>입출금</title>
+    <title>캘린더</title>
   </head>
   <body id="app" class="dark:bg-gray-800">
+    <section
+      class="
+        h-6
+        w-full
+        text-md
+        bg-gray-600
+        text-center text-white
+        dark:text-purple-400
+      "
+    >
+      운영체제 다크모드에 맞춰서 테마가 변해요!
+    </section>
     <header
       class="
         container
@@ -63,11 +75,13 @@
             <div class="absolute left-2 top-2 dark:text-purple-300">1</div>
             <div
               class="
-                h-4
+                md:h-4
+                h-3
                 text-xs
                 rounded-md
                 text-right text-green-400
-                mr-3
+                md:mr-3
+                mr-1
                 cursor-pointer
                 hover:text-blue-400
               "
@@ -76,11 +90,13 @@
             </div>
             <div
               class="
-                h-4
+                md:h-4
+                h-3
                 text-xs
                 rounded-md
                 text-right text-red-400
-                mr-3
+                md:mr-3
+                mr-1
                 cursor-pointer
                 hover:text-blue-400
               "
