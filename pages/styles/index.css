@@ -23,3 +23,10 @@
     background-color: rgba(196, 181, 253, 0.4);
   }
 }
+
+@media (max-width: 640px) {
+  #app {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+}
