@@ -66,20 +66,33 @@
             id="category"
             class="w-24 truncate dark:text-green-50"
             placeholder="미분류"
+            autocomplete="off"
           />
           <input
             class="w-56 truncate dark:text-green-50"
             placeholder="입/지출 내용"
+            autocomplete="off"
           />
           <input
             type="text"
             class="w-40 truncate dark:text-green-50"
             placeholder="결제수단"
+            autocomplete="off"
+            pattern="(카드|현금|현대카드)"
+            title="카드 or 현금 or 현대카드"
+            oninput="this.reportValidity()"
           />
           <input
-            type="text"
+            type="number"
             class="w-32 truncate right-0 dark:text-green-50"
-            placeholder="금액"
+            placeholder="금액 (원)"
+            autocomplete="off"
+            title="형식: 숫자"
+            min="-10000000"
+            max="10000000"
+            step="1000"
+            title="원은 빼고 숫자만 입력해주세요"
+            oninput="this.reportValidity()"
           />
         </form>
       </section>
