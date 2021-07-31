@@ -2,6 +2,7 @@
   width: 100vw;
   max-width: 1024px;
   height: calc(100vw * 0.8);
+  max-height: 860px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +12,7 @@
   .calendar {
     width: 80vw;
     height: calc(80vw * 0.8);
+    max-height: 860px;
     display: flex;
     flex-direction: column;
     align-items: center;
