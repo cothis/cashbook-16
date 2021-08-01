@@ -11,6 +11,7 @@
   background: rgba(0, 0, 0, 0.1);
   color: rgba(52, 211, 153, 0.8);
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 @media (max-width: 640px) {
@@ -41,14 +42,5 @@ select:disabled {
 
   .slide-btn:hover {
     background-color: rgba(196, 181, 253, 0.4);
-  }
-
-  select:focus {
-    box-shadow: 0 0 1px 3px rgba(196, 181, 253, 0.7);
-    border-bottom: 1px solid rgba(196, 181, 253, 0.8);
-  }
-
-  select:disabled {
-    opacity: 0.5;
   }
 }
