@@ -84,19 +84,16 @@
         7 월 내 역
       </h1>
 
-      <section class="w-full md:w-3/4 flex flex-col">
+      <form action="/api" method="post" class="w-full md:w-3/4 flex flex-col">
         <h2 class="text-lg text-green-400 dark:text-green-300 mb-4">
           새 내역 추가
         </h2>
         <input
           type="date"
           class="w-full sm:w-36 truncate text-black dark:text-white mb-4"
-          placeholder="날짜"
-          autocomplete="off"
+          value="2021-08-01"
         />
-        <form
-          action="/api"
-          method="post"
+        <div
           class="
             flex flex-col
             sm:flex-row
@@ -166,15 +163,38 @@
             placeholder="입/지출 내용"
             autocomplete="off"
           />
-          <input
-            type="text"
-            class="w-full sm:w-40 truncate dark:text-white"
-            placeholder="결제수단"
-            autocomplete="off"
-            pattern="(카드|현금|현대카드)"
-            title="format: 카드 or 현금 or 현대카드"
-            oninput="this.reportValidity()"
-          />
+          <select
+            id="method"
+            name="method"
+            size="3"
+            class="w-full sm:w-40 dark:text-white"
+          >
+            <option
+              value=""
+              class="w-full sm:w-40 truncate dark:text-gray-300"
+              selected
+            >
+              결제수단 선택
+            </option>
+            <option
+              value="카드"
+              class="w-full sm:w-40 truncate dark:text-white"
+            >
+              카드
+            </option>
+            <option
+              value="현금"
+              class="w-full sm:w-40 truncate dark:text-white"
+            >
+              현금
+            </option>
+            <option
+              value="현대카드"
+              class="w-full sm:w-40 truncate dark:text-white"
+            >
+              현대카드
+            </option>
+          </select>
           <input
             type="number"
             class="
@@ -194,8 +214,8 @@
             title="원은 빼고 숫자만 입력해주세요"
             oninput="this.reportValidity()"
           />
-        </form>
-      </section>
+        </div>
+      </form>
 
       <section class="w-full md:w-3/4 flex flex-col">
         <h2 class="text-lg text-green-400 dark:text-green-300">7월 15일 목</h2>
