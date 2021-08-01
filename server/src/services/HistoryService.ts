@@ -1,4 +1,4 @@
-import { PaymentHistory, IHistory } from '../entity/paymentHistory.entity';
+import { PaymentHistory } from '../entity/paymentHistory.entity';
 import { HistoryQuery } from '../controllers/historyController';
 import { Between, DeepPartial } from 'typeorm';
 
