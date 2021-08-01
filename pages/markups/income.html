@@ -135,7 +135,8 @@
         justify-start
         items-center
         box-border
-        gap-24
+        sm:gap-24
+        gap-12
         pb-12
       "
     >
@@ -143,7 +144,12 @@
         7 월 내 역
       </h1>
 
-      <form action="/api" method="post" class="w-full md:w-3/4 flex flex-col">
+      <form
+        action="/api"
+        method="post"
+        class="w-full md:w-3/4 flex flex-col"
+        onsubmit="return false;"
+      >
         <h2 class="text-lg text-green-400 dark:text-green-300 mb-4">
           새 내역 추가
         </h2>
@@ -257,6 +263,22 @@
             placeholder="금액 (원)"
             autocomplete="off"
             title="형식: 숫자"
+          />
+        </div>
+        <div class="flex flex-row w-full items-center justify-end">
+          <input
+            id="submit"
+            type="submit"
+            class="
+              text-md text-white
+              mt-6
+              rounded-md
+              bg-green-400
+              p-1
+              pl-3
+              pr-3
+            "
+            value="새 내역 추가"
           />
         </div>
       </form>
