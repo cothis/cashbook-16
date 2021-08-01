@@ -1,22 +1,11 @@
 .calendar {
-  width: 100vw;
+  width: 96vw;
   max-width: 1024px;
-  height: calc(100vw * 0.8);
+  height: calc(96vw * 0.8);
   max-height: 860px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-@media (min-width: 768px) {
-  .calendar {
-    width: 80vw;
-    height: calc(80vw * 0.8);
-    max-height: 860px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 .calendar-grid {
@@ -40,6 +29,17 @@
 .calendar-cell:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.08);
+}
+
+@media (min-width: 768px) {
+  .calendar {
+    width: 80vw;
+    height: calc(80vw * 0.8);
+    max-height: 860px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
