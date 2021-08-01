@@ -14,35 +14,37 @@ export interface historyQuery {
 class historyController {
   constructor() {}
 
-  getHistories = (req: Request, res: Response) => {
+  getHistories = async (req: Request, res: Response) => {
     const query: historyQuery = req.query;
     query.githubId = req.session.githubId;
-    const histories: PaymentHistory[] = historyService.getHistoires(query);
+    const histories: PaymentHistory[] = await historyService.getHistoires(
+      query
+    );
 
     res.json(histories);
   };
 
-  createHistory = (req: Request, res: Response) => {
+  createHistory = async (req: Request, res: Response) => {
     const history: PaymentHistory = req.body;
-    const newHistory = historyService.createHistory(history);
+    const newHistory = await historyService.createHistory(history);
 
     res.json(newHistory);
   };
 
-  updateHistory = (req: Request, res: Response) => {
+  updateHistory = async (req: Request, res: Response) => {
     const historyId = Number(req.params.historyId);
     const history: PaymentHistory = req.body;
     history.uuid = historyId;
-    const newHistory = historyService.updateHistory(history);
+    const updateResult: boolean = await historyService.updateHistory(history);
 
-    res.json(newHistory);
+    res.json({ result: updateResult });
   };
 
-  deleteHistory = (req: Request, res: Response) => {
+  deleteHistory = async (req: Request, res: Response) => {
     const historyId = Number(req.params.historyId);
-    const deletedHistory = historyService.deleteHistory(historyId);
+    const deleteResult: boolean = await historyService.deleteHistory(historyId);
 
-    res.json(deletedHistory);
+    res.json({ result: deleteResult });
   };
 }
 
