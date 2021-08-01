@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/tailwind.css" />
     <title>입출금</title>
+    <script type="module">
+      /**
+       * @returns {HTMLElement}
+       */
+      const $ = (selector) => document.querySelector(selector);
+
+      const $date = $('#date');
+      const $category = $('#category');
+      const $ioContent = $('#ioContent');
+
+      $date.addEventListener('input', (ev) => console.log(ev.target.value));
+      $category.addEventListener('change', (ev) =>
+        console.log(ev.target.value)
+      );
+
+      $ioContent.addEventListener('input', (ev) =>
+        console.log(ev.target.value)
+      );
+    </script>
   </head>
   <body id="app" class="dark:bg-gray-800">
     <section
@@ -71,6 +90,8 @@
     </header>
     <section
       class="
+        m-auto
+        max-w-screen-xl
         flex flex-col
         w-full
         justify-start
@@ -89,6 +110,7 @@
           새 내역 추가
         </h2>
         <input
+          id="date"
           type="date"
           class="w-full sm:w-36 truncate text-black dark:text-white mb-4"
           value="2021-08-01"
@@ -153,6 +175,7 @@
             </option>
           </select>
           <input
+            id="ioContent"
             class="w-full sm:w-56 truncate dark:text-white"
             placeholder="입/지출 내용"
             autocomplete="off"
