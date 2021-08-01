@@ -28,6 +28,10 @@ export class PaymentHistory extends BaseEntity {
   @Column()
   isIncome: boolean;
 
+  @Index('date-idx')
+  @Column()
+  payDate: Date;
+
   @Index('method-idx')
   @ManyToOne(() => PaymentMethod, (method) => method.histories, {
     nullable: false,
