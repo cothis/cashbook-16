@@ -5,7 +5,6 @@ import path from 'path';
 import cors from 'cors';
 import session from 'express-session';
 import logger from 'morgan';
-import { createConnection } from 'typeorm';
 import router from './routes/router';
 import { PaymentHistory } from './entity/paymentHistory.entity';
 import { PaymentCategory } from './entity/paymentCategory.entity';
