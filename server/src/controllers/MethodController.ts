@@ -1,4 +1,4 @@
-import { PaymentMethod } from '@/entity/paymentMethod.entity';
+import { PaymentMethod } from '../entity/paymentMethod.entity';
 import { Request, Response } from 'express';
 import methodService from '../services/MethodService';
 

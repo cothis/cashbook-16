@@ -1,4 +1,4 @@
-import { PaymentCategory } from '@/entity/paymentCategory.entity';
+import { PaymentCategory } from '../entity/paymentCategory.entity';
 
 class CategoryService {
   constructor() {}

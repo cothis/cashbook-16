@@ -1,4 +1,4 @@
-import { PaymentHistory } from '@/entity/paymentHistory.entity';
+import { PaymentHistory } from '../entity/paymentHistory.entity';
 import { Request, Response } from 'express';
 import historyService from '../services/HistoryService';
 

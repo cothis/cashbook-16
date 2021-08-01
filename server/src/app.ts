@@ -10,6 +10,7 @@ import router from './routes/router';
 import { PaymentHistory } from './entity/paymentHistory.entity';
 import { PaymentCategory } from './entity/paymentCategory.entity';
 import { PaymentMethod } from './entity/paymentMethod.entity';
+import HistoryService from './services/HistoryService';
 
 const COOKIE_SECRET = (process.env.cookie_secret as string) || 'set_this';
 
@@ -53,20 +54,22 @@ const createDefaults = async () => {
 
 // createConnection().then(async (connection) => {
 //   await createDefaults();
-//   const method = await PaymentMethod.findOneOrFail({
-//     where: { name: '현대카드' },
-//   });
-//   const category = await PaymentCategory.findOne({ where: { name: '식비' } });
+//   const category = await PaymentCategory.findOne();
+//   const method = await PaymentMethod.findOne();
+//   if (!category) return;
+//   if (!method) return;
 
-//   const paymentHistory = PaymentHistory.create({
+//   const result = await HistoryService.createHistory({
+//     amount: 0,
+//     category,
+//     content: 'hi',
 //     githubId: 'cothis',
 //     isIncome: false,
-//     category: category,
-//     method: method,
-//     amount: 3500,
-//     content: '국밥',
+//     method,
+//     payDate: new Date(),
 //   });
-//   paymentHistory.save();
+
+//   console.log(result);
 // });
 
 app.use('/api', router);

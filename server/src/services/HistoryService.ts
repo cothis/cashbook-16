@@ -1,22 +1,30 @@
 import { PaymentHistory } from '../entity/paymentHistory.entity';
 import { HistoryQuery } from '../controllers/historyController';
-import { Between, DeepPartial } from 'typeorm';
+import { Between } from 'typeorm';
 
 class HistoryService {
   constructor() {}
 
-  getHistoires = async (query: HistoryQuery): Promise<PaymentHistory[]> => {
+  getHistoires = async (query?: HistoryQuery): Promise<PaymentHistory[]> => {
     const histories = await PaymentHistory.find({
       where: {
-        githubId: query.githubId,
-        category: query.category,
-        isIncome: query.isIncome,
-        payDate: Between(query.startDate, query.endDate),
-        method: query.method,
+        githubId: query?.githubId,
+        category: query?.category,
+        isIncome: query?.isIncome,
+        payDate: Between(query?.startDate, query?.endDate),
+        method: query?.method,
       },
     });
 
     return histories;
+  };
+
+  getHistoryById = async (uuid: number): Promise<PaymentHistory> => {
+    return await PaymentHistory.findOneOrFail({
+      where: {
+        uuid,
+      },
+    });
   };
 
   createHistory = async (
