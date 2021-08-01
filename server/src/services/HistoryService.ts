@@ -5,15 +5,18 @@ import { Between } from 'typeorm';
 class HistoryService {
   constructor() {}
 
-  getHistoires = async (query?: HistoryQuery): Promise<PaymentHistory[]> => {
+  getHistoires = async (query: HistoryQuery): Promise<PaymentHistory[]> => {
+    const condition = {
+      ...(query.githubId && { githubId: query.githubId }),
+      ...(query.category && { category: { name: query.category } }),
+      ...(query.method && { method: { id: query.method } }),
+      ...(query.isIncome && { isIncome: query.isIncome == 'true' }),
+      ...(query.startDate &&
+        query.endDate && { payDate: Between(query.startDate, query.endDate) }),
+    };
+
     const histories = await PaymentHistory.find({
-      where: {
-        githubId: query?.githubId,
-        category: query?.category,
-        isIncome: query?.isIncome,
-        payDate: Between(query?.startDate, query?.endDate),
-        method: query?.method,
-      },
+      where: condition,
     });
 
     return histories;
@@ -30,7 +33,12 @@ class HistoryService {
   createHistory = async (
     history: Partial<PaymentHistory>
   ): Promise<PaymentHistory> => {
-    const newHistory = PaymentHistory.create(history);
+    console.log(history);
+    const newHistory = PaymentHistory.create({
+      ...history,
+      method: { id: history.methodId },
+      category: { name: history.categoryName },
+    });
     const result = await PaymentHistory.save(newHistory);
 
     return result;

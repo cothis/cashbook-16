@@ -1,11 +1,11 @@
 import { PaymentHistory } from '../entity/paymentHistory.entity';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import historyService from '../services/HistoryService';
 
 export interface HistoryQuery {
   githubId?: string;
   category?: number;
-  isIncome?: boolean;
+  isIncome?: string;
   startDate?: Date;
   endDate?: Date;
   method?: string;
@@ -24,28 +24,43 @@ class HistoryController {
     res.json(histories);
   };
 
-  createHistory = async (req: Request, res: Response) => {
-    const history: Partial<PaymentHistory> = req.body;
-    history.githubId = req.session.githubId;
-    const newHistory = await historyService.createHistory(history);
+  createHistory = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const history: Partial<PaymentHistory> = req.body;
+      console.log(history);
+      history.githubId = req.session.githubId;
+      const newHistory = await historyService.createHistory(history);
 
-    res.json(newHistory);
+      res.json(newHistory);
+    } catch (err) {
+      next(err);
+    }
   };
 
-  updateHistory = async (req: Request, res: Response) => {
-    const historyId = Number(req.params.historyId);
-    const history: Partial<PaymentHistory> = req.body;
-    history.uuid = historyId;
-    const updateResult: boolean = await historyService.updateHistory(history);
+  updateHistory = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const historyId = Number(req.params.historyId);
+      const history: Partial<PaymentHistory> = req.body;
+      history.uuid = historyId;
+      const updateResult: boolean = await historyService.updateHistory(history);
 
-    res.json({ result: updateResult });
+      res.json({ result: updateResult });
+    } catch (err) {
+      next(err);
+    }
   };
 
-  deleteHistory = async (req: Request, res: Response) => {
-    const historyId = Number(req.params.historyId);
-    const deleteResult: boolean = await historyService.deleteHistory(historyId);
+  deleteHistory = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const historyId = Number(req.params.historyId);
+      const deleteResult: boolean = await historyService.deleteHistory(
+        historyId
+      );
 
-    res.json({ result: deleteResult });
+      res.json({ result: deleteResult });
+    } catch (err) {
+      next(err);
+    }
   };
 }
 

@@ -38,6 +38,8 @@ const sessionConfig = {
 app.use(logger('dev'));
 app.use(cors(corsConfig));
 app.use(session(sessionConfig));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 const createDefaults = async () => {
