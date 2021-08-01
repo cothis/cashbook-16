@@ -14,6 +14,7 @@ class MethodController {
 
   createMethod = async (req: Request, res: Response) => {
     const method: Partial<PaymentMethod> = req.body;
+    method.githubId = req.session.githubId;
     const newMethod = await methodService.createMethod(method);
 
     res.json(newMethod);

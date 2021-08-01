@@ -26,6 +26,7 @@ class HistoryController {
 
   createHistory = async (req: Request, res: Response) => {
     const history: Partial<PaymentHistory> = req.body;
+    history.githubId = req.session.githubId;
     const newHistory = await historyService.createHistory(history);
 
     res.json(newHistory);
