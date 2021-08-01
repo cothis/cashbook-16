@@ -11,7 +11,7 @@ export interface HistoryQuery {
   method?: string;
 }
 
-class historyController {
+class HistoryController {
   constructor() {}
 
   getHistories = async (req: Request, res: Response) => {
@@ -25,7 +25,7 @@ class historyController {
   };
 
   createHistory = async (req: Request, res: Response) => {
-    const history: PaymentHistory = req.body;
+    const history: Partial<PaymentHistory> = req.body;
     const newHistory = await historyService.createHistory(history);
 
     res.json(newHistory);
@@ -33,7 +33,7 @@ class historyController {
 
   updateHistory = async (req: Request, res: Response) => {
     const historyId = Number(req.params.historyId);
-    const history: PaymentHistory = req.body;
+    const history: Partial<PaymentHistory> = req.body;
     history.uuid = historyId;
     const updateResult: boolean = await historyService.updateHistory(history);
 
@@ -48,4 +48,4 @@ class historyController {
   };
 }
 
-export default new historyController();
+export default new HistoryController();
