@@ -2,7 +2,7 @@ import { PaymentHistory } from '@/entity/paymentHistory.entity';
 import { Request, Response } from 'express';
 import historyService from '../services/HistoryService';
 
-export interface historyQuery {
+export interface HistoryQuery {
   githubId?: string;
   category?: number;
   isIncome?: boolean;
@@ -15,7 +15,7 @@ class historyController {
   constructor() {}
 
   getHistories = async (req: Request, res: Response) => {
-    const query: historyQuery = req.query;
+    const query: HistoryQuery = req.query;
     query.githubId = req.session.githubId;
     const histories: PaymentHistory[] = await historyService.getHistoires(
       query

@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "jest --verbose=false",
     "build": "tsc",
     "start": "NODE_ENV=production pm2 start dist/index.js"
   },

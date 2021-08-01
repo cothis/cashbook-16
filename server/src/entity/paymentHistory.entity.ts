@@ -9,6 +9,17 @@ import {
 import { PaymentCategory } from './paymentCategory.entity';
 import { PaymentMethod } from './paymentMethod.entity';
 
+export interface IHistory {
+  uuid: number;
+  githubId: string;
+  content: string;
+  amount: number;
+  isIncome: boolean;
+  payDate: Date;
+  method: PaymentMethod;
+  category: PaymentCategory;
+}
+
 @Entity()
 export class PaymentHistory extends BaseEntity {
   @PrimaryGeneratedColumn()
