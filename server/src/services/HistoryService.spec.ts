@@ -6,10 +6,17 @@ import { PaymentMethod } from '../entity/paymentMethod.entity';
 describe('historyService', () => {
   beforeAll(async () => {
     await createConnection();
-    const category = PaymentCategory.create({ name: '식비', color: '#332299' });
-    await PaymentCategory.save(category);
-    const method = PaymentMethod.create({ name: '현대카드' });
-    await PaymentMethod.save(method);
+    try {
+      const category = PaymentCategory.create({
+        name: '식비',
+        color: '#332299',
+      });
+      await PaymentCategory.save(category);
+    } catch (err) {}
+    try {
+      const method = PaymentMethod.create({ name: '현대카드' });
+      await PaymentMethod.save(method);
+    } catch (err) {}
   });
 
   afterAll(async () => {
@@ -22,8 +29,8 @@ describe('historyService', () => {
   });
 
   it('createHistory 가 잘 동작해야 합니다.', async () => {
-    const [category] = await PaymentCategory.find();
-    const [method] = await PaymentMethod.find();
+    const category = await PaymentCategory.findOne();
+    const method = await PaymentMethod.findOne();
     if (!category) return;
     if (!method) return;
 
