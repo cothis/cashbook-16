@@ -2,7 +2,8 @@ import { PaymentHistory } from '@/entity/paymentHistory.entity';
 import { Request, Response } from 'express';
 import historyService from '../services/HistoryService';
 
-interface historyQuery {
+export interface historyQuery {
+  githubId?: string;
   category?: number;
   isIncome?: boolean;
   startDate?: Date;
@@ -15,6 +16,7 @@ class historyController {
 
   getHistories = (req: Request, res: Response) => {
     const query: historyQuery = req.query;
+    query.githubId = req.session.githubId;
     const histories: PaymentHistory[] = historyService.getHistoires(query);
 
     res.json(histories);
@@ -38,7 +40,7 @@ class historyController {
 
   deleteHistory = (req: Request, res: Response) => {
     const historyId = Number(req.params.historyId);
-    const deletedHistory = historyService.deleteHistory(history);
+    const deletedHistory = historyService.deleteHistory(historyId);
 
     res.json(deletedHistory);
   };
