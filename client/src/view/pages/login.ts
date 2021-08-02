@@ -7,12 +7,16 @@ export default class LoginPage extends Page {
   }
 
   async fetchUser() {
-    const githubId = await fetch('/api/user', {
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then((res) => res.githubId);
-    if (githubId !== 'not-logged-in') {
+    try {
+      const response = await fetch('/api/user', {
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message);
+      }
+
       const routeEvent = new CustomEvent('route', {
         detail: {
           pathname: 'main',
@@ -20,6 +24,8 @@ export default class LoginPage extends Page {
       });
 
       window.dispatchEvent(routeEvent);
+    } catch (err) {
+      console.error(err);
     }
   }
 
