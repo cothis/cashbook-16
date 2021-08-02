@@ -25,6 +25,7 @@ module.exports = {
               implementation: require('node-sass'),
             },
           },
+          'postcss-loader',
         ],
       },
       {
