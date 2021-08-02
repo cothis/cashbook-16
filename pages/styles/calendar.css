@@ -3,13 +3,14 @@
   left: 0;
   top: 0;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   height: 100%;
   z-index: 5;
 }
 
 .blur {
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .modal {
@@ -20,7 +21,7 @@
   z-index: 10;
   width: 94%;
   height: 80%;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   filter: blur(0);
 }
 
@@ -45,7 +46,7 @@
   flex-direction: column;
   position: relative;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(20, 20, 20, 0.05);
   border-radius: 0.8rem;
   justify-content: flex-end;
   align-items: flex-end;
