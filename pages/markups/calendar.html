@@ -8,9 +8,103 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/calendar.css" />
     <link rel="stylesheet" href="../styles/tailwind.css" />
+    <script type="module">
+      /** @returns {HTMLElement} */
+      const $ = (selector) => document.querySelector(selector);
+      /** @returns {HTMLElement[]} */
+      const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+
+      const $modal = $('#modal');
+      const $cells = $$('.calendar-cell');
+
+      const openModal = () => {
+        $modal.classList.remove('hidden');
+      };
+      const closeModal = () => {
+        $modal.classList.add('hidden');
+      };
+
+      document.addEventListener('click', (ev) => {
+        if (ev.target === $('.modal-bg')) {
+          closeModal();
+        }
+      });
+
+      $cells.forEach(($cell) => {
+        $cell.addEventListener('click', () => {
+          openModal();
+        });
+      });
+    </script>
     <title>캘린더</title>
   </head>
   <body id="app" class="dark:bg-gray-800">
+    <div id="modal" class="hidden modal-bg blur">
+      <section
+        class="
+          modal
+          flex flex-col
+          items-center
+          justify-center
+          sm:w-4/5 sm:h-3/5
+          overflow-y-auto
+          dark:text-purple-100
+        "
+      >
+        <article class="w-full md:w-3/4 flex flex-col">
+          <div class="flex flex-row w-full justify-between items-center">
+            <h2 class="text-lg text-green-400 dark:text-green-300">
+              7월 15일 목
+            </h2>
+            <div>
+              <span class="text-xs text-green-400 text-right font-thin"
+                >+12,000원</span
+              >
+              <span class="text-xs text-red-400 text-right font-thin"
+                >-56,240원</span
+              >
+            </div>
+          </div>
+          <div class="flex flex-row w-full h-12 items-center justify-between">
+            <span class="w-28 truncate dark:text-purple-200">미분류</span>
+            <span class="w-56 truncate dark:text-purple-200"
+              >당근이 인형 중고판매</span
+            >
+            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
+              >현금</span
+            >
+            <span class="w-32 truncate right-0 text-green-400 text-right"
+              >+12,000원</span
+            >
+          </div>
+          <div class="flex flex-row w-full h-12 items-center justify-between">
+            <span class="w-28 truncate dark:text-purple-200">문화/여가</span>
+            <span class="w-56 truncate dark:text-purple-200"
+              >스트리밍서비스 정기 결제</span
+            >
+            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
+              >현대카드</span
+            >
+            <span class="w-32 truncate right-0 text-red-400 text-right"
+              >-10,900원</span
+            >
+          </div>
+          <div class="flex flex-row w-full h-12 items-center justify-between">
+            <span class="w-28 truncate dark:text-purple-200">교통</span>
+            <span class="w-56 truncate dark:text-purple-200"
+              >후불 교통비 결제</span
+            >
+            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
+              >현대카드</span
+            >
+            <span class="w-32 truncate right-0 text-red-400 text-right"
+              >-45,340원</span
+            >
+          </div>
+        </article>
+      </section>
+    </div>
+
     <section
       class="h-6 w-full text-md text-center text-green-400 dark:text-purple-400"
     >
