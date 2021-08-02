@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/navbar.css" />
     <link rel="stylesheet" href="../styles/calendar.css" />
     <link rel="stylesheet" href="../styles/tailwind.css" />
     <script type="module">
@@ -424,7 +425,8 @@
     </section>
     <header
       class="
-        container
+        navbar
+        mx-auto
         flex flex-row
         md:h-20
         sm:h-16
@@ -476,6 +478,44 @@
         그래프
       </button>
     </header>
+    <section
+      class="
+        flex flex-row
+        h-12
+        w-full
+        justify-center
+        text-sm text-black
+        dark:text-white
+        bg-gray-50
+        dark:bg-gray-700
+        sticky
+        top-0
+      "
+    >
+      <button
+        class="
+          md:w-24
+          sm:w-20
+          w-16
+          h-full
+          hover:text-green-400
+          dark:text-white
+          border-b-2 border-solid border-green-300
+        "
+      >
+        전체
+      </button>
+      <button
+        class="md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white"
+      >
+        입금
+      </button>
+      <button
+        class="md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white"
+      >
+        출금
+      </button>
+    </section>
     <section
       class="
         flex flex-col
