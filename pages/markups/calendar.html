@@ -51,7 +51,7 @@
           dark:text-purple-100
         "
       >
-        <article class="w-full md:w-3/4 flex flex-col">
+        <article class="w-full md:w-3/4 flex flex-col pl-2 pr-2 box-border">
           <div class="flex flex-row w-full justify-between items-center">
             <h2 class="text-lg text-green-400 dark:text-green-300">
               7월 15일 목
@@ -65,41 +65,242 @@
               >
             </div>
           </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">미분류</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >당근이 인형 중고판매</span
+          <form class="flex flex-row w-full h-12 items-center justify-between">
+            <select id="category" name="category" class="w-28 dark:text-white">
+              <option value="문화/여가" class="w-28 truncate dark:text-white">
+                문화/여가
+              </option>
+              <option value="생활" class="w-28 truncate dark:text-white">
+                생활
+              </option>
+              <option value="의료/건강" class="w-28 truncate dark:text-white">
+                의료/건강
+              </option>
+              <option value="교통" class="w-28 truncate dark:text-white">
+                교통
+              </option>
+              <option value="식비" class="w-28 truncate dark:text-white">
+                식비
+              </option>
+              <option
+                value="미분류"
+                class="w-28 truncate dark:text-white"
+                selected
+              >
+                미분류
+              </option>
+            </select>
+            <input
+              id="ioContent"
+              class="w-56 truncate dark:text-white"
+              placeholder="입/지출 내용"
+              autocomplete="off"
+              value="당근이 인형 중고판매"
+            />
+            <select
+              id="method"
+              name="method"
+              class="hidden sm:block w-40 truncate dark:text-white"
             >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현금</span
+              <option
+                value="카드"
+                class="hidden sm:block w-40 truncate dark:text-white"
+                selected
+              >
+                카드
+              </option>
+              <option
+                value="현금"
+                class="hidden sm:block w-40 truncate dark:text-white"
+              >
+                현금
+              </option>
+              <option
+                value="현대카드"
+                class="hidden sm:block w-40 truncate dark:text-white"
+              >
+                현대카드
+              </option>
+            </select>
+            <input
+              type="number"
+              class="
+                w-24
+                truncate
+                sm:right-0
+                text-green-400
+                dark:text-white
+                text-right
+              "
+              placeholder="금액 (원)"
+              autocomplete="off"
+              title="형식: 숫자"
+              value="12000"
+            />
+          </form>
+          <form class="flex flex-row w-full h-12 items-center justify-between">
+            <select id="category" name="category" class="w-28 dark:text-white">
+              <option
+                value="문화/여가"
+                class="w-28 truncate dark:text-white"
+                selected
+              >
+                문화/여가
+              </option>
+              <option value="생활" class="w-28 truncate dark:text-white">
+                생활
+              </option>
+              <option value="의료/건강" class="w-28 truncate dark:text-white">
+                의료/건강
+              </option>
+              <option value="교통" class="w-28 truncate dark:text-white">
+                교통
+              </option>
+              <option value="식비" class="w-28 truncate dark:text-white">
+                식비
+              </option>
+              <option value="미분류" class="w-28 truncate dark:text-white">
+                미분류
+              </option>
+            </select>
+            <input
+              id="ioContent"
+              class="w-56 truncate dark:text-white"
+              placeholder="입/지출 내용"
+              autocomplete="off"
+              value="스트리밍서비스 정기 결제"
+            />
+            <select
+              id="method"
+              name="method"
+              class="hidden sm:block w-40 truncate dark:text-white"
             >
-            <span class="w-32 truncate right-0 text-green-400 text-right"
-              >+12,000원</span
+              <option
+                value="카드"
+                class="hidden sm:block w-40 truncate dark:text-white"
+              >
+                카드
+              </option>
+              <option
+                value="현금"
+                class="hidden sm:block w-40 truncate dark:text-white"
+              >
+                현금
+              </option>
+              <option
+                value="현대카드"
+                class="hidden sm:block w-40 truncate dark:text-white"
+                selected
+              >
+                현대카드
+              </option>
+            </select>
+            <input
+              type="number"
+              class="
+                w-24
+                truncate
+                sm:right-0
+                text-red-400
+                dark:text-white
+                text-right
+              "
+              placeholder="금액 (원)"
+              autocomplete="off"
+              title="형식: 숫자"
+              value="-15000"
+            />
+          </form>
+          <form class="flex flex-row w-full h-12 items-center justify-between">
+            <select id="category" name="category" class="w-28 dark:text-white">
+              <option value="문화/여가" class="w-28 truncate dark:text-white">
+                문화/여가
+              </option>
+              <option value="생활" class="w-28 truncate dark:text-white">
+                생활
+              </option>
+              <option value="의료/건강" class="w-28 truncate dark:text-white">
+                의료/건강
+              </option>
+              <option
+                value="교통"
+                class="w-28 truncate dark:text-white"
+                selected
+              >
+                교통
+              </option>
+              <option value="식비" class="w-28 truncate dark:text-white">
+                식비
+              </option>
+              <option value="미분류" class="w-28 truncate dark:text-white">
+                미분류
+              </option>
+            </select>
+            <input
+              id="ioContent"
+              class="w-56 truncate dark:text-white"
+              placeholder="입/지출 내용"
+              autocomplete="off"
+              value="후불 교통비 결제"
+            />
+            <select
+              id="method"
+              name="method"
+              class="hidden sm:block w-40 truncate dark:text-white"
             >
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">문화/여가</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >스트리밍서비스 정기 결제</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현대카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-10,900원</span
-            >
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">교통</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >후불 교통비 결제</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현대카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-45,340원</span
-            >
+              <option
+                value="카드"
+                class="hidden sm:block w-40 truncate dark:text-white"
+              >
+                카드
+              </option>
+              <option
+                value="현금"
+                class="hidden sm:block w-40 truncate dark:text-white"
+              >
+                현금
+              </option>
+              <option
+                value="현대카드"
+                class="hidden sm:block w-40 truncate dark:text-white"
+                selected
+              >
+                현대카드
+              </option>
+            </select>
+            <input
+              type="number"
+              class="
+                w-24
+                truncate
+                sm:right-0
+                text-red-400
+                dark:text-white
+                text-right
+              "
+              placeholder="금액 (원)"
+              autocomplete="off"
+              title="형식: 숫자"
+              value="-45340"
+            />
+          </form>
+          <div class="flex flex-row w-full items-center justify-end">
+            <input
+              id="submit"
+              type="submit"
+              class="
+                text-md text-white
+                mt-6
+                rounded-md
+                bg-green-400
+                dark:bg-green-500
+                cursor-pointer
+                p-1
+                pl-3
+                pr-3
+              "
+              value="변경사항 적용"
+            />
           </div>
         </article>
       </section>
