@@ -28,6 +28,10 @@ export class PaymentHistory extends BaseEntity {
   @Column()
   isIncome: boolean;
 
+  @Index('date-idx')
+  @Column()
+  payDate: Date;
+
   @Index('method-idx')
   @ManyToOne(() => PaymentMethod, (method) => method.histories, {
     nullable: false,
@@ -35,6 +39,9 @@ export class PaymentHistory extends BaseEntity {
     onUpdate: 'CASCADE',
   })
   method: PaymentMethod;
+
+  @Column()
+  methodId: number;
 
   @Index('category-idx')
   @ManyToOne(() => PaymentCategory, (category) => category.histories, {
@@ -44,7 +51,10 @@ export class PaymentHistory extends BaseEntity {
   })
   category: PaymentCategory;
 
-  toJSON() {
-    return { ...this, uuid: undefined };
-  }
+  @Column()
+  categoryName: string;
+
+  // toJSON() {
+  //   return { ...this, uuid: undefined };
+  // }
 }
