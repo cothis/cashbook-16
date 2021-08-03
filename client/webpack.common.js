@@ -37,6 +37,13 @@ module.exports = {
           limit: 10000, // 10kb
         },
       },
+      {
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      },
     ],
   },
   resolve: {

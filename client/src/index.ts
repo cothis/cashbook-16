@@ -3,6 +3,8 @@ import MainView from '@/view/pages/main';
 import LoginPage from '@/view/pages/login';
 import ListPage from './view/pages/list';
 import RouterLink from '@/view/customElements/router-link';
+import './view/styles/reset.css';
+import './view/styles/index.css';
 import 'tailwindcss/tailwind.css';
 window.customElements.define('router-link', RouterLink);
 
