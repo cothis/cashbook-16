@@ -4,6 +4,92 @@ import logo from '../../../assets/logo.png';
 
 const today = '2020-08-01';
 
+const days = [
+  {
+    date: '7월 15일 목',
+    totalIncome: '12000',
+    totalSpend: '-56240',
+    detail: [
+      {
+        category: '미분류',
+        content: '테스트',
+        method: '현금',
+        amount: '20000',
+      },
+      {
+        category: '미분류',
+        content: '당근이 인형 중고판매',
+        method: '현금',
+        amount: '12000',
+      },
+      {
+        category: '문화/여가',
+        content: '스트리밍서비스 정기 결제',
+        method: '현대카드',
+        amount: '-10900',
+      },
+      {
+        category: '교통',
+        content: '후불 교통비 결제',
+        method: '현대카드',
+        amount: '-45340',
+      },
+    ],
+  },
+  {
+    date: '7월 14일 수',
+    totalIncome: '1500000',
+    totalSpend: '0',
+    detail: [
+      {
+        category: '미분류',
+        content: '우아한 형제들',
+        method: '카카오뱅크',
+        amount: '1500000',
+      },
+    ],
+  },
+  {
+    date: '7월 12일 월',
+    totalIncome: '0',
+    totalSpend: '-100000',
+    detail: [
+      {
+        category: '쇼핑',
+        content: '쿠팡 (쿠페이)',
+        method: '카드',
+        amount: '-100000',
+      },
+    ],
+  },
+  {
+    date: '7월 10일 토',
+    totalIncome: '0',
+    totalSpend: '-16000',
+    detail: [
+      {
+        category: '식비',
+        content: '연래춘(숭실대앞)',
+        method: '현대카드',
+        amount: '-16000',
+      },
+    ],
+  },
+  {
+    date: '7월 9일 금',
+    totalIncome: '0',
+    totalSpend: '-50000',
+    detail: [
+      {
+        category: '의료/건강',
+        content: '백신접종',
+        method: '현대카드',
+        amount: '-50000',
+      },
+    ],
+  },
+];
+
 export default class ListPage extends Page {
   constructor(root: HTMLElement) {
     super(root);
@@ -263,153 +349,25 @@ export default class ListPage extends Page {
           </div>
         </form>
 
-        <section class="w-full md:w-3/4 flex flex-col">
-          <div class="flex flex-row w-full justify-between items-center">
-            <h2 class="text-lg text-green-400 dark:text-green-300">
-              7월 15일 목
-            </h2>
-            <div>
-              <span class="text-xs text-green-400 text-right font-thin"
-                >+12,000원</span
-              >
-              <span class="text-xs text-red-400 text-right font-thin"
-                >-56,240원</span
-              >
-            </div>
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">미분류</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >당근이 인형 중고판매</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현금</span
-            >
-            <span class="w-32 truncate right-0 text-green-400 text-right"
-              >+12,000원</span
-            >
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">문화/여가</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >스트리밍서비스 정기 결제</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현대카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-10,900원</span
-            >
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">교통</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >후불 교통비 결제</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현대카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-45,340원</span
-            >
-          </div>
-        </section>
+        ${days.map(
+          (day) => html`<section class="w-full md:w-3/4 flex flex-col">
+            <list-title
+              date="${day.date}"
+              income="${day.totalIncome}"
+              spend="${day.totalSpend}"
+            ></list-title>
+            ${day.detail.map(
+              (el) =>
+                html`<list-item
+                  category="${el.category}"
+                  content="${el.content}"
+                  method="${el.method}"
+                  amount="${el.amount}"
+                ></list-item>`
+            )}
+          </section>`
+        )}
 
-        <section class="w-full md:w-3/4 flex flex-col">
-          <div class="flex flex-row w-full justify-between items-center">
-            <h2 class="text-lg text-green-400 dark:text-green-300">
-              7월 14일 수
-            </h2>
-            <div>
-              <span class="text-xs text-green-400 text-right font-thin"
-                >+1,500,000원</span
-              >
-            </div>
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">미분류</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >(주)우아한형제들</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >카카오뱅크</span
-            >
-            <span class="w-32 truncate right-0 text-green-400 text-right"
-              >+1,500,000원</span
-            >
-          </div>
-        </section>
-
-        <section class="w-full md:w-3/4 flex flex-col">
-          <div class="flex flex-row w-full justify-between items-center">
-            <h2 class="text-lg text-green-400 dark:text-green-300">
-              7월 12일 월
-            </h2>
-            <div>
-              <span class="text-xs text-red-400 text-right font-thin"
-                >-100,000원</span
-              >
-            </div>
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">쇼핑</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >쿠팡 (쿠페이)</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-100,000원</span
-            >
-          </div>
-        </section>
-        <section class="w-full md:w-3/4 flex flex-col">
-          <div class="flex flex-row w-full justify-between items-center">
-            <h2 class="text-lg text-green-400 dark:text-green-300">
-              7월 10일 토
-            </h2>
-            <div>
-              <span class="text-xs text-red-400 text-right font-thin"
-                >-16,000원</span
-              >
-            </div>
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">식비</span>
-            <span class="w-56 truncate dark:text-purple-200"
-              >연래춘(숭실대앞)</span
-            >
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현대카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-16,000원</span
-            >
-          </div>
-        </section>
-        <section class="w-full md:w-3/4 flex flex-col">
-          <div class="flex flex-row w-full justify-between items-center">
-            <h2 class="text-lg text-green-400 dark:text-green-300">
-              7월 9일 금
-            </h2>
-            <div>
-              <span class="text-xs text-red-400 text-right font-thin"
-                >-50,000원</span
-              >
-            </div>
-          </div>
-          <div class="flex flex-row w-full h-12 items-center justify-between">
-            <span class="w-28 truncate dark:text-purple-200">의료/건강</span>
-            <span class="w-56 truncate dark:text-purple-200">백신접종</span>
-            <span class="hidden sm:block w-40 truncate dark:text-purple-200"
-              >현대카드</span
-            >
-            <span class="w-32 truncate right-0 text-red-400 text-right"
-              >-50,000원</span
-            >
-          </div>
-        </section>
         <div class="hidden sm:block fixed top-1/2 left-0 p-8 w-10 slide-btn">
           <
         </div>

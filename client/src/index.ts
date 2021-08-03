@@ -3,10 +3,14 @@ import MainView from '@/view/pages/main';
 import LoginPage from '@/view/pages/login';
 import ListPage from './view/pages/list';
 import RouterLink from '@/view/customElements/router-link';
+import ListTitle from './view/customElements/list-title';
+import ListItem from './view/customElements/list-item';
 import './view/styles/reset.css';
 import './view/styles/index.css';
 import 'tailwindcss/tailwind.css';
 window.customElements.define('router-link', RouterLink);
+ListTitle.define();
+ListItem.define();
 
 const $app = <HTMLElement>document.querySelector('#App');
 const router = new Router();
