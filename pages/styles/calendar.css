@@ -26,6 +26,11 @@
   filter: blur(0);
 }
 
+.month-summary {
+  width: 96vw;
+  max-width: 1024px;
+}
+
 .calendar {
   width: 96vw;
   max-width: 1024px;
@@ -68,6 +73,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .month-summary {
+    width: 80vw;
+    max-width: 1024px;
   }
 }
 

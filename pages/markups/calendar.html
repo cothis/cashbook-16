@@ -533,13 +533,24 @@
         justify-start
         items-center
         box-border
-        gap-16
+        gap-12
         pb-12
       "
     >
       <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-white">
         7 월 내 역
       </h1>
+
+      <div class="month-summary flex flex-row justify-end items-center">
+        <div>
+          <span class="text-xs text-green-400 text-right font-thin"
+            >+12,000원</span
+          >
+          <span class="text-xs text-red-400 text-right font-thin"
+            >-56,240원</span
+          >
+        </div>
+      </div>
 
       <section class="calendar">
         <div class="calendar-grid w-full h-full grid grid-cols-7 grid-rows-6">
