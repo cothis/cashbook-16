@@ -9,9 +9,9 @@ const CALENDAR_CELL_MINUS = `md:h-4 sm:h-3 h-2 hidden sm:block text-xs rounded-m
 const CALENDAR_CELL_MINUS_DOT = `md:h-4 sm:h-3 h-2 block sm:hidden text-xs rounded-md text-right text-red-400 md:pr-3 pr-1`;
 
 interface State {
-  plus?: string;
-  minus?: string;
-  day: string;
+  plus?: number;
+  minus?: number;
+  day: number;
 }
 
 export default class CalendarCell extends HTMLElement implements View {
@@ -20,7 +20,7 @@ export default class CalendarCell extends HTMLElement implements View {
   constructor() {
     super();
     this.className = CALENDAR_CELL_CLASS;
-    this.state = { day: '0' };
+    this.state = { day: 0 };
     this.render();
   }
 
@@ -29,7 +29,7 @@ export default class CalendarCell extends HTMLElement implements View {
     oldValue: string,
     newValue: string
   ) {
-    this.state[name] = newValue;
+    this.state[name] = parseInt(newValue);
     this.render();
   }
 
@@ -42,21 +42,26 @@ export default class CalendarCell extends HTMLElement implements View {
   }
 
   createDom(): HTMLElement {
+    const { plus, minus, day } = this.state;
     return html`
       <span class="calendar-cell pb-2">
-        <div class="${CALENDAR_CELL_DATE}">${this.state.day}</div>
-        ${this.state.plus
+        <div class="${CALENDAR_CELL_DATE}">${day}</div>
+        ${plus
           ? [
               html`
-                <div class="${CALENDAR_CELL_PLUS}">+${this.state.plus}</div>
+                <div class="${CALENDAR_CELL_PLUS}">
+                  ${plus.toLocaleString()}
+                </div>
               `,
               html` <div class="${CALENDAR_CELL_PLUS_DOT}">。</div> `,
             ]
           : undefined}
-        ${this.state.minus
+        ${minus
           ? [
               html`
-                <div class="${CALENDAR_CELL_MINUS}">-${this.state.minus}</div>
+                <div class="${CALENDAR_CELL_MINUS}">
+                  ${minus.toLocaleString()}
+                </div>
               `,
               html` <div class="${CALENDAR_CELL_MINUS_DOT}">。</div> `,
             ]

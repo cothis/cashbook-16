@@ -1,4 +1,5 @@
 import FC, { html, FCPropTypes } from './FC';
+import { toKRW } from '../../utils';
 
 interface MonthSummaryPropTypes extends FCPropTypes {
   plus: number;
@@ -16,10 +17,10 @@ const MonthSummary: FC<MonthSummaryPropTypes> = (prop) => {
     <div class="month-summary flex flex-row justify-end items-center">
       <div>
         <span class="text-xs text-green-400 text-right font-thin"
-          >${plus}원</span
+          >${toKRW(plus)}</span
         >
         <span class="text-xs text-red-400 text-right font-thin"
-          >${minus}원</span
+          >${toKRW(minus)}</span
         >
       </div>
     </div>
