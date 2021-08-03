@@ -90,6 +90,52 @@ const days = [
   },
 ];
 
+const categories = [
+  {
+    value: '문화/여가',
+    selected: true,
+  },
+  {
+    value: '생활',
+    selected: false,
+  },
+  {
+    value: '의료/건강',
+    selected: false,
+  },
+  {
+    value: '교통',
+    selected: false,
+  },
+  {
+    value: '식비',
+    selected: false,
+  },
+  {
+    value: '미분류',
+    selected: false,
+  },
+];
+
+const methods = [
+  {
+    name: '카드',
+    selected: true,
+  },
+  {
+    name: '현금',
+    selected: false,
+  },
+  {
+    name: '현대카드',
+    selected: false,
+  },
+];
+
+const BUTTON_CLASS =
+  'md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white';
+const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
+
 export default class ListPage extends Page {
   constructor(root: HTMLElement) {
     super(root);
@@ -102,107 +148,16 @@ export default class ListPage extends Page {
       >
         운영체제 다크모드에 맞춰서 테마가 변해요!
       </section>
-      <header
-        class="
-        container
-        flex flex-row
-        md:h-20
-        sm:h-16
-        h-12
-        items-center
-        justify-start
-        gap-4
-        border-b-2 border-gray-50
-        box-border
-      "
-      >
-        <span class="cursor-pointer h-full sm:ml-16 ml-2 mr-4 p-2">
-          <img src="${logo}" alt="" class="h-full w-auto object-fill" />
-        </span>
-        <button
-          class="
-          md:w-24
-          sm:w-20
-          w-16
-          h-full
-          bg-green-400
-          text-white
-          hover:text-white
-        "
-        >
-          리스트
-        </button>
-        <a class="h-full" href="calendar.html">
-          <button
-            class="
-            md:w-24
-            sm:w-20
-            w-16
-            h-full
-            hover:text-green-400
-            dark:text-white
-          "
-          >
-            캘린더
-          </button>
-        </a>
-        <button
-          class="md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white"
-        >
-          그래프
-        </button>
-      </header>
+      <app-header active="list"></app-header>
       <section
-        class="
-        flex flex-row
-        h-12
-        w-full
-        justify-center
-        text-sm text-black
-        dark:text-white
-        bg-gray-50
-        dark:bg-gray-700
-        sticky
-        top-0
-      "
+        class="flex flex-row h-12 w-full justify-center text-sm text-black dark:text-white bg-gray-50 dark:bg-gray-700 sticky top-0"
       >
-        <button
-          class="
-          md:w-24
-          sm:w-20
-          w-16
-          h-full
-          hover:text-green-400
-          dark:text-white
-          border-b-2 border-solid border-green-300
-        "
-        >
-          전체
-        </button>
-        <button
-          class="md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white"
-        >
-          입금
-        </button>
-        <button
-          class="md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white"
-        >
-          출금
-        </button>
+        <button class="${BUTTON_CLASS} ${ACTIVE_CLASS}">전체</button>
+        <button class="${BUTTON_CLASS}">입금</button>
+        <button class="${BUTTON_CLASS}">출금</button>
       </section>
       <section
-        class="
-        m-auto
-        max-w-screen-xl
-        flex flex-col
-        w-full
-        justify-start
-        items-center
-        box-border
-        sm:gap-24
-        gap-12
-        pb-12
-      "
+        class="m-auto max-w-screen-xl flex flex-col w-full justify-start items-center box-border sm:gap-24 gap-12 pb-12"
       >
         <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
           7 월 내 역
@@ -224,19 +179,7 @@ export default class ListPage extends Page {
             value="2021-08-01"
           />
           <div
-            class="
-            flex flex-col
-            sm:flex-row
-            w-full
-            sm:h-12
-            gap-6
-            sm:gap-0
-            items-start
-            sm:items-center
-            pl-1
-            sm:pl-0
-            justify-between
-          "
+            class="flex flex-col sm:flex-row w-full sm:h-12 gap-6 sm:gap-0 items-start sm:items-center pl-1 sm:pl-0 justify-between"
           >
             <select
               id="category"
@@ -244,43 +187,16 @@ export default class ListPage extends Page {
               size="3"
               class="w-full sm:w-28 dark:text-white"
             >
-              <option
-                value="문화/여가"
-                class="w-full sm:w-28 truncate dark:text-white"
-                selected
-              >
-                문화/여가
-              </option>
-              <option
-                value="생활"
-                class="w-full sm:w-28 truncate dark:text-white"
-              >
-                생활
-              </option>
-              <option
-                value="의료/건강"
-                class="w-full sm:w-28 truncate dark:text-white"
-              >
-                의료/건강
-              </option>
-              <option
-                value="교통"
-                class="w-full sm:w-28 truncate dark:text-white"
-              >
-                교통
-              </option>
-              <option
-                value="식비"
-                class="w-full sm:w-28 truncate dark:text-white"
-              >
-                식비
-              </option>
-              <option
-                value="미분류"
-                class="w-full sm:w-28 truncate dark:text-white"
-              >
-                미분류
-              </option>
+              ${categories.map(
+                (category) =>
+                  html`<option
+                    value="${category.value}"
+                    class="w-full sm:w-28 truncate dark:text-white"
+                    ${category.selected ? 'selected' : ''}
+                  >
+                    ${category.value}
+                  </option>`
+              )}
             </select>
             <input
               id="ioContent"
@@ -294,36 +210,19 @@ export default class ListPage extends Page {
               size="3"
               class="w-full sm:w-40 dark:text-white"
             >
-              <option
-                value="카드"
-                class="w-full sm:w-40 truncate dark:text-white"
-                selected
-              >
-                카드
-              </option>
-              <option
-                value="현금"
-                class="w-full sm:w-40 truncate dark:text-white"
-              >
-                현금
-              </option>
-              <option
-                value="현대카드"
-                class="w-full sm:w-40 truncate dark:text-white"
-              >
-                현대카드
-              </option>
+              ${methods.map(
+                (method) => html`<option
+                  value=${method.name}
+                  class="w-full sm:w-40 truncate dark:text-white"
+                  ${method.selected ? 'selected' : ''}
+                >
+                  ${method.name}
+                </option>`
+              )}
             </select>
             <input
               type="number"
-              class="
-              w-full
-              sm:w-32
-              truncate
-              sm:right-0
-              dark:text-white
-              sm:text-right
-            "
+              class="w-full sm:w-32 truncate sm:right-0 dark:text-white sm:text-right"
               placeholder="금액 (원)"
               autocomplete="off"
               title="형식: 숫자"
@@ -333,17 +232,7 @@ export default class ListPage extends Page {
             <input
               id="submit"
               type="submit"
-              class="
-              text-md text-white
-              mt-6
-              rounded-md
-              bg-green-400
-              dark:bg-green-500
-              cursor-pointer
-              p-1
-              pl-3
-              pr-3
-            "
+              class="text-md text-white mt-6 rounded-md bg-green-400 dark:bg-green-500 cursor-pointer p-1 pl-3 pr-3"
               value="새 내역 추가"
             />
           </div>
