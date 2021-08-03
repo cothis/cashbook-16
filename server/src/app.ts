@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv-defaults/config';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import path from 'path';
 import cors from 'cors';
 import session from 'express-session';
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/api', router);
 app.use(errorController.handlerError);
-app.get('/*', (req, res) => {
+app.use((req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
