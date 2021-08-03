@@ -1,4 +1,4 @@
-import Component from './component';
+import Component from './Component';
 import html from '../../core/jsx';
 import { getRandomInt } from '../../utils';
 
@@ -12,10 +12,15 @@ type CalendarState = {
   cells: Cell[];
 };
 
-class Calendar extends Component {
+type CalendarProps = {
+  openModal: () => void;
+};
+
+class Calendar extends Component<CalendarProps, {}> {
   state: CalendarState;
-  constructor() {
-    super();
+
+  constructor(props: CalendarProps) {
+    super(props);
     this.state = {
       cells: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15].map(
         (val, idx, arr) => ({
@@ -29,7 +34,6 @@ class Calendar extends Component {
 
   createDom(): HTMLElement {
     const { cells } = this.state;
-    console.log(cells);
 
     return html`
       <section class="calendar">
@@ -43,6 +47,9 @@ class Calendar extends Component {
                 day="${cell.day}"
                 plus="${cell.plus}"
                 minus="${cell.minus}"
+                onClick=${() => {
+                  this.props?.openModal();
+                }}
               >
               </calendar-cell>
             `;

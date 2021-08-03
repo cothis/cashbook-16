@@ -3,7 +3,8 @@ import html from '../../core/jsx';
 import Banner from '../FC/Banner';
 import MonthSummary from '../FC/MonthSummary';
 import Calendar from '../components/Calendar';
-import Component from '../components/component';
+import CalendarModal from '../components/CalendarModal';
+import Component from '../components/Component';
 
 const BUTTON_CLASS = `md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white`;
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
@@ -11,16 +12,22 @@ const BODY_WRAPPER_CLASS = `flex flex-col h-screen w-full justify-start items-ce
 
 export default class CalendarPage extends Page {
   $calendar: Component;
+  $calendarModal: Component;
 
   constructor(root: HTMLElement) {
     super(root);
-    this.$calendar = new Calendar();
+    this.$calendarModal = new CalendarModal();
+    this.$calendarModal.render();
+    this.$calendar = new Calendar({
+      openModal: (this.$calendarModal as CalendarModal).open,
+    });
     this.$calendar.render();
+    (this.$calendarModal as CalendarModal).open();
   }
 
   createDom(): HTMLElement {
     return html` <section>
-      ${Banner()}
+      ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
       <section
         class="flex flex-row h-12 w-full justify-center text-sm text-black dark:text-white bg-gray-50 dark:bg-gray-700 sticky top-0"

@@ -27,6 +27,9 @@ export const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
 };
 
+export const $ = (selector: string): HTMLElement | null =>
+  document.querySelector(selector);
+
 export const debouncer = <T>() => {
   let timer: NodeJS.Timeout | undefined = undefined;
   return (
