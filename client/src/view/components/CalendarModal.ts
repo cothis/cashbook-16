@@ -17,12 +17,6 @@ type CalendarModalState = {
 class CalendarModal extends Component {
   constructor() {
     super();
-
-    document.addEventListener('click', (ev) => {
-      if (ev.target === $('.modal-bg')) {
-        this.close();
-      }
-    });
   }
 
   open = () => {

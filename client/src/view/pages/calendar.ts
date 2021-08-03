@@ -5,6 +5,7 @@ import MonthSummary from '../FC/MonthSummary';
 import Calendar from '../components/Calendar';
 import CalendarModal from '../components/CalendarModal';
 import Component from '../components/Component';
+import { $ } from '../../utils';
 
 const BUTTON_CLASS = `md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white`;
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
@@ -25,8 +26,14 @@ export default class CalendarPage extends Page {
     (this.$calendarModal as CalendarModal).open();
   }
 
+  onOuterClick = (ev: Event) => {
+    if (ev.target === $('.modal-bg')) {
+      (this.$calendarModal as CalendarModal).close();
+    }
+  };
+
   createDom(): HTMLElement {
-    return html` <section>
+    return html` <section onClick=${this.onOuterClick}>
       ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
       <section
