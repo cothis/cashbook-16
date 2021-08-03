@@ -1,3 +1,36 @@
+.modal-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.05);
+  height: 100%;
+  z-index: 5;
+}
+
+.blur {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 94%;
+  max-width: 1024px;
+  height: 60%;
+  background-color: rgba(255, 255, 255, 0.5);
+  filter: blur(0);
+}
+
+.month-summary {
+  width: 96vw;
+  max-width: 1024px;
+}
+
 .calendar {
   width: 96vw;
   max-width: 1024px;
@@ -19,7 +52,7 @@
   flex-direction: column;
   position: relative;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(20, 20, 20, 0.05);
   border-radius: 0.8rem;
   justify-content: flex-end;
   align-items: flex-end;
@@ -41,6 +74,11 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .month-summary {
+    width: 80vw;
+    max-width: 1024px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,5 +88,10 @@
 
   .calendar-cell:hover {
     background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .modal {
+    /* background-color: rgba(200, 205, 205, 0.55); */
+    background-color: rgba(20, 30, 30, 0.4);
   }
 }
