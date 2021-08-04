@@ -30,20 +30,6 @@ class CategoryController extends Controller<State> {
     const result = CategoryStore.setState({ categories: categories });
     if (result) this.notify('category');
   };
-
-  requestGetCategory = async () => {
-    try {
-      const response = await fetch('/api/categories', {
-        credentials: 'include',
-      });
-      if (!response.ok) throw new Error('카테고리를 가져오지 못했습니다.');
-      const data: PaymentCategory[] = await response.json();
-      console.log(data);
-      this.setCategories(data);
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
 }
 
 export default new CategoryController();

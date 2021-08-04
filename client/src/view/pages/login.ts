@@ -19,8 +19,6 @@ export default class LoginPage extends Page {
         throw new Error(err.message);
       }
 
-      await HistoryController.requestGetHistory();
-      await CategoryController.requestGetCategory();
       const routeEvent = new CustomEvent('route', {
         detail: {
           pathname: 'list',

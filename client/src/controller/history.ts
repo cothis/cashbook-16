@@ -32,20 +32,6 @@ class HistoryController extends Controller<State> {
     if (result) this.notify('history');
   };
 
-  requestGetHistory = async () => {
-    try {
-      const response = await fetch('/api/histories', {
-        credentials: 'include',
-      });
-      if (!response.ok) throw new Error('히스토리를 가져오지 못했습니다.');
-      const data: PaymentHistory[] = await response.json();
-      console.log(data);
-      this.setHistories(data);
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
-
   fetchHistory = async (options: Partial<getHistoryProps>) => {
     const response = await getHistories(options);
 

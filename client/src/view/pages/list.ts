@@ -1,6 +1,8 @@
 import Page from './page';
 import html from '../../core/jsx';
 import HistoryController from '../../controller/history';
+import { getCategories, getHistories } from '../../api/apis';
+import CategoryController from '../../controller/category';
 import { PaymentCategory, PaymentHistory } from '../../types';
 import { HistoryState } from '@/store/history';
 import { dateToString } from '@/utils';
@@ -41,15 +43,25 @@ export default class ListPage extends Page {
 
   constructor(root: HTMLElement) {
     super(root);
-    HistoryController.subscribe(this, this.updateDom, 'history');
   }
 
-  updateDom(historyState: HistoryState) {
+  async beforeMount() {
+    const [histories, categoreis] = await Promise.all([
+      getHistories(),
+      getCategories(),
+    ]);
+
+    HistoryController.setHistories(histories);
+    CategoryController.setCategories(categoreis);
+    this.toHistoryBoard({ histories });
+    HistoryController.subscribe(this, this.render, 'history');
+  }
+
+  toHistoryBoard(historyState: HistoryState) {
     const histories: PaymentHistory[] = historyState.histories;
     const map = new Map<string, HistoryBoard>();
     histories.forEach((history) => {
       const date = dateToString(history.payDate);
-      console.log(typeof history.amount);
       let find = map.get(date);
       if (!find) {
         find = { date, totalIncome: '0', totalSpend: '0', detail: [] };
@@ -77,8 +89,6 @@ export default class ListPage extends Page {
       map.set(date, find);
     });
     this.histories = Array.from(map).map((el) => el[1]);
-    console.log(this.histories);
-    this.render();
   }
 
   createDom(): HTMLElement {

@@ -8,7 +8,10 @@ export default class Page implements View {
     this.$root = $root;
   }
 
-  render(): void {
+  async beforeMount() {}
+
+  async render() {
+    await this.beforeMount();
     const $new = this.createDom();
     if (this.$root.firstElementChild) {
       this.$root.replaceChild($new, this.$root.firstElementChild);
