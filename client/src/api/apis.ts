@@ -36,12 +36,12 @@ export const getMethods = async (): Promise<PaymentMethod[]> => {
   return await request<PaymentMethod[]>('/api/methods');
 };
 
-export const createHistory = async (body: string): Promise<PaymentHistory> => {
+export const createHistory = async (body: any): Promise<PaymentHistory> => {
   return await request<PaymentHistory>('/api/histories', {
     method: 'post',
-    body: body,
+    body: JSON.stringify(body),
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
   });
 };

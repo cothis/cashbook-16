@@ -27,6 +27,7 @@ class HistoryController {
   createHistory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const history: Partial<PaymentHistory> = req.body;
+      history.isIncome = history.amount! >= 0;
       console.log(history);
       history.githubId = req.session.githubId;
       const newHistory = await historyService.createHistory(history);

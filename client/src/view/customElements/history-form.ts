@@ -1,7 +1,7 @@
 import html from '../../core/jsx';
 import View from '../view';
 import { createHistory } from '../../api/apis';
-import { urlencodeFormData } from '../../utils';
+import HistoryController from '../../controller/history';
 
 const THIS_CLASS = 'w-full md:w-3/4 flex flex-col';
 
@@ -18,10 +18,10 @@ export default class HistoryForm extends HTMLElement implements View {
 
   onSubmit = (e: Event) => {
     const target = e.target as HTMLFormElement;
-    const formData = new FormData(target);
-    const params = urlencodeFormData(formData);
+    const datas = Object.fromEntries(new FormData(target));
 
-    createHistory(params).then((result) => {
+    createHistory(datas).then((result) => {
+      HistoryController.registerNewHistory(result);
       console.log(result);
     });
 

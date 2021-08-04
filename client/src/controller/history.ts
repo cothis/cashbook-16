@@ -23,6 +23,11 @@ class HistoryController extends Controller<State> {
     return newState;
   }
 
+  registerNewHistory(history: PaymentHistory) {
+    this.getHistories().push(history);
+    this.notify('history');
+  }
+
   getHistories(): PaymentHistory[] {
     return historyStore.getState().histories;
   }

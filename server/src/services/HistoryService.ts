@@ -1,6 +1,8 @@
 import { PaymentHistory } from '../entity/paymentHistory.entity';
 import { HistoryQuery } from '../controllers/historyController';
 import { Between } from 'typeorm';
+import { PaymentMethod } from '../entity/paymentMethod.entity';
+import { PaymentCategory } from '../entity/paymentCategory.entity';
 
 class HistoryService {
   constructor() {}
@@ -34,13 +36,14 @@ class HistoryService {
   createHistory = async (
     history: Partial<PaymentHistory>
   ): Promise<PaymentHistory> => {
-    console.log(history);
     const newHistory = PaymentHistory.create({
       ...history,
       method: { id: history.methodId },
       category: { name: history.categoryName },
     });
     const result = await PaymentHistory.save(newHistory);
+    result.method = await PaymentMethod.findOneOrFail(result.methodId);
+    result.category = await PaymentCategory.findOneOrFail(result.categoryName);
 
     return result;
   };
