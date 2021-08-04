@@ -9,13 +9,14 @@ export default class CategorySelect extends HTMLElement implements View {
 
   constructor() {
     super();
-    CategoryController.subscribe(this, this.updateCategoreis, 'category');
+    // CategoryController.subscribe(this, this.updateCategoreis, 'category');
     this.categories = CategoryController.getCategories();
 
     this.render();
   }
 
   updateCategoreis = (state: CategoryState) => {
+    console.log(this);
     this.categories = state.categories;
     this.render();
   };
@@ -24,7 +25,8 @@ export default class CategorySelect extends HTMLElement implements View {
     window.customElements.define('category-select', CategorySelect);
   }
 
-  createDom(): HTMLElement {
+  createDom = (): HTMLElement => {
+    console.log(this);
     return html`<select
       id="category"
       name="category"
@@ -42,11 +44,11 @@ export default class CategorySelect extends HTMLElement implements View {
           </option>`
       )}
     </select>`;
-  }
+  };
 
-  render(): void {
+  render = (): void => {
     const dom = this.createDom();
     this.innerHTML = '';
     this.append(...dom.children);
-  }
+  };
 }

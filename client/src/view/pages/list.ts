@@ -17,33 +17,6 @@ interface HistoryBoard {
   }[];
 }
 
-const categories = [
-  {
-    value: '문화/여가',
-    selected: true,
-  },
-  {
-    value: '생활',
-    selected: false,
-  },
-  {
-    value: '의료/건강',
-    selected: false,
-  },
-  {
-    value: '교통',
-    selected: false,
-  },
-  {
-    value: '식비',
-    selected: false,
-  },
-  {
-    value: '미분류',
-    selected: false,
-  },
-];
-
 const methods = [
   {
     name: '카드',
@@ -148,23 +121,8 @@ export default class ListPage extends Page {
           <div
             class="flex flex-col sm:flex-row w-full sm:h-12 gap-6 sm:gap-0 items-start sm:items-center pl-1 sm:pl-0 justify-between"
           >
-            <select
-              id="category"
-              name="category"
-              size="3"
-              class="w-full sm:w-28 dark:text-white"
-            >
-              ${categories.map(
-                (category) =>
-                  html`<option
-                    value="${category.value}"
-                    class="w-full sm:w-28 truncate dark:text-white"
-                    ${category.selected ? 'selected' : ''}
-                  >
-                    ${category.value}
-                  </option>`
-              )}
-            </select>
+            <category-select></category-select>
+
             <input
               id="ioContent"
               class="w-full sm:w-56 truncate dark:text-white"

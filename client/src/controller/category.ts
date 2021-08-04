@@ -36,7 +36,7 @@ class CategoryController extends Controller<State> {
       const response = await fetch('/api/categories', {
         credentials: 'include',
       });
-      if (!response.ok) throw new Error('히스토리를 가져오지 못했습니다.');
+      if (!response.ok) throw new Error('카테고리를 가져오지 못했습니다.');
       const data: PaymentCategory[] = await response.json();
       console.log(data);
       this.setCategories(data);

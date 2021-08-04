@@ -2,6 +2,7 @@ import Controller from './controller';
 import { BaseState } from '../store/store';
 import historyStore, { HistoryState } from '../store/history';
 import { PaymentHistory } from '../types';
+import { getHistories, getHistoryProps } from '@/api/histories';
 
 interface State {
   history: HistoryState;
@@ -43,6 +44,12 @@ class HistoryController extends Controller<State> {
     } catch (e) {
       console.error(e.message);
     }
+  };
+
+  fetchHistory = async (options: Partial<getHistoryProps>) => {
+    const response = await getHistories(options);
+
+    this.setHistories(response);
   };
 }
 
