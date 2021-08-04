@@ -19,7 +19,7 @@ export default class LoginPage extends Page {
 
       const routeEvent = new CustomEvent('route', {
         detail: {
-          pathname: 'main',
+          pathname: 'list',
         },
       });
 

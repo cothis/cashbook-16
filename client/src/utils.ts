@@ -45,3 +45,20 @@ export const debouncer = <T>() => {
     });
   };
 };
+
+export const dateToString = (date: Date | string, splitter: string = '-') => {
+  if (typeof date === 'string') {
+    try {
+      date = new Date(date);
+    } catch (e) {
+      throw new Error(`${date}는 날짜로 변환할수 없습니다.`);
+    }
+  }
+
+  const year = date.getFullYear();
+  let month = String(date.getMonth() + 1);
+  month = Number(month) < 10 ? '0' + month : month;
+  let day = String(date.getDate());
+  day = Number(day) < 10 ? '0' + day : day;
+  return year + splitter + month + splitter + day;
+};

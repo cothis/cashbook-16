@@ -1,94 +1,21 @@
 import Page from './page';
 import html from '../../core/jsx';
-import logo from '../../../assets/logo.png';
+import HistoryController from '../../controller/history';
+import { PaymentHistory } from '../../types';
+import { HistoryState } from '@/store/history';
+import { dateToString } from '@/utils';
 
-const today = '2020-08-01';
-
-const days = [
-  {
-    date: '7월 15일 목',
-    totalIncome: '12000',
-    totalSpend: '-56240',
-    detail: [
-      {
-        category: '미분류',
-        content: '테스트',
-        method: '현금',
-        amount: '20000',
-      },
-      {
-        category: '미분류',
-        content: '당근이 인형 중고판매',
-        method: '현금',
-        amount: '12000',
-      },
-      {
-        category: '문화/여가',
-        content: '스트리밍서비스 정기 결제',
-        method: '현대카드',
-        amount: '-10900',
-      },
-      {
-        category: '교통',
-        content: '후불 교통비 결제',
-        method: '현대카드',
-        amount: '-45340',
-      },
-    ],
-  },
-  {
-    date: '7월 14일 수',
-    totalIncome: '1500000',
-    totalSpend: '0',
-    detail: [
-      {
-        category: '미분류',
-        content: '우아한 형제들',
-        method: '카카오뱅크',
-        amount: '1500000',
-      },
-    ],
-  },
-  {
-    date: '7월 12일 월',
-    totalIncome: '0',
-    totalSpend: '-100000',
-    detail: [
-      {
-        category: '쇼핑',
-        content: '쿠팡 (쿠페이)',
-        method: '카드',
-        amount: '-100000',
-      },
-    ],
-  },
-  {
-    date: '7월 10일 토',
-    totalIncome: '0',
-    totalSpend: '-16000',
-    detail: [
-      {
-        category: '식비',
-        content: '연래춘(숭실대앞)',
-        method: '현대카드',
-        amount: '-16000',
-      },
-    ],
-  },
-  {
-    date: '7월 9일 금',
-    totalIncome: '0',
-    totalSpend: '-50000',
-    detail: [
-      {
-        category: '의료/건강',
-        content: '백신접종',
-        method: '현대카드',
-        amount: '-50000',
-      },
-    ],
-  },
-];
+interface HistoryBoard {
+  date: string;
+  totalIncome: string;
+  totalSpend: string;
+  detail: {
+    category: string;
+    content: string;
+    method: string;
+    amount: string;
+  }[];
+}
 
 const categories = [
   {
@@ -137,8 +64,46 @@ const BUTTON_CLASS =
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
 
 export default class ListPage extends Page {
+  private histories?: HistoryBoard[];
+
   constructor(root: HTMLElement) {
     super(root);
+    HistoryController.subscribe(this, this.updateDom, 'history');
+  }
+
+  updateDom(historyState: HistoryState) {
+    const histories: PaymentHistory[] = historyState.histories;
+    const map = new Map<string, HistoryBoard>();
+    histories.forEach((history) => {
+      const date = dateToString(history.payDate);
+      let find = map.get(date);
+      if (!find) {
+        find = { date, totalIncome: '0', totalSpend: '0', detail: [] };
+      }
+
+      find = {
+        ...find,
+        ...(history.isIncome && {
+          totalIncome: String(
+            Number(find.totalIncome) + Number(history.amount)
+          ),
+        }),
+        ...(!history.isIncome && {
+          totalSpend: String(Number(find.totalSpend) + Number(history.amount)),
+        }),
+      };
+
+      find.detail.push({
+        category: history.category.name,
+        amount: String(history.amount),
+        content: history.content,
+        method: history.method.name,
+      });
+
+      map.set(date, find);
+    });
+    this.histories = Array.from(map).map((el) => el[1]);
+    this.render();
   }
 
   createDom(): HTMLElement {
@@ -238,7 +203,7 @@ export default class ListPage extends Page {
           </div>
         </form>
 
-        ${days.map(
+        ${this.histories?.map(
           (day) => html`<section class="w-full md:w-3/4 flex flex-col">
             <list-title
               date="${day.date}"
