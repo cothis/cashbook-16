@@ -8,11 +8,11 @@ type EditableRowProps = {
   content: string;
   method: string;
   amount: number;
-  onDeleteRow: () => void;
-  onAddRow: () => void;
+  onDeleteRow?: () => void;
+  onAddRow?: (info: EditableRowState) => void;
 };
 
-type EditableRowState = {
+export type EditableRowState = {
   category: string;
   content: string;
   method: string;
@@ -81,9 +81,9 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
         <input
           id="ioContent"
           class="w-56 truncate dark:text-white"
-          placeholder="입/지출 내용"
+          placeholder="새로운 내용"
           autocomplete="off"
-          value="${content}"
+          value="${content === '' ? false : content}"
         />
         <select
           id="method"
@@ -114,27 +114,44 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
         </select>
         <input
           type="number"
-          class="w-24 truncate sm:right-0 ${amount > 0
+          class="w-24 truncate sm:right-0 ${amount >= 0
             ? 'text-green-400'
             : 'text-red-400'} text-right"
           placeholder="금액 (원)"
           autocomplete="off"
           title="형식: 숫자"
-          value="${amount}"
+          value="${amount === 0 ? false : amount}"
         />
         <button class="p-2">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 16C12.3765 16 16 12.3686 16 8C16 3.62353 12.3686 0 7.99216 0C3.62353 0 0 3.62353 0 8C0 12.3686 3.63137 16 8 16ZM4.83137 8.6902C4.36863 8.6902 4.0549 8.44706 4.0549 8.01569C4.0549 7.57647 4.35294 7.32549 4.83137 7.32549H11.1686C11.6392 7.32549 11.9294 7.57647 11.9294 8.01569C11.9294 8.44706 11.6235 8.6902 11.1686 8.6902H4.83137Z"
-              fill="#F87171"
-            />
-          </svg>
+          ${this.props?.onDeleteRow
+            ? html`
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8 16C12.3765 16 16 12.3686 16 8C16 3.62353 12.3686 0 7.99216 0C3.62353 0 0 3.62353 0 8C0 12.3686 3.63137 16 8 16ZM4.83137 8.6902C4.36863 8.6902 4.0549 8.44706 4.0549 8.01569C4.0549 7.57647 4.35294 7.32549 4.83137 7.32549H11.1686C11.6392 7.32549 11.9294 7.57647 11.9294 8.01569C11.9294 8.44706 11.6235 8.6902 11.1686 8.6902H4.83137Z"
+                    fill="#F87171"
+                  />
+                </svg>
+              `
+            : html`
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0.701212 7.20121H5.79879V12.2988C5.79879 12.677 6.11394 13 6.5 13C6.88606 13 7.20909 12.677 7.20909 12.2988V7.20121H12.2988C12.677 7.20121 13 6.88606 13 6.5C13 6.11394 12.677 5.79091 12.2988 5.79091H7.20909V0.701212C7.20909 0.32303 6.88606 0 6.5 0C6.11394 0 5.79879 0.32303 5.79879 0.701212V5.79091H0.701212C0.32303 5.79091 0 6.11394 0 6.5C0 6.88606 0.32303 7.20121 0.701212 7.20121Z"
+                    fill="#34D399"
+                  />
+                </svg>
+              `}
         </button>
       </form>
     `;

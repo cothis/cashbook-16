@@ -8,7 +8,7 @@ import {
   toKRW,
   toMonthDateDay,
 } from '../../utils';
-import EditableRow from './EditableRow';
+import EditableRow, { EditableRowState } from './EditableRow';
 import { getHistories } from '../../api/histories';
 import { TimeState } from '@/store/time';
 
@@ -28,6 +28,7 @@ type CalendarModalState = {
 
 class CalendarModal extends Component<{}, CalendarModalState> {
   $editableRows: EditableRow[];
+  $lastRow: EditableRow;
 
   constructor() {
     super();
@@ -38,16 +39,20 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       histories: [],
     };
     this.$editableRows = [];
+    this.$lastRow = new EditableRow({
+      category: '미분류',
+      amount: 0,
+      content: '',
+      method: '카드',
+      onAddRow: this.onAddRow.bind(this),
+    });
+    this.$lastRow.render();
 
     CalendarController.subscribe(this, this.onTimeChange.bind(this), 'time');
   }
 
   onTimeChange = async (timeState: TimeState) => {
     this.state.time = timeState;
-    const [startDate, endDate] = monthRangeFactory(
-      this.state.time.year,
-      this.state.time.month
-    );
     const d = timeStateToDate(this.state.time);
     const histories = HistoryController.getHistoryOfDate(d);
     this.state.histories = histories.map((history) => {
@@ -73,7 +78,6 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       const $newRow = new EditableRow({
         ...history,
         onAddRow: this.onAddRow.bind(this),
-        onDeleteRow: this.onDeleteRow.bind(this),
       });
       $newRow.render();
       return $newRow;
@@ -82,24 +86,23 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.render();
   };
 
-  onAddRow = () => {
+  onAddRow = (rowInfo: EditableRowState) => {
     this.state.histories.push({
       day: this.state.time.date,
-      category: '미분류',
-      amount: 0,
-      content: '새로운 항목',
-      method: '카드',
+      category: rowInfo.category,
+      amount: rowInfo.amount,
+      content: rowInfo.content,
+      method: rowInfo.method,
     });
-    const $newRow = new EditableRow({
+    const $newLastRow = new EditableRow({
       category: '미분류',
       amount: 0,
       content: '새로운 항목',
       method: '카드',
       onAddRow: this.onAddRow.bind(this),
-      onDeleteRow: this.onDeleteRow.bind(this),
     });
-    $newRow.render();
-    this.$editableRows.push($newRow);
+    $newLastRow.render();
+    this.$lastRow = $newLastRow;
   };
 
   onDeleteRow = () => {};
@@ -143,91 +146,8 @@ class CalendarModal extends Component<{}, CalendarModalState> {
             </div>
 
             ${this.$editableRows.map(($row) => $row.$this)}
-            <form
-              class="flex flex-row w-full h-12 items-center justify-between"
-              onsubmit="return false;"
-            >
-              <select
-                id="category"
-                name="category"
-                class="w-28 dark:text-white"
-              >
-                <option value="문화/여가" class="w-28 truncate dark:text-white">
-                  문화/여가
-                </option>
-                <option value="생활" class="w-28 truncate dark:text-white">
-                  생활
-                </option>
-                <option value="의료/건강" class="w-28 truncate dark:text-white">
-                  의료/건강
-                </option>
-                <option value="교통" class="w-28 truncate dark:text-white">
-                  교통
-                </option>
-                <option value="식비" class="w-28 truncate dark:text-white">
-                  식비
-                </option>
-                <option
-                  value="미분류"
-                  class="w-28 truncate dark:text-white"
-                  selected
-                >
-                  미분류
-                </option>
-              </select>
-              <input
-                id="ioContent"
-                class="w-56 truncate dark:text-white"
-                placeholder="새로운 입/지출"
-                autocomplete="off"
-              />
-              <select
-                id="method"
-                name="method"
-                class="hidden sm:block w-40 truncate dark:text-white"
-              >
-                <option
-                  value="카드"
-                  class="hidden sm:block w-40 truncate dark:text-white"
-                >
-                  카드
-                </option>
-                <option
-                  value="현금"
-                  class="hidden sm:block w-40 truncate dark:text-white"
-                  selected
-                >
-                  현금
-                </option>
-                <option
-                  value="현대카드"
-                  class="hidden sm:block w-40 truncate dark:text-white"
-                >
-                  현대카드
-                </option>
-              </select>
-              <input
-                type="number"
-                class="w-24 truncate sm:right-0 dark:text-white text-right"
-                placeholder="금액 (원)"
-                autocomplete="off"
-                title="형식: 숫자"
-              />
-              <button class="p-2 plus">
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 13 13"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0.701212 7.20121H5.79879V12.2988C5.79879 12.677 6.11394 13 6.5 13C6.88606 13 7.20909 12.677 7.20909 12.2988V7.20121H12.2988C12.677 7.20121 13 6.88606 13 6.5C13 6.11394 12.677 5.79091 12.2988 5.79091H7.20909V0.701212C7.20909 0.32303 6.88606 0 6.5 0C6.11394 0 5.79879 0.32303 5.79879 0.701212V5.79091H0.701212C0.32303 5.79091 0 6.11394 0 6.5C0 6.88606 0.32303 7.20121 0.701212 7.20121Z"
-                    fill="#34D399"
-                  />
-                </svg>
-              </button>
-            </form>
+            ${this.$lastRow.$this}
+
             <div
               class="
                 flex flex-row
