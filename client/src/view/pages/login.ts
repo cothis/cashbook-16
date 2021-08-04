@@ -1,5 +1,6 @@
 import Page from '@/view/pages/page';
 import html from '@/core/jsx';
+import HistoryController from '../../controller/history';
 
 export default class LoginPage extends Page {
   constructor(root: HTMLElement) {
@@ -17,6 +18,7 @@ export default class LoginPage extends Page {
         throw new Error(err.message);
       }
 
+      await HistoryController.requestGetHistory();
       const routeEvent = new CustomEvent('route', {
         detail: {
           pathname: 'list',

@@ -10,7 +10,6 @@ interface State {
 class HistoryController extends Controller<State> {
   constructor() {
     super();
-    this.requestGetHistory();
   }
 
   reduceFrom(key: keyof State) {
