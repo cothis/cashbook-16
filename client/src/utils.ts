@@ -1,3 +1,4 @@
+import { TimeState } from '@/store/time';
 const { stringify } = JSON;
 
 /**
@@ -76,4 +77,17 @@ export const monthRangeFactory = (year: number, month: number) => {
   );
 
   return [start, end];
+};
+
+export const toMonthDateDay = (timeState: TimeState) => {
+  const { year, month, date } = timeState;
+  const d = new Date(
+    `${timeState.year}-${String(month).padStart(2, '0')}-${String(
+      date
+    ).padStart(2, '0')}T00:00:00`
+  );
+  const day = d.getDay();
+  const dow = '일월화수목금토'[day];
+
+  return `${month}월 ${date}일 ${dow}`;
 };

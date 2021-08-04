@@ -1,7 +1,7 @@
 import Component from './Component';
 import html from '../../core/jsx';
 import CalendarController from '../../controller/calendar';
-import { monthRangeFactory } from '../../utils';
+import { monthRangeFactory, toMonthDateDay } from '../../utils';
 import { getHistories } from '../../api/histories';
 import { TimeState } from '@/store/time';
 
@@ -78,7 +78,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
           <article class="w-full md:w-3/4 flex flex-col pl-2 pr-2 box-border">
             <div class="flex flex-row w-full justify-between items-center">
               <h2 class="text-lg text-green-400 dark:text-green-300">
-                ${`${this.state.time.month} ${this.state.time.date} n요일`}
+                ${toMonthDateDay(this.state.time)}
               </h2>
               <div>
                 <span class="text-xs text-green-400 text-right font-thin"
