@@ -1,7 +1,12 @@
 import Component from './Component';
 import html from '../../core/jsx';
 import CalendarController from '../../controller/calendar';
-import { monthRangeFactory, toMonthDateDay } from '../../utils';
+import HistoryController from '../../controller/history';
+import {
+  monthRangeFactory,
+  timeStateToDate,
+  toMonthDateDay,
+} from '../../utils';
 import { getHistories } from '../../api/histories';
 import { TimeState } from '@/store/time';
 
@@ -32,7 +37,8 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       this.state.time.year,
       this.state.time.month
     );
-    const histories = await getHistories({ startDate, endDate });
+    const d = timeStateToDate(this.state.time);
+    const histories = HistoryController.getHistoryOfDate(d);
     this.state.histories = histories.map((history) => {
       const { amount, payDate, content, method, category } = history;
       return {
@@ -43,22 +49,17 @@ class CalendarModal extends Component<{}, CalendarModalState> {
         category: category.name,
       };
     });
-    console.log(this.$this);
+    console.log(this.state.histories);
     this.render();
-    // this.$this.firstElementChild?.replaceWith(
-    //   this.createDom().firstElementChild!
-    // );
-    console.log(this.$this);
-    // this.render();
   };
 
-  // open = () => {
-  //   this.$this.classList.remove('hidden');
-  // };
+  open = () => {
+    this.$this?.classList.remove('hidden');
+  };
 
-  // close = () => {
-  //   this.$this.classList.add('hidden');
-  // };
+  close = () => {
+    this.$this?.classList.add('hidden');
+  };
 
   createDom(): HTMLElement {
     console.log(`${this.state.time.month} ${this.state.time.date} n요일`);

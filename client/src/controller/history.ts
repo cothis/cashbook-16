@@ -37,6 +37,15 @@ class HistoryController extends Controller<State> {
 
     this.setHistories(response);
   };
+
+  getHistoryOfDate = (query: Date) => {
+    return historyStore.getState().histories.filter((history) => {
+      history.payDate.setHours(0, 0, 0, 0);
+      query.setHours(0, 0, 0, 0);
+      if (history.payDate.getTime() == query.getTime()) return true;
+      return false;
+    });
+  };
 }
 
 export default new HistoryController();

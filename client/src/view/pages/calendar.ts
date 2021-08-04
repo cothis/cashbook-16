@@ -62,7 +62,6 @@ export default class CalendarPage extends Page {
   }
 
   onHistoryChange(histories: PaymentHistory[]) {
-    console.log(histories);
     this.$calendar.clearCells();
     histories.forEach((historyPiece) => {
       const date = historyPiece.payDate.getDate() - 1;
@@ -92,8 +91,8 @@ export default class CalendarPage extends Page {
 
   onOuterClick = (ev: Event) => {
     if (ev.target === $('.modal-bg')) {
-      // this.$calendarModal.close();
-      $('.modal-bg')?.classList.add('hidden');
+      this.$calendarModal.close();
+      // $('.modal-bg')?.classList.add('hidden');
     }
   };
 
