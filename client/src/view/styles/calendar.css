@@ -47,48 +47,48 @@
   grid-row-gap: 0.8rem;
 }
 
-.calendar-cell:nth-child(1) {
-  color: rgb(248, 113, 113);
+.calendar-cell:nth-child(1) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
 }
 
-.calendar-cell:nth-child(7) {
-  color: rgb(96, 165, 250);
-}
-
-.calendar-cell:nth-child(8) {
-  color: rgb(248, 113, 113);
-}
-
-.calendar-cell:nth-child(14) {
-  color: rgb(96, 165, 250);
-}
-
-.calendar-cell:nth-child(15) {
-  color: rgb(248, 113, 113);
-}
-
-.calendar-cell:nth-child(21) {
-  color: rgb(96, 165, 250);
-}
-
-.calendar-cell:nth-child(22) {
-  color: rgb(248, 113, 113);
-}
-
-.calendar-cell:nth-child(28) {
-  color: rgb(96, 165, 250);
-}
-
-.calendar-cell:nth-child(29) {
-  color: rgb(248, 113, 113);
-}
-
-.calendar-cell:nth-child(35) {
+.calendar-cell:nth-child(7) .calendar-cell__day {
   color: rgb(96, 165, 250) !important;
 }
 
-.calendar-cell:nth-child(36) {
-  color: rgb(248, 113, 113);
+.calendar-cell:nth-child(8) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(14) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(15) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(21) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(22) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(28) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(29) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(35) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(36) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
 }
 
 .calendar-cell {

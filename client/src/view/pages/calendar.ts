@@ -23,7 +23,6 @@ export default class CalendarPage extends Page {
       openModal: (this.$calendarModal as CalendarModal).open,
     });
     this.$calendar.render();
-    (this.$calendarModal as CalendarModal).open();
   }
 
   onOuterClick = (ev: Event) => {
@@ -36,13 +35,6 @@ export default class CalendarPage extends Page {
     return html` <section onClick=${this.onOuterClick}>
       ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
-      <section
-        class="flex flex-row h-12 w-full justify-center text-sm text-black dark:text-white bg-gray-50 dark:bg-gray-700 sticky top-0"
-      >
-        <button class="${BUTTON_CLASS} ${ACTIVE_CLASS}">전체</button>
-        <button class="${BUTTON_CLASS}">입금</button>
-        <button class="${BUTTON_CLASS}">출금</button>
-      </section>
       <section class="${BODY_WRAPPER_CLASS}">
         <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
           7 월 내 역
