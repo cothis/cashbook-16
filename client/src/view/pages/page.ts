@@ -1,6 +1,7 @@
+import html from '@/core/jsx';
 import View from '@/view/view';
 
-export default abstract class Page implements View {
+export default class Page implements View {
   $root: HTMLElement;
   $this!: HTMLElement;
 
@@ -11,12 +12,14 @@ export default abstract class Page implements View {
   render(): void {
     const $new = this.createDom();
     if (this.$root.firstElementChild) {
-      this.$root.replaceChild($new, this.$this);
+      this.$root.replaceChild($new, this.$root.firstElementChild);
     } else {
       this.$root.appendChild($new);
     }
     this.$this = $new;
   }
 
-  abstract createDom(): HTMLElement;
+  createDom(): HTMLElement {
+    throw new Error('need to be implemented');
+  }
 }
