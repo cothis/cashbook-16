@@ -13,8 +13,8 @@ interface CalendarState {
   cells: Cell[];
 }
 
-class Calendar extends Component {
-  state: CalendarState;
+class Calendar extends Component<{}, CalendarState> {
+  // state: CalendarState;
 
   constructor() {
     super();
