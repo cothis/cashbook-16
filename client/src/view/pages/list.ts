@@ -103,6 +103,7 @@ export default class ListPage extends Page {
       map.set(date, find);
     });
     this.histories = Array.from(map).map((el) => el[1]);
+    this.render();
   }
 
   createDom(): HTMLElement {
