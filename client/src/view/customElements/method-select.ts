@@ -22,13 +22,13 @@ export default class MethodSelect extends HTMLElement implements View {
     return html`<div>
       <select
         id="method"
-        name="method"
+        name="methodId"
         size="3"
         class="w-full sm:w-40 dark:text-white"
       >
         ${this.methods.map(
           (method, i) => html`<option
-            value=${method.name}
+            value=${method.id}
             class="w-full sm:w-40 truncate dark:text-white"
             selected=${i === 0}
           >

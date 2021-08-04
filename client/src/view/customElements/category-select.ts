@@ -22,7 +22,7 @@ export default class CategorySelect extends HTMLElement implements View {
     return html`<div>
       <select
         id="category"
-        name="category"
+        name="categoryName"
         size="3"
         class="w-full sm:w-28 dark:text-white"
       >

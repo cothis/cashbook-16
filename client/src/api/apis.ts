@@ -11,7 +11,7 @@ interface getHistoryProps {
 
 const request = async <T>(
   url: string,
-  option: {} = {},
+  option: RequestInit = {},
   errorMessage?: string
 ): Promise<T> => {
   const response = await fetch(url, { ...option, credentials: 'include' });
@@ -34,4 +34,14 @@ export const getHistories = async (
 
 export const getMethods = async (): Promise<PaymentMethod[]> => {
   return await request<PaymentMethod[]>('/api/methods');
+};
+
+export const createHistory = async (body: string): Promise<PaymentHistory> => {
+  return await request<PaymentHistory>('/api/histories', {
+    method: 'post',
+    body: body,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  });
 };

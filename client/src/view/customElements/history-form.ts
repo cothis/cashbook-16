@@ -1,5 +1,7 @@
 import html from '../../core/jsx';
 import View from '../view';
+import { createHistory } from '../../api/apis';
+import { urlencodeFormData } from '../../utils';
 
 const THIS_CLASS = 'w-full md:w-3/4 flex flex-col';
 
@@ -14,6 +16,18 @@ export default class HistoryForm extends HTMLElement implements View {
     window.customElements.define('history-form', HistoryForm);
   }
 
+  onSubmit = (e: Event) => {
+    const target = e.target as HTMLFormElement;
+    const formData = new FormData(target);
+    const params = urlencodeFormData(formData);
+
+    createHistory(params).then((result) => {
+      console.log(result);
+    });
+
+    e.preventDefault();
+  };
+
   createDom(): HTMLElement {
     return html`
       <div>
@@ -21,7 +35,7 @@ export default class HistoryForm extends HTMLElement implements View {
           action="/api"
           method="post"
           class="flex flex-col"
-          onsubmit="return false;"
+          onsubmit=${this.onSubmit}
         >
           <h2 class="text-lg text-green-400 dark:text-green-300 mb-4">
             새 내역 추가
@@ -29,6 +43,7 @@ export default class HistoryForm extends HTMLElement implements View {
           <input
             id="date"
             type="date"
+            name="payDate"
             class="w-full sm:w-36 truncate text-black dark:text-white mb-4"
             value="2021-08-01"
           />
@@ -39,6 +54,7 @@ export default class HistoryForm extends HTMLElement implements View {
 
             <input
               id="ioContent"
+              name="content"
               class="w-full sm:w-56 truncate dark:text-white"
               placeholder="입/지출 내용"
               autocomplete="off"
@@ -46,6 +62,7 @@ export default class HistoryForm extends HTMLElement implements View {
             <method-select></method-select>
             <input
               type="number"
+              name="amount"
               class="w-full sm:w-32 truncate sm:right-0 dark:text-white sm:text-right"
               placeholder="금액 (원)"
               autocomplete="off"
