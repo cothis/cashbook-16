@@ -94,7 +94,8 @@ export default class CalendarPage extends Page {
 
   onOuterClick = (ev: Event) => {
     if (ev.target === $('.modal-bg')) {
-      this.$calendarModal.close();
+      // this.$calendarModal.close();
+      $('.modal-bg')?.classList.add('hidden');
     }
   };
 

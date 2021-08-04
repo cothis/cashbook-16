@@ -1,6 +1,7 @@
 import Component from './Component';
 import html from '../../core/jsx';
-import { getRandomInt } from '../../utils';
+import CalendarController from '../../controller/calendar';
+import { $ } from '../../utils';
 
 interface Cell {
   day: number;
@@ -12,23 +13,19 @@ interface CalendarState {
   cells: Cell[];
 }
 
-interface CalendarProps {
-  openModal: () => void;
-}
-
-class Calendar extends Component<CalendarProps, {}> {
+class Calendar extends Component {
   state: CalendarState;
 
-  constructor(props: CalendarProps) {
-    super(props);
+  constructor() {
+    super();
     this.state = { cells: [] };
     this.clearCells();
   }
 
   clearCells = () => {
     this.state = {
-      cells: [...Array(30).keys()].map((val, idx, arr) => ({
-        day: val,
+      cells: [...Array(30).keys()].map((val) => ({
+        day: val + 1,
         minus: 0,
         plus: 0,
       })),
@@ -51,7 +48,12 @@ class Calendar extends Component<CalendarProps, {}> {
                 plus="${cell.plus}"
                 minus="${cell.minus}"
                 onClick=${() => {
-                  this.props?.openModal();
+                  const time = CalendarController.getCalendar();
+                  CalendarController.setCalendar({
+                    ...time,
+                    date: cell.day,
+                  });
+                  $('.modal-bg')?.classList.remove('hidden');
                 }}
               >
               </calendar-cell>

@@ -1,6 +1,9 @@
 import Component from './Component';
 import html from '../../core/jsx';
-import { $ } from '../../utils';
+import CalendarController from '../../controller/calendar';
+import { monthRangeFactory } from '../../utils';
+import { getHistories } from '../../api/histories';
+import { TimeState } from '@/store/time';
 
 type CalendarModalState = {
   netPlus: number;
@@ -12,24 +15,52 @@ type CalendarModalState = {
     method: string;
     amount: number;
   }[];
+  time: TimeState;
 };
 
 class CalendarModal extends Component<{}, CalendarModalState> {
   constructor() {
     super();
+    this.state.time = CalendarController.getCalendar();
+
+    CalendarController.subscribe(this, this.onTimeChange.bind(this), 'time');
   }
 
-  open = () => {
-    this.$this.classList.remove('hidden');
+  onTimeChange = async (timeState: TimeState) => {
+    this.state.time = timeState;
+    const [startDate, endDate] = monthRangeFactory(
+      this.state.time.year,
+      this.state.time.month
+    );
+    const histories = await getHistories({ startDate, endDate });
+    this.state.histories = histories.map((history) => {
+      const { amount, payDate, content, method, category } = history;
+      return {
+        amount: parseInt(amount),
+        day: payDate.getDate(),
+        content,
+        method: method.name,
+        category: category.name,
+      };
+    });
+    console.log(this.$this);
+    this.$this.replaceWith(this.createDom());
+    console.log(this.$this);
+    // this.render();
   };
 
-  close = () => {
-    this.$this.classList.add('hidden');
-  };
+  // open = () => {
+  //   this.$this.classList.remove('hidden');
+  // };
+
+  // close = () => {
+  //   this.$this.classList.add('hidden');
+  // };
 
   createDom(): HTMLElement {
+    console.log(`${this.state.time.month} ${this.state.time.date} n요일`);
     return html`
-      <div id="modal" class="hidden modal-bg blur">
+      <div id="modal" class="modal-bg blur">
         <section
           class="
             modal
@@ -44,7 +75,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
           <article class="w-full md:w-3/4 flex flex-col pl-2 pr-2 box-border">
             <div class="flex flex-row w-full justify-between items-center">
               <h2 class="text-lg text-green-400 dark:text-green-300">
-                7월 15일 목
+                ${`${this.state.time.month} ${this.state.time.date} n요일`}
               </h2>
               <div>
                 <span class="text-xs text-green-400 text-right font-thin"
