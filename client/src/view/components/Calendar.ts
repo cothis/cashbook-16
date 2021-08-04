@@ -2,19 +2,19 @@ import Component from './Component';
 import html from '../../core/jsx';
 import { getRandomInt } from '../../utils';
 
-type Cell = {
+interface Cell {
   day: number;
   plus: number;
   minus: number;
-};
+}
 
-type CalendarState = {
+interface CalendarState {
   cells: Cell[];
-};
+}
 
-type CalendarProps = {
+interface CalendarProps {
   openModal: () => void;
-};
+}
 
 class Calendar extends Component<CalendarProps, {}> {
   state: CalendarState;
