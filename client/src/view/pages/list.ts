@@ -1,7 +1,7 @@
 import Page from './page';
 import html from '../../core/jsx';
 import HistoryController from '../../controller/history';
-import { getCategories, getHistories } from '../../api/apis';
+import { getCategories, getHistories, getMethods } from '../../api/apis';
 import ListController from '../../controller/list';
 
 const BUTTON_CLASS =
@@ -14,13 +14,15 @@ export default class ListPage extends Page {
   }
 
   async beforeMount() {
-    const [histories, categoreis] = await Promise.all([
+    const [histories, categoreis, methods] = await Promise.all([
       getHistories(),
       getCategories(),
+      getMethods(),
     ]);
 
     HistoryController.setHistories(histories);
     ListController.setCategories(categoreis);
+    ListController.setMethods(methods);
   }
 
   createDom(): HTMLElement {

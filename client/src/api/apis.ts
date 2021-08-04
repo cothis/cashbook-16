@@ -31,3 +31,7 @@ export const getHistories = async (
     '/api/histories?' + qs.stringify(option)
   );
 };
+
+export const getMethods = async (): Promise<PaymentMethod[]> => {
+  return await request<PaymentMethod[]>('/api/methods');
+};
