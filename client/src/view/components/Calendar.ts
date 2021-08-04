@@ -21,6 +21,11 @@ class Calendar extends Component<CalendarProps, {}> {
 
   constructor(props: CalendarProps) {
     super(props);
+    this.state = { cells: [] };
+    this.clearCells();
+  }
+
+  clearCells = () => {
     this.state = {
       cells: [...Array(30).keys()].map((val, idx, arr) => ({
         day: val,
@@ -28,7 +33,7 @@ class Calendar extends Component<CalendarProps, {}> {
         plus: 0,
       })),
     };
-  }
+  };
 
   createDom(): HTMLElement {
     const { cells } = this.state;
