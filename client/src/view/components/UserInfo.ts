@@ -1,4 +1,4 @@
-import Component from '@/view/components/component';
+import Component from '@/view/components/Component';
 import html from '@/core/jsx';
 import MainController from '@/controller/main';
 import { UserState } from '@/store/user';
