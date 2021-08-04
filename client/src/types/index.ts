@@ -2,7 +2,7 @@ export interface PaymentHistory {
   uuid: number;
   githubId: string;
   content: string;
-  amount: number;
+  amount: string;
   isIncome: boolean;
   payDate: Date;
   method: PaymentMethod;

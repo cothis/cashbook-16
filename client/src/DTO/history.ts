@@ -5,7 +5,7 @@ type getHistoryPiece = {
   uuid: number;
   githubId: string;
   content: string;
-  amount: string; // int로 파싱해줘야함
+  amount: number; // int로 파싱해줘야함
   isIncome: boolean;
   payDate: Date;
   methodId: number;

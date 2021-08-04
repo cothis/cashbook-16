@@ -25,4 +25,4 @@ const getHistories = async (prop: Partial<getHistoryProps>) => {
   return response as getHistoryPiece[];
 };
 
-export { getHistories };
+export { getHistories, getHistoryProps };
