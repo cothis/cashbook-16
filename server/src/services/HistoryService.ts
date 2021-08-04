@@ -19,6 +19,9 @@ class HistoryService {
 
     const histories = await PaymentHistory.find({
       where: condition,
+      order: {
+        payDate: 'DESC',
+      },
       relations: ['method', 'category'],
     });
 
