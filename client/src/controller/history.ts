@@ -47,8 +47,8 @@ class HistoryController extends Controller<State> {
     }
   };
 
-  fetchHistory = async (props: Partial<getHistoryProps>) => {
-    const response = await getHistories(props);
+  fetchHistory = async (options: Partial<getHistoryProps>) => {
+    const response = await getHistories(options);
 
     this.setHistories(response);
   };
