@@ -1,13 +1,13 @@
 import Store, { BaseState } from './store';
 
-export interface CalendarState extends BaseState {
+export interface TimeState extends BaseState {
   year: number;
   month: number;
   date: number;
 }
 
-class CalendarStore extends Store<CalendarState> {
-  constructor(initialState?: CalendarState) {
+class TimeStore extends Store<TimeState> {
+  constructor(initialState?: TimeState) {
     const today = new Date();
     super(
       initialState ?? {
@@ -19,4 +19,4 @@ class CalendarStore extends Store<CalendarState> {
   }
 }
 
-export default new CalendarStore();
+export default new TimeStore();
