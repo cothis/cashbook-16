@@ -29,4 +29,5 @@ router.addRoutePath('login', LoginPage);
 router.addRoutePath('list', ListPage);
 router.addRoutePath('calendar', CalendarPage);
 router.addRoutePath('', LoginPage);
+router.setDefaultPage(new CalendarPage(document.body));
 router.route(location.pathname.slice(1));

@@ -6,7 +6,8 @@ import Calendar from '../components/Calendar';
 import CalendarModal from '../components/CalendarModal';
 import Component from '../components/Component';
 import { getHistories } from '../../api/histories';
-import { $ } from '../../utils';
+import { $, monthRangeFactory } from '../../utils';
+import { getHistoryPiece } from '@/DTO/history';
 
 const BUTTON_CLASS = `md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white`;
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
@@ -15,43 +16,86 @@ const BODY_WRAPPER_CLASS = `flex flex-col h-screen w-full justify-start items-ce
 interface CalendarPageState {
   year: number;
   month: number;
-  totalIncome: number;
-  totalSpend: number;
+  totalIncome?: number;
+  totalSpend?: number;
+  days: getHistoryPiece[];
 }
 export default class CalendarPage extends Page {
-  $calendar: Component;
-  $calendarModal: Component;
+  $calendar: Calendar;
+  $calendarModal: CalendarModal;
+  $monthSummary: HTMLElement;
+  state: CalendarPageState;
 
   constructor(root: HTMLElement) {
     super(root);
     this.$calendarModal = new CalendarModal();
     this.$calendarModal.render();
+    console.log(this.$calendarModal.$this);
     this.$calendar = new Calendar({
-      openModal: (this.$calendarModal as CalendarModal).open,
+      openModal: this.$calendarModal.open,
     });
     this.$calendar.render();
-    const res = getHistories({
-      startDate: new Date('2021-07-01T00:00:00'),
-      endDate: new Date('2021-07-30T00:00:00'),
-    }).then(console.log);
+    this.state = { year: 2021, month: 7, days: [] };
+    this.$monthSummary = MonthSummary({
+      plus: this.state.totalIncome ?? 0,
+      minus: this.state.totalSpend ?? 0,
+    });
+    this.onMount();
   }
+
+  onMount = async () => {
+    const { year, month } = this.state;
+    const [startDate, endDate] = monthRangeFactory(year, month);
+    const histories = await getHistories({
+      startDate,
+      endDate,
+    });
+
+    histories.forEach((historyPiece) => {
+      const date = historyPiece.payDate.getDate() - 1;
+      if (historyPiece.isIncome) {
+        this.$calendar.state.cells[date].plus += parseInt(historyPiece.amount);
+      } else {
+        this.$calendar.state.cells[date].minus += parseInt(historyPiece.amount);
+      }
+    });
+    this.state.totalIncome = histories.reduce((acc, val) => {
+      const amount = parseInt(val.amount);
+      if (amount > 0) return acc + amount;
+      return acc;
+    }, 0);
+    this.state.totalSpend = histories.reduce((acc, val) => {
+      const amount = parseInt(val.amount);
+      if (amount < 0) return acc + amount;
+      return acc;
+    }, 0);
+    this.$calendar.render();
+    this.$monthSummary.replaceWith(
+      MonthSummary({
+        plus: this.state.totalIncome ?? 0,
+        minus: this.state.totalSpend ?? 0,
+      })
+    );
+    this.render();
+  };
 
   onOuterClick = (ev: Event) => {
     if (ev.target === $('.modal-bg')) {
-      (this.$calendarModal as CalendarModal).close();
+      this.$calendarModal.close();
     }
   };
 
   createDom(): HTMLElement {
+    const { month, year } = this.state;
     return html` <section onClick=${this.onOuterClick}>
       ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
       <section class="${BODY_WRAPPER_CLASS}">
         <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
-          7 월 내 역
+          ${month} 월 내 역
         </h1>
 
-        ${MonthSummary({ plus: 12000, minus: 56240 })} ${this.$calendar.$this}
+        ${this.$monthSummary} ${this.$calendar.$this}
 
         <div class="hidden sm:block fixed top-1/2 left-0 p-8 w-10 slide-btn">
           <

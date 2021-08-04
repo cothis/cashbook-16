@@ -20,7 +20,15 @@ const getHistories = async (prop: Partial<getHistoryProps>) => {
       }
       return res;
     })
-    .then((res) => res.json());
+    .then((res) => res.json())
+    .then((histories: getHistoryPiece[]) => {
+      return histories.map((history) => {
+        return {
+          ...history,
+          payDate: new Date(history.payDate),
+        };
+      });
+    });
 
   return response as getHistoryPiece[];
 };

@@ -22,13 +22,11 @@ class Calendar extends Component<CalendarProps, {}> {
   constructor(props: CalendarProps) {
     super(props);
     this.state = {
-      cells: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15].map(
-        (val, idx, arr) => ({
-          day: val,
-          minus: getRandomInt(-20000, 0),
-          plus: getRandomInt(0, 20000),
-        })
-      ),
+      cells: [...Array(30).keys()].map((val, idx, arr) => ({
+        day: val,
+        minus: 0,
+        plus: 0,
+      })),
     };
   }
 

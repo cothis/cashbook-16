@@ -3,13 +3,14 @@ import View from '@/view/view';
 
 export default class Page implements View {
   $root: HTMLElement;
-  $this!: HTMLElement;
+  $this: HTMLElement;
 
   constructor($root: HTMLElement) {
     this.$root = $root;
+    this.$this = document.createElement('code');
   }
 
-  render(): void {
+  async render() {
     const $new = this.createDom();
     if (this.$root.firstElementChild) {
       this.$root.replaceChild($new, this.$root.firstElementChild);

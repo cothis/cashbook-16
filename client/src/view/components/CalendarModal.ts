@@ -15,8 +15,10 @@ type CalendarModalState = {
 };
 
 class CalendarModal extends Component {
+  // state: {};
   constructor() {
     super();
+    // this.state = {};
   }
 
   open = () => {
@@ -29,7 +31,7 @@ class CalendarModal extends Component {
 
   createDom(): HTMLElement {
     return html`
-      <div id="modal" class="hidden modal-bg blur">
+      <div id="modal" class="modal-bg blur">
         <section
           class="
             modal

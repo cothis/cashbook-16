@@ -62,3 +62,18 @@ export const dateToString = (date: Date | string, splitter: string = '-') => {
   day = Number(day) < 10 ? '0' + day : day;
   return year + splitter + month + splitter + day;
 };
+
+/**
+ *
+ * @returns [해당달의 처음 Date, 다음달의 처음 Date]
+ */
+export const monthRangeFactory = (year: number, month: number) => {
+  const start = new Date(
+    `${year}-${String(month).padStart(2, '0')}-01T00:00:00`
+  );
+  const end = new Date(
+    `${year}-${String(month + 1).padStart(2, '0')}-01T00:00:00`
+  );
+
+  return [start, end];
+};
