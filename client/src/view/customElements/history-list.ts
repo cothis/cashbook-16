@@ -17,7 +17,7 @@ interface HistoryBoard {
   }[];
 }
 
-const THIS_CLASS = 'w-full md:w-3/4 flex flex-col';
+const THIS_CLASS = 'w-full md:w-3/4 flex flex-col sm:gap-24 gap-12 pb-12';
 
 export default class HistoryList extends HTMLElement implements View {
   historyBoard: HistoryBoard[];

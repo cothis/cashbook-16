@@ -22,7 +22,6 @@ export default class HistoryForm extends HTMLElement implements View {
 
     createHistory(datas).then((result) => {
       HistoryController.registerNewHistory(result);
-      console.log(result);
     });
 
     e.preventDefault();
