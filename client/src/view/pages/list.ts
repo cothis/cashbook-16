@@ -33,13 +33,7 @@ export default class ListPage extends Page {
         운영체제 다크모드에 맞춰서 테마가 변해요!
       </section>
       <app-header active="list"></app-header>
-      <section
-        class="flex flex-row h-12 w-full justify-center text-sm text-black dark:text-white bg-gray-50 dark:bg-gray-700 sticky top-0"
-      >
-        <button class="${BUTTON_CLASS} ${ACTIVE_CLASS}">전체</button>
-        <button class="${BUTTON_CLASS}">입금</button>
-        <button class="${BUTTON_CLASS}">출금</button>
-      </section>
+      <pay-type></pay-type>
       <section
         class="m-auto max-w-screen-xl flex flex-col w-full justify-start items-center box-border sm:gap-24 gap-12 pb-12"
       >
