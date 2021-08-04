@@ -17,7 +17,7 @@ interface HistoryBoard {
   }[];
 }
 
-const THIS_CLASS = 'w-full md:w-3/4 flex flex-col';
+const THIS_CLASS = 'w-full md:w-3/4 flex flex-col sm:gap-24 gap-12 pb-12';
 
 export default class HistoryList extends HTMLElement implements View {
   historyBoard: HistoryBoard[];
@@ -26,18 +26,18 @@ export default class HistoryList extends HTMLElement implements View {
     super();
 
     this.className = THIS_CLASS;
-
     this.historyBoard = [];
-    const histories = HistoryController.getHistories() ?? [];
-    this.toHistoryBoard(histories);
-    this.render();
+    HistoryController.subscribe(this, this.toHistoryBoardFromStore, 'history');
+    this.toHistoryBoardFromStore();
   }
 
   static define() {
     window.customElements.define('history-list', HistoryList);
   }
 
-  toHistoryBoard(histories: PaymentHistory[]) {
+  toHistoryBoardFromStore = () => {
+    const histories = HistoryController.getHistories() ?? [];
+
     const map = new Map<string, HistoryBoard>();
     histories.forEach((history) => {
       const date = dateToString(history.payDate);
@@ -68,7 +68,9 @@ export default class HistoryList extends HTMLElement implements View {
       map.set(date, find);
     });
     this.historyBoard = Array.from(map).map((el) => el[1]);
-  }
+
+    this.render();
+  };
 
   createDom(): HTMLElement {
     return html`

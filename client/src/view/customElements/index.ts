@@ -7,6 +7,7 @@ import CategorySelect from './category-select';
 import MethodSelect from './method-select';
 import HistoryForm from './history-form';
 import HistoryList from './history-list';
+import PayType from './pay-type';
 
 RouterLink.define();
 ListTitle.define();
@@ -17,3 +18,4 @@ CategorySelect.define();
 MethodSelect.define();
 HistoryForm.define();
 HistoryList.define();
+PayType.define();

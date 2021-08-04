@@ -24,5 +24,5 @@ export default abstract class Controller<S> {
     });
   }
 
-  abstract reduceFrom(key: keyof S): BaseState;
+  abstract reduceFrom(key: keyof S): BaseState | undefined;
 }

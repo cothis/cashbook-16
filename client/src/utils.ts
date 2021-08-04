@@ -62,3 +62,11 @@ export const dateToString = (date: Date | string, splitter: string = '-') => {
   day = Number(day) < 10 ? '0' + day : day;
   return year + splitter + month + splitter + day;
 };
+
+export const urlencodeFormData = (fd: FormData) => {
+  const params = new URLSearchParams();
+  for (const pair of fd.entries()) {
+    typeof pair[1] == 'string' && params.append(pair[0], pair[1]);
+  }
+  return params.toString();
+};
