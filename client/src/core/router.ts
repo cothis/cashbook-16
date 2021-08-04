@@ -3,6 +3,7 @@ import Page from '@/view/pages/page';
 const BACK_METHOD = '@back';
 
 export default class Router {
+  default?: Page;
   history: Page[];
   map: Map<string, typeof Page>;
 
@@ -46,6 +47,10 @@ export default class Router {
     return pathname === BACK_METHOD;
   }
 
+  setDefaultPage(page: Page) {
+    this.default = page;
+  }
+
   addRoutePath(pathname: string, page: typeof Page) {
     this.map.set(pathname, page);
   }
@@ -53,6 +58,12 @@ export default class Router {
   route(pathname: string) {
     const pageContructor = this.map.get(pathname);
     if (!pageContructor) throw new Error('Route 페이지가 등록되지 않았습니다.');
+    let page = this.map.get(pathname);
+    if (!page) {
+      if (!this.default) throw new Error('routing할 페이지가 없습니다.');
+      this.history.push(this.default);
+      this.default.render();
+    }
 
     this.detachPage(this.getLastPage());
 

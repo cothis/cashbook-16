@@ -33,8 +33,7 @@ export default class CalendarPage extends Page {
     const res = getHistories({
       startDate: new Date('2021-07-01T00:00:00'),
       endDate: new Date('2021-07-30T00:00:00'),
-    });
-    console.log(res);
+    }).then(console.log);
   }
 
   onOuterClick = (ev: Event) => {
