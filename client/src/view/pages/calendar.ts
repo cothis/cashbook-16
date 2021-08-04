@@ -5,12 +5,19 @@ import MonthSummary from '../FC/MonthSummary';
 import Calendar from '../components/Calendar';
 import CalendarModal from '../components/CalendarModal';
 import Component from '../components/Component';
+import { getHistories } from '../../api/histories';
 import { $ } from '../../utils';
 
 const BUTTON_CLASS = `md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white`;
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
 const BODY_WRAPPER_CLASS = `flex flex-col h-screen w-full justify-start items-center box-border gap-12 pb-12`;
 
+interface CalendarPageState {
+  year: number;
+  month: number;
+  totalIncome: number;
+  totalSpend: number;
+}
 export default class CalendarPage extends Page {
   $calendar: Component;
   $calendarModal: Component;
@@ -23,6 +30,11 @@ export default class CalendarPage extends Page {
       openModal: (this.$calendarModal as CalendarModal).open,
     });
     this.$calendar.render();
+    const res = getHistories({
+      startDate: new Date('2021-07-01T00:00:00'),
+      endDate: new Date('2021-07-30T00:00:00'),
+    });
+    console.log(res);
   }
 
   onOuterClick = (ev: Event) => {

@@ -34,4 +34,5 @@ router.addRoutePath('main', mainView);
 router.addRoutePath('login', loginPage);
 router.addRoutePath('list', listPage);
 router.addRoutePath('calendar', calendarPage);
-router.route('calendar');
+router.addRoutePath('', loginPage);
+router.route(location.pathname.slice(1));
