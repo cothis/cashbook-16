@@ -23,4 +23,4 @@ const listPage = new ListPage($app);
 router.addRoutePath('main', mainView);
 router.addRoutePath('login', loginPage);
 router.addRoutePath('list', listPage);
-router.route('list');
+router.route('login');
