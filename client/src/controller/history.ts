@@ -23,8 +23,8 @@ class HistoryController extends Controller<State> {
     return newState;
   }
 
-  getHistories(): HistoryState {
-    return historyStore.getState();
+  getHistories(): PaymentHistory[] {
+    return historyStore.getState().histories;
   }
 
   setHistories = (histories: PaymentHistory[]) => {
