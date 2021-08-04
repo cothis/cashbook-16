@@ -44,7 +44,8 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       };
     });
     console.log(this.$this);
-    this.$this.replaceWith(this.createDom());
+    this.render();
+    // this.$this.replaceWith(this.createDom());
     console.log(this.$this);
     // this.render();
   };

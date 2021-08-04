@@ -33,9 +33,7 @@ export default class CalendarPage extends Page {
     };
     this.$calendarModal = new CalendarModal();
     this.$calendarModal.render();
-    this.$calendar = new Calendar({
-      openModal: this.$calendarModal.open,
-    });
+    this.$calendar = new Calendar();
     this.$calendar.render();
     this.$monthSummary = MonthSummary({
       plus: this.state.totalIncome ?? 0,
