@@ -51,8 +51,9 @@ export default class CalendarPage extends Page {
     });
   }
 
-  onMount(histories: getHistoryPiece[]) {
-    console.log(histories);
+  onMount(historyState: HistoryState) {
+    const histories = historyState.histories;
+
     histories.forEach((historyPiece) => {
       const date = historyPiece.payDate.getDate() - 1;
       if (historyPiece.isIncome) {
@@ -72,16 +73,11 @@ export default class CalendarPage extends Page {
       return acc;
     }, 0);
     this.$calendar.render();
-    this.$monthSummary.replaceWith(
-      MonthSummary({
-        plus: this.state.totalIncome ?? 0,
-        minus: this.state.totalSpend ?? 0,
-      })
-    );
+    this.$monthSummary = MonthSummary({
+      plus: this.state.totalIncome ?? 0,
+      minus: this.state.totalSpend ?? 0,
+    });
     this.render();
-    // console.log('called');
-    // console.log(histories);
-    // console.log(this);
   }
 
   onOuterClick = (ev: Event) => {

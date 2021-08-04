@@ -15,10 +15,8 @@ export default abstract class Component<P extends {} = {}, S extends {} = {}>
   }
 
   render() {
-    if (!this.$this.parentElement) {
-      this.$this = this.createDom();
-    }
-    this.$this.parentElement?.replaceChild(this.createDom(), this.$this);
+    this.$this = this.createDom();
+    // this.$this.replaceWith(this.createDom());
   }
 
   abstract createDom(): HTMLElement;
