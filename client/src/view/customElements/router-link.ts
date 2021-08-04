@@ -14,4 +14,8 @@ export default class RouterLink extends HTMLElement {
 
     window.dispatchEvent(routeEvent);
   }
+
+  static define() {
+    window.customElements.define('router-link', RouterLink);
+  }
 }

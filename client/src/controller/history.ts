@@ -11,7 +11,6 @@ interface State {
 class HistoryController extends Controller<State> {
   constructor() {
     super();
-    this.requestGetHistory();
   }
 
   reduceFrom(key: keyof State) {
@@ -24,27 +23,13 @@ class HistoryController extends Controller<State> {
     return newState;
   }
 
-  getHistories(): HistoryState {
-    return historyStore.getState();
+  getHistories(): PaymentHistory[] {
+    return historyStore.getState().histories;
   }
 
   setHistories = (histories: PaymentHistory[]) => {
     const result = historyStore.setState({ histories: histories });
     if (result) this.notify('history');
-  };
-
-  requestGetHistory = async () => {
-    try {
-      const response = await fetch('/api/histories', {
-        credentials: 'include',
-      });
-      if (!response.ok) throw new Error('히스토리를 가져오지 못했습니다.');
-      const data: PaymentHistory[] = await response.json();
-      console.log(data);
-      this.setHistories(data);
-    } catch (e) {
-      console.error(e.message);
-    }
   };
 
   fetchHistory = async (options: Partial<getHistoryProps>) => {

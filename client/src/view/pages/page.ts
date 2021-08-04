@@ -1,4 +1,3 @@
-import html from '@/core/jsx';
 import View from '@/view/view';
 
 export default class Page implements View {
@@ -9,7 +8,10 @@ export default class Page implements View {
     this.$root = $root;
   }
 
-  render(): void {
+  async beforeMount() {}
+
+  async render() {
+    await this.beforeMount();
     const $new = this.createDom();
     if (this.$root.firstElementChild) {
       this.$root.replaceChild($new, this.$root.firstElementChild);

@@ -1,5 +1,7 @@
 import Page from '@/view/pages/page';
 import html from '@/core/jsx';
+import HistoryController from '../../controller/history';
+import CategoryController from '../../controller/category';
 
 export default class LoginPage extends Page {
   constructor(root: HTMLElement) {
