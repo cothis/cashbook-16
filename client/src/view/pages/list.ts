@@ -1,7 +1,7 @@
 import Page from './page';
 import html from '../../core/jsx';
 import HistoryController from '../../controller/history';
-import { PaymentHistory } from '../../types';
+import { PaymentCategory, PaymentHistory } from '../../types';
 import { HistoryState } from '@/store/history';
 import { dateToString } from '@/utils';
 
@@ -76,6 +76,7 @@ export default class ListPage extends Page {
     const map = new Map<string, HistoryBoard>();
     histories.forEach((history) => {
       const date = dateToString(history.payDate);
+      console.log(typeof history.amount);
       let find = map.get(date);
       if (!find) {
         find = { date, totalIncome: '0', totalSpend: '0', detail: [] };
@@ -95,7 +96,7 @@ export default class ListPage extends Page {
 
       find.detail.push({
         category: history.category.name,
-        amount: String(history.amount),
+        amount: history.amount,
         content: history.content,
         method: history.method.name,
       });
@@ -103,11 +104,12 @@ export default class ListPage extends Page {
       map.set(date, find);
     });
     this.histories = Array.from(map).map((el) => el[1]);
+    console.log(this.histories);
     this.render();
   }
 
   createDom(): HTMLElement {
-    return html`<section id="app" class="dark:bg-gray-800">
+    return html`<section>
       <section
         class="h-6 w-full text-md text-center text-green-400 dark:text-purple-400"
       >
