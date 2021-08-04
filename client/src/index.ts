@@ -22,17 +22,11 @@ ListItem.define();
 AppHeader.define();
 CalendarCell.define();
 
-const $app = <HTMLElement>document.querySelector('#app');
 const router = new Router();
 
-const mainView = new MainView($app);
-const loginPage = new LoginPage($app);
-const listPage = new ListPage($app);
-const calendarPage = new CalendarPage($app);
-
-router.addRoutePath('main', mainView);
-router.addRoutePath('login', loginPage);
-router.addRoutePath('list', listPage);
-router.addRoutePath('calendar', calendarPage);
-router.setDefaultPage(loginPage);
+router.addRoutePath('main', MainView);
+router.addRoutePath('login', LoginPage);
+router.addRoutePath('list', ListPage);
+router.addRoutePath('calendar', CalendarPage);
+router.addRoutePath('', LoginPage);
 router.route(location.pathname.slice(1));

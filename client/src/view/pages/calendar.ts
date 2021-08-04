@@ -5,12 +5,19 @@ import MonthSummary from '../FC/MonthSummary';
 import Calendar from '../components/Calendar';
 import CalendarModal from '../components/CalendarModal';
 import Component from '../components/Component';
+import { getHistories } from '../../api/histories';
 import { $ } from '../../utils';
 
 const BUTTON_CLASS = `md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white`;
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
 const BODY_WRAPPER_CLASS = `flex flex-col h-screen w-full justify-start items-center box-border gap-12 pb-12`;
 
+interface CalendarPageState {
+  year: number;
+  month: number;
+  totalIncome: number;
+  totalSpend: number;
+}
 export default class CalendarPage extends Page {
   $calendar: Component;
   $calendarModal: Component;
@@ -23,7 +30,10 @@ export default class CalendarPage extends Page {
       openModal: (this.$calendarModal as CalendarModal).open,
     });
     this.$calendar.render();
-    (this.$calendarModal as CalendarModal).open();
+    const res = getHistories({
+      startDate: new Date('2021-07-01T00:00:00'),
+      endDate: new Date('2021-07-30T00:00:00'),
+    }).then(console.log);
   }
 
   onOuterClick = (ev: Event) => {
@@ -36,13 +46,6 @@ export default class CalendarPage extends Page {
     return html` <section onClick=${this.onOuterClick}>
       ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
-      <section
-        class="flex flex-row h-12 w-full justify-center text-sm text-black dark:text-white bg-gray-50 dark:bg-gray-700 sticky top-0"
-      >
-        <button class="${BUTTON_CLASS} ${ACTIVE_CLASS}">전체</button>
-        <button class="${BUTTON_CLASS}">입금</button>
-        <button class="${BUTTON_CLASS}">출금</button>
-      </section>
       <section class="${BODY_WRAPPER_CLASS}">
         <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
           7 월 내 역

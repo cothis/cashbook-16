@@ -45,7 +45,7 @@ export default class CalendarCell extends HTMLElement implements View {
     const { plus, minus, day } = this.state;
     return html`
       <span class="calendar-cell pb-2">
-        <div class="${CALENDAR_CELL_DATE}">${day}</div>
+        <div class="calendar-cell__day ${CALENDAR_CELL_DATE}">${day}</div>
         ${plus
           ? [
               html`
