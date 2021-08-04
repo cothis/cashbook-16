@@ -2,7 +2,7 @@ import Page from './page';
 import html from '../../core/jsx';
 import HistoryController from '../../controller/history';
 import { getCategories, getHistories } from '../../api/apis';
-import CategoryController from '../../controller/category';
+import ListController from '../../controller/list';
 import { PaymentCategory, PaymentHistory } from '../../types';
 import { HistoryState } from '@/store/history';
 import { dateToString } from '@/utils';
@@ -52,7 +52,7 @@ export default class ListPage extends Page {
     ]);
 
     HistoryController.setHistories(histories);
-    CategoryController.setCategories(categoreis);
+    ListController.setCategories(categoreis);
     this.toHistoryBoard({ histories });
     HistoryController.subscribe(this, this.render, 'history');
   }

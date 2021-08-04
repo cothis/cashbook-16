@@ -1,7 +1,7 @@
 import View from '../view';
 import html from '../../core/jsx';
 import { PaymentCategory } from '../../types';
-import CategoryController from '../../controller/category';
+import ListController from '../../controller/list';
 import { CategoryState } from '../../store/category';
 
 export default class CategorySelect extends HTMLElement implements View {
@@ -10,7 +10,7 @@ export default class CategorySelect extends HTMLElement implements View {
   constructor() {
     super();
 
-    this.categories = CategoryController.getCategories() ?? [];
+    this.categories = ListController.getCategories() ?? [];
     this.render();
   }
 
