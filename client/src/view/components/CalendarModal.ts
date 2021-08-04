@@ -5,7 +5,7 @@ import { $ } from '../../utils';
 type CalendarModalState = {
   netPlus: number;
   netMinus: number;
-  days: {
+  histories: {
     day: number;
     category: string;
     content: string;
@@ -14,11 +14,9 @@ type CalendarModalState = {
   }[];
 };
 
-class CalendarModal extends Component {
-  // state: {};
+class CalendarModal extends Component<{}, CalendarModalState> {
   constructor() {
     super();
-    // this.state = {};
   }
 
   open = () => {
@@ -31,7 +29,7 @@ class CalendarModal extends Component {
 
   createDom(): HTMLElement {
     return html`
-      <div id="modal" class="modal-bg blur">
+      <div id="modal" class="hidden modal-bg blur">
         <section
           class="
             modal

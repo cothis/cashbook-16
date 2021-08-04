@@ -4,10 +4,11 @@ import Banner from '../FC/Banner';
 import MonthSummary from '../FC/MonthSummary';
 import Calendar from '../components/Calendar';
 import CalendarModal from '../components/CalendarModal';
-import Component from '../components/Component';
+import HistoryController from '../../controller/history';
 import { getHistories } from '../../api/histories';
 import { $, monthRangeFactory } from '../../utils';
 import { getHistoryPiece } from '@/DTO/history';
+import { HistoryState } from '@/store/history';
 
 const BUTTON_CLASS = `md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white`;
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
@@ -30,7 +31,6 @@ export default class CalendarPage extends Page {
     super(root);
     this.$calendarModal = new CalendarModal();
     this.$calendarModal.render();
-    console.log(this.$calendarModal.$this);
     this.$calendar = new Calendar({
       openModal: this.$calendarModal.open,
     });
@@ -40,17 +40,19 @@ export default class CalendarPage extends Page {
       plus: this.state.totalIncome ?? 0,
       minus: this.state.totalSpend ?? 0,
     });
-    this.onMount();
-  }
-
-  onMount = async () => {
-    const { year, month } = this.state;
-    const [startDate, endDate] = monthRangeFactory(year, month);
-    const histories = await getHistories({
+    HistoryController.subscribe(this, this.onMount.bind(this), 'history');
+    const [startDate, endDate] = monthRangeFactory(
+      this.state.year,
+      this.state.month
+    );
+    HistoryController.fetchHistory({
       startDate,
       endDate,
     });
+  }
 
+  onMount(histories: getHistoryPiece[]) {
+    console.log(histories);
     histories.forEach((historyPiece) => {
       const date = historyPiece.payDate.getDate() - 1;
       if (historyPiece.isIncome) {
@@ -77,7 +79,10 @@ export default class CalendarPage extends Page {
       })
     );
     this.render();
-  };
+    // console.log('called');
+    // console.log(histories);
+    // console.log(this);
+  }
 
   onOuterClick = (ev: Event) => {
     if (ev.target === $('.modal-bg')) {
