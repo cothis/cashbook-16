@@ -104,9 +104,9 @@
 }
 
 .calendar-cell:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(20, 135, 135, 0.1);
   transform: scale(1.08);
-  transition: 0.3s;
+  /* transition: 0.3s; */
 }
 
 @media (min-width: 768px) {
