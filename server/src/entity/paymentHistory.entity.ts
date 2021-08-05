@@ -5,6 +5,7 @@ import {
   BaseEntity,
   ManyToOne,
   Index,
+  RelationId,
 } from 'typeorm';
 import { PaymentCategory } from './paymentCategory.entity';
 import { PaymentMethod } from './paymentMethod.entity';
@@ -40,7 +41,7 @@ export class PaymentHistory extends BaseEntity {
   })
   method: PaymentMethod;
 
-  @Column()
+  @RelationId((history: PaymentHistory) => history.method)
   methodId: number;
 
   @Index('category-idx')
@@ -51,7 +52,7 @@ export class PaymentHistory extends BaseEntity {
   })
   category: PaymentCategory;
 
-  @Column()
+  @RelationId((history: PaymentHistory) => history.category)
   categoryName: string;
 
   // toJSON() {
