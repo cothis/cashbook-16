@@ -49,7 +49,6 @@ export default class CalendarPage extends Page {
   }
 
   onTimeChange(time: TimeState) {
-    console.log(time);
     this.state.time = time;
     const [startDate, endDate] = monthRangeFactory(
       this.state.time.year,
