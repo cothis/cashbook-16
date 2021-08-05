@@ -51,11 +51,12 @@ class HistoryController {
       });
 
       await Promise.all(getMethodIds);
-      await historyService.deleteHistories(dto.payDate, req.session.githubId!);
-      await historyService.createHistories(dto.datas, req.session.githubId!);
+      await historyService.deleteHistories(dto.payDate!, req.session.githubId!);
+      // await historyService.createHistories(dto.datas!, req.session.githubId!);
 
       res.json({ result: true });
     } catch (err) {
+      console.error(err);
       next(err);
     }
   };
