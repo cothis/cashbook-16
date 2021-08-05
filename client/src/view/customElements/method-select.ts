@@ -2,14 +2,15 @@ import View from '../view';
 import html from '../../core/jsx';
 import { PaymentMethod } from '../../types';
 import ListController from '../../controller/list';
-import { MethodState } from '../../store/method';
+
+const THIS_CLASS = 'w-full sm:w-28 dark:text-white';
 
 export default class MethodSelect extends HTMLElement implements View {
   methods: PaymentMethod[] = [];
 
   constructor() {
     super();
-
+    this.className = THIS_CLASS;
     this.methods = ListController.getMethods() ?? [];
     this.render();
   }
@@ -22,13 +23,13 @@ export default class MethodSelect extends HTMLElement implements View {
     return html`<div>
       <select
         id="method"
-        name="method"
+        name="methodId"
         size="3"
         class="w-full sm:w-40 dark:text-white"
       >
         ${this.methods.map(
           (method, i) => html`<option
-            value=${method.name}
+            value=${method.id}
             class="w-full sm:w-40 truncate dark:text-white"
             selected=${i === 0}
           >
