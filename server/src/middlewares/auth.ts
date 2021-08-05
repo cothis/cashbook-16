@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthError } from '../errors/CustomErrors';
+import { AuthError } from '../errors/customErrors';
 
 export const loginCheck = async (
   req: Request,

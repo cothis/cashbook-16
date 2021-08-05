@@ -1,4 +1,4 @@
-import View from '@/view/view';
+import View from '../view';
 
 export default abstract class Component<P extends {} = {}, S extends {} = {}>
   implements View
