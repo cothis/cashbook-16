@@ -77,7 +77,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$editableRows = this.state.histories.map((history) => {
       const $newRow = new EditableRow({
         ...history,
-        onAddRow: this.onAddRow.bind(this),
+        onDeleteRow: this.onDeleteRow.bind(this),
       });
       $newRow.render();
       return $newRow;

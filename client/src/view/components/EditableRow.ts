@@ -27,54 +27,52 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
     };
   }
 
+  chromeOptionHack = () => {
+    const { category, method } = this.state;
+    setTimeout(() => {
+      const $categoryOption = this.$this?.querySelector(
+        `option[value="${category}"]`
+      );
+      const $methodOption = this.$this?.querySelector(
+        `option[value="${method}"]`
+      );
+      $categoryOption?.removeAttribute('selected');
+      $categoryOption?.setAttribute('selected', '');
+      $methodOption?.removeAttribute('selected');
+      $methodOption?.setAttribute('selected', '');
+    }, 1);
+  };
+
   createDom(): HTMLElement {
     const { amount, category, content, method } = this.state;
+    this.chromeOptionHack();
     return html`
       <form
         class="flex flex-row w-full h-12 items-center justify-between"
         onsubmit="return false;"
       >
-        <select id="category" name="category" class="w-28 dark:text-white">
-          <option
-            value="문화/여가"
-            class="w-28 truncate dark:text-white"
-            selected=${category === '문화/여가'}
-          >
+        <select
+          id="category"
+          name="category"
+          class="w-28 dark:text-white"
+          value="${category}"
+        >
+          <option value="문화/여가" class="w-28 truncate dark:text-white">
             문화/여가
           </option>
-          <option
-            value="생활"
-            class="w-28 truncate dark:text-white"
-            selected=${category === '생활'}
-          >
+          <option value="생활" class="w-28 truncate dark:text-white">
             생활
           </option>
-          <option
-            value="의료/건강"
-            class="w-28 truncate dark:text-white"
-            selected=${category === '의료/건강'}
-          >
+          <option value="의료/건강" class="w-28 truncate dark:text-white">
             의료/건강
           </option>
-          <option
-            value="교통"
-            class="w-28 truncate dark:text-white"
-            selected=${category === '교통'}
-          >
+          <option value="교통" class="w-28 truncate dark:text-white">
             교통
           </option>
-          <option
-            value="식비"
-            class="w-28 truncate dark:text-white"
-            selected=${category === '식비'}
-          >
+          <option value="식비" class="w-28 truncate dark:text-white">
             식비
           </option>
-          <option
-            value="미분류"
-            class="w-28 truncate dark:text-white"
-            selected=${category === '미분류'}
-          >
+          <option value="미분류" class="w-28 truncate dark:text-white">
             미분류
           </option>
         </select>
@@ -93,21 +91,18 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
           <option
             value="카드"
             class="hidden sm:block w-40 truncate dark:text-white"
-            selected=${method === '카드'}
           >
             카드
           </option>
           <option
             value="현금"
             class="hidden sm:block w-40 truncate dark:text-white"
-            selected=${method === '현금'}
           >
             현금
           </option>
           <option
             value="계좌이체"
             class="hidden sm:block w-40 truncate dark:text-white"
-            selected=${method === '계좌이체'}
           >
             계좌이체
           </option>
