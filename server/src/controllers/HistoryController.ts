@@ -43,7 +43,6 @@ class HistoryController {
   applyChanges = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const histories: Partial<HistoryApplyDto>[] = req.body;
-
       const getMethodIds = histories.map(async (history) => {
         if (!history.methodName) return;
         const method = await methodService.getMethodByName(history.methodName);
