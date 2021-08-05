@@ -4,7 +4,7 @@ import { PaymentHistory } from '../../types/index';
 import HistoryController from '../../controller/history';
 import { HistoryState } from '../../store/history';
 import { dateToString } from '../../utils';
-import { getHistories } from '@/api/histories';
+import { getHistories } from '../../api/histories';
 
 interface HistoryBoard {
   date: string;

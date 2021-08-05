@@ -42,7 +42,7 @@ export default class ListItem extends HTMLElement implements View {
 
   createDom(): HTMLElement {
     const isIncome = Number(this.state.amount) > 0;
-    const amountText = this.state.amount + '원';
+    const amountText = Number(this.state.amount).toLocaleString() + '원';
 
     return html`
       <div>
