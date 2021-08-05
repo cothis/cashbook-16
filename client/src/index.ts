@@ -2,7 +2,7 @@ import Router from '@/core/router';
 import MainView from '@/view/pages/main';
 import LoginPage from '@/view/pages/login';
 import ListPage from './view/pages/list';
-import CalendarPage from './view/pages/Calendar';
+import CalendarPage from './view/pages/calendar';
 
 import './view/customElements';
 

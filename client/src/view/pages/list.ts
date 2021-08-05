@@ -8,6 +8,7 @@ import ListController from '../../controller/list';
 const BUTTON_CLASS =
   'md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white';
 const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
+const THIS_MONTH = new Date().getMonth() + 1;
 
 export default class ListPage extends Page {
   constructor(root: HTMLElement) {
@@ -39,7 +40,7 @@ export default class ListPage extends Page {
         class="m-auto max-w-screen-xl flex flex-col w-full justify-start items-center box-border sm:gap-24 gap-12 pb-12"
       >
         <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
-          7 월 내 역
+          ${THIS_MONTH} 월 내 역
         </h1>
 
         <history-form></history-form>
