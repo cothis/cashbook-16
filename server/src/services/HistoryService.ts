@@ -5,6 +5,18 @@ import { PaymentMethod } from '../entity/paymentMethod.entity';
 import { PaymentCategory } from '../entity/paymentCategory.entity';
 
 class HistoryService {
+  deleteHistories = async (payDate: string, githubId: string) => {
+    PaymentHistory.delete({ payDate: payDate, githubId: githubId });
+    throw new Error('Method not implemented.');
+  };
+
+  createHistories = async (
+    datas: Partial<PaymentHistory>[],
+    githubId: string
+  ) => {
+    throw new Error('Method not implemented.');
+  };
+
   applyChanges = async (
     histories: Partial<PaymentHistory>[],
     githubId: string
