@@ -9,6 +9,7 @@ type EditableRowProps = {
   method: string;
   amount: number;
   onAddRow?: (info: EditableRowState) => void;
+  onDeleteRow?: (info: EditableRowState) => void;
 };
 
 export type EditableRowState = {
@@ -45,6 +46,22 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
     }, 1);
   };
 
+  onChangeCategory = (ev: Event) => {
+    this.state.category = (ev.target as any).value;
+  };
+
+  onChangeContent = (ev: Event) => {
+    this.state.content = (ev.target as any).value;
+  };
+
+  onChangeMethod = (ev: Event) => {
+    this.state.method = (ev.target as any).value;
+  };
+
+  onChangeAmount = (ev: Event) => {
+    this.state.amount = (ev.target as any).value;
+  };
+
   createDom(): HTMLElement {
     const { amount, category, content, uuid } = this.state;
     this.chromeOptionHack();
@@ -59,6 +76,7 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
           name="category"
           class="w-28 dark:text-white"
           value="${category}"
+          onChange=${this.onChangeCategory.bind(this)}
         >
           <option value="문화/여가" class="w-28 truncate dark:text-white">
             문화/여가
@@ -85,11 +103,13 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
           placeholder="새로운 내용"
           autocomplete="off"
           value="${content === '' ? false : content}"
+          onInput=${this.onChangeContent.bind(this)}
         />
         <select
           id="method"
           name="method"
           class="hidden sm:block w-40 truncate dark:text-white"
+          onChange=${this.onChangeMethod.bind(this)}
         >
           <option
             value="카드"
@@ -120,12 +140,14 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
           autocomplete="off"
           title="형식: 숫자"
           value="${amount === 0 ? false : amount}"
+          onChange=${this.onChangeAmount.bind(this)}
         />
         <button class="p-2" onClick=${() => {
           this.props?.onAddRow
             ? this.props?.onAddRow?.(this.state)
             : (() => {
                 this.$this?.remove();
+                this.props?.onDeleteRow?.(this.state);
               })();
         }}>
           ${

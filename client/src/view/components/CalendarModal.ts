@@ -82,9 +82,22 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$editableRows = this.state.histories.map((history) => {
       const $newRow = new EditableRow({
         ...history,
+        onDeleteRow: this.onDeleteRow.bind(this),
       });
       $newRow.render();
       return $newRow;
+    });
+    this.render();
+  };
+
+  onDeleteRow = (rowInfo: EditableRowState) => {
+    this.state.histories = this.state.histories.filter((history) => {
+      if (history.content === rowInfo.content) return false;
+      return true;
+    });
+    this.$editableRows = this.$editableRows.filter(($row) => {
+      if ($row.props?.content === rowInfo.content) return false;
+      return true;
     });
     this.render();
   };
@@ -103,6 +116,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       amount: rowInfo.amount,
       content: rowInfo.content,
       method: rowInfo.method,
+      onDeleteRow: this.onDeleteRow.bind(this),
     });
     $prevLastRow.render();
     this.$editableRows.push($prevLastRow);
