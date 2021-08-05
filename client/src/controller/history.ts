@@ -20,8 +20,10 @@ class HistoryController extends Controller<State> {
     switch (key) {
       case 'history':
         newState = this.getHistories();
+        break;
       case 'isIncome':
         newState = this.getIsIncome();
+        break;
     }
 
     return newState;
@@ -29,6 +31,10 @@ class HistoryController extends Controller<State> {
 
   registerNewHistory(history: PaymentHistory) {
     this.getHistories().push(history);
+    this.getHistories().sort(
+      (a, b) =>
+        new Date(a.payDate).getSeconds() - new Date(b.payDate).getSeconds()
+    );
     this.notify('history');
   }
 

@@ -10,7 +10,8 @@ interface State {
 // const APP_HEADER_CLASS =
 // 'container flex flex-row md:h-20 sm:h-16 h-12 items-center justify-start gap-4 border-b-2 border-gray-50 box-border';
 const APP_HEADER_CLASS = `navbar mx-auto flex flex-row md:h-20 sm:h-16 h-12 items-center justify-start gap-4`;
-const BUTTON_CLASS = 'md:w-24 sm:w-20 w-16 h-full';
+const BUTTON_CLASS =
+  'md:w-24 sm:w-20 w-16 h-full text-center flex flex-col justify-center cursor-pointer';
 const ACTIVE_CLASS = 'bg-green-400 text-white hover:text-white';
 const DEACTIVE_CLASS = 'hover:text-green-400 dark:text-white';
 
@@ -48,27 +49,20 @@ export default class AppHeader extends HTMLElement implements View {
       <span class="cursor-pointer h-full sm:ml-16 ml-2 mr-4 p-2">
         <img src="${logo}" alt="" class="h-full w-auto object-fill" />
       </span>
-      <button
+      <router-link
+        to="list"
         class="${BUTTON_CLASS} ${this.state.active === 'list'
           ? ACTIVE_CLASS
           : DEACTIVE_CLASS}"
-      >
-        리스트
-      </button>
-      <button
+        >리스트
+      </router-link>
+      <router-link
+        to="calendar"
         class="${BUTTON_CLASS} ${this.state.active === 'calendar'
           ? ACTIVE_CLASS
           : DEACTIVE_CLASS}"
-      >
-        캘린더
-      </button>
-      <button
-        class="${BUTTON_CLASS} ${this.state.active === 'graph'
-          ? ACTIVE_CLASS
-          : DEACTIVE_CLASS}"
-      >
-        그래프
-      </button>
+        >캘린더
+      </router-link>
     </header>`;
   }
 }
