@@ -138,7 +138,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
         uuid,
         categoryName: category,
         content,
-        method,
+        methodName: method,
         isIncome: Number(amount) >= 0,
         amount: Number(amount),
         payDate: timeStateToString(this.state.time),
