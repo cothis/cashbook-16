@@ -38,7 +38,9 @@ export default class LoginPage extends Page {
         <img
           src="https://user-images.githubusercontent.com/13645032/126734049-a98f0f5f-74df-4c9f-b302-88163bbf96b5.png"
         />
-        <div class="text-center">사진을 눌러서 깃허브 로그인 하세요</div>
+        <div class="text-center dark:text-white">
+          사진을 눌러서 깃허브 로그인 하세요
+        </div>
       </a>
     </div>`;
   }
