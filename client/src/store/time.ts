@@ -12,7 +12,7 @@ class TimeStore extends Store<TimeState> {
     super(
       initialState ?? {
         year: today.getFullYear(),
-        month: today.getMonth(),
+        month: today.getMonth() + 1,
         date: today.getDate(),
       }
     );
