@@ -4,11 +4,7 @@ class MethodService {
   constructor() {}
 
   getMethods = async (githubId?: string): Promise<PaymentMethod[]> => {
-    const methods = await PaymentMethod.find({
-      where: {
-        githubId,
-      },
-    });
+    const methods = await PaymentMethod.find({ order: { id: 'ASC' } });
 
     return methods;
   };
