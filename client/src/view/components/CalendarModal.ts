@@ -9,8 +9,9 @@ import {
   toMonthDateDay,
 } from '../../utils';
 import EditableRow, { EditableRowState } from './EditableRow';
-import { getHistories } from '../../api/histories';
+import { postHistories } from '../../api/apis';
 import { TimeState } from '@/store/time';
+import { categoryPostForm } from '@/DTO/category';
 
 type CalendarModalState = {
   netPlus: number;
@@ -53,6 +54,10 @@ class CalendarModal extends Component<{}, CalendarModalState> {
 
   onTimeChange = async (timeState: TimeState) => {
     this.state.time = timeState;
+    this.updateModalChilds.call(this);
+  };
+
+  updateModalChilds = () => {
     const d = timeStateToDate(this.state.time);
     const histories = HistoryController.getHistoryOfDate(d);
     this.state.histories = histories.map((history) => {
@@ -66,12 +71,12 @@ class CalendarModal extends Component<{}, CalendarModalState> {
         uuid,
       };
     });
-    this.state.netPlus = histories.reduce((acc, history) => {
-      if (parseInt(history.amount) > 0) return acc + parseInt(history.amount);
+    this.state.netPlus = this.state.histories.reduce((acc, history) => {
+      if (history.amount > 0) return acc + history.amount;
       return acc;
     }, 0);
-    this.state.netMinus = histories.reduce((acc, history) => {
-      if (parseInt(history.amount) < 0) return acc + parseInt(history.amount);
+    this.state.netMinus = this.state.histories.reduce((acc, history) => {
+      if (history.amount < 0) return acc + history.amount;
       return acc;
     }, 0);
     this.$editableRows = this.state.histories.map((history) => {
@@ -82,7 +87,6 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       $newRow.render();
       return $newRow;
     });
-    console.log(this.state.histories);
     this.render();
   };
 
@@ -119,7 +123,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     const $forms = this.$this?.querySelectorAll('form');
     if (!$forms) return;
     const forms = Array.from($forms);
-    const datas = forms.reduce((acc: EditableRowState[], form) => {
+    const datas = forms.reduce((acc: categoryPostForm[], form) => {
       const uuidString = (form.querySelector('#uuid') as HTMLInputElement)
         .value;
       const uuid = uuidString === '' ? undefined : parseInt(uuidString);
@@ -129,21 +133,22 @@ class CalendarModal extends Component<{}, CalendarModalState> {
         .value;
       const method = (form.querySelector('#method') as HTMLSelectElement).value;
       const amount = (form.querySelector('#amount') as HTMLInputElement).value;
+      if (content === '' || Number(amount) === 0) return acc;
       acc.push({
         uuid,
-        category,
+        categoryName: category,
         content,
         method,
+        isIncome: Number(amount) >= 0,
         amount: Number(amount),
         payDate: timeStateToString(this.state.time),
       });
       return acc;
     }, []);
-    console.log(datas);
+    postHistories(datas);
   };
 
   createDom(): HTMLElement {
-    console.log(`${this.state.time.month} ${this.state.time.date} n요일`);
     return html`
       <div id="modal" class="hidden modal-bg blur">
         <section

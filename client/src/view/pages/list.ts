@@ -1,7 +1,8 @@
 import Page from './page';
 import html from '../../core/jsx';
 import HistoryController from '../../controller/history';
-import { getCategories, getHistories, getMethods } from '../../api/apis';
+import { getCategories, getMethods } from '../../api/apis';
+import { getHistories } from '../../api/histories';
 import ListController from '../../controller/list';
 
 const BUTTON_CLASS =

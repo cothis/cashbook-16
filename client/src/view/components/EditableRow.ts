@@ -17,7 +17,9 @@ export type EditableRowState = {
   content: string;
   method: string;
   amount: number;
+  isIncome?: boolean;
   uuid?: number;
+  payDate?: string;
 };
 
 class EditableRow extends Component<EditableRowProps, EditableRowState> {

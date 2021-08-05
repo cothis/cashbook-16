@@ -10,7 +10,7 @@ interface getHistoryProps {
   method: methodType;
 }
 
-const getHistories = async (prop: Partial<getHistoryProps>) => {
+const getHistories = async (prop?: Partial<getHistoryProps>) => {
   const response = await fetch('/api/histories?' + qs.stringify(prop), {
     credentials: 'include',
   })

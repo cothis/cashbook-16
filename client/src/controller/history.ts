@@ -3,7 +3,7 @@ import { BaseState } from '../store/store';
 import historyStore, { HistoryState } from '../store/history';
 import { PaymentHistory } from '../types';
 import { getHistories, getHistoryProps } from '@/api/histories';
-import { getHistories as getHistoriesByApi } from '../api/apis';
+import { getHistories as getHistoriesByApi } from '../api/histories';
 
 interface State {
   history: HistoryState;
