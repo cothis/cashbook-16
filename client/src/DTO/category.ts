@@ -9,7 +9,7 @@ type categoryType =
 type categoryPostForm = {
   categoryName: string;
   content: string;
-  method: string;
+  methodName: string;
   amount: number;
   isIncome?: boolean;
   uuid?: number;
