@@ -38,7 +38,9 @@ class Calendar extends Component<{}, CalendarState> {
   }
 
   clearCells = () => {
-    this.state.cells = [...Array(30).keys()].map((val) => ({
+    const lengthOfMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const monthLen = lengthOfMonths[this.state.time.month - 1];
+    this.state.cells = [...Array(monthLen).keys()].map((val) => ({
       day: val + 1,
       minus: 0,
       plus: 0,
