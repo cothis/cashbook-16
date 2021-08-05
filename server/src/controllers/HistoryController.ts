@@ -38,6 +38,20 @@ class HistoryController {
     }
   };
 
+  applyChanges = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const histories: Partial<PaymentHistory>[] = req.body;
+      const result: boolean = await historyService.applyChanges(
+        histories,
+        req.session.githubId!
+      );
+
+      res.json({ result });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   updateHistory = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const historyId = Number(req.params.historyId);

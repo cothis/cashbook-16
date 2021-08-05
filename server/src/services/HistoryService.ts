@@ -5,6 +5,21 @@ import { PaymentMethod } from '../entity/paymentMethod.entity';
 import { PaymentCategory } from '../entity/paymentCategory.entity';
 
 class HistoryService {
+  applyChanges = async (
+    histories: Partial<PaymentHistory>[],
+    githubId: string
+  ): Promise<boolean> => {
+    const updates = histories.filter((history) => history.uuid);
+    const news = histories.filter((history) => !history.uuid);
+    news.forEach((history) => (history.githubId = githubId));
+
+    const results = await Promise.all<boolean | PaymentHistory>([
+      ...updates.map(this.updateHistory),
+      ...news.map(this.createHistory),
+    ]);
+
+    return true;
+  };
   constructor() {}
 
   getHistoires = async (query: HistoryQuery): Promise<PaymentHistory[]> => {
