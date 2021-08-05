@@ -116,9 +116,25 @@ export default class CalendarPage extends Page {
       ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
       <section class="${BODY_WRAPPER_CLASS}">
-        <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
-          ${month} 월 내 역
-        </h1>
+        <div class="flex flex-row w-screen items-center justify-between mt-8">
+          <div></div>
+          <button
+            class="block sm:hidden text-gray-600 dark:text-white p-3"
+            onClick=${this.onPrevMonth.bind(this)}
+          >
+            ${month - 1} 월
+          </button>
+          <h1 class="text-4xl font-sans text-gray-600 dark:text-white">
+            ${month} 월 내 역
+          </h1>
+          <button
+            class="block sm:hidden text-gray-600 dark:text-white p-3"
+            onClick=${this.onNextMonth.bind(this)}
+          >
+            ${month + 1} 월
+          </button>
+          <div></div>
+        </div>
 
         ${this.$monthSummary} ${this.$calendar.$this}
 
