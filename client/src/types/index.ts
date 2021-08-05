@@ -18,3 +18,11 @@ export interface PaymentCategory {
   name: string;
   color: string;
 }
+
+export interface HistoryProps {
+  category: string;
+  isIncome: boolean;
+  startDate: Date;
+  endDate: Date;
+  method: PaymentMethod;
+}

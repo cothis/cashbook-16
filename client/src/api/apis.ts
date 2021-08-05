@@ -1,13 +1,10 @@
 import qs from 'qs';
-import { PaymentCategory, PaymentHistory, PaymentMethod } from '../types/index';
-
-interface getHistoryProps {
-  category: string;
-  isIncome: boolean;
-  startDate: Date;
-  endDate: Date;
-  method: PaymentMethod;
-}
+import {
+  PaymentCategory,
+  PaymentHistory,
+  PaymentMethod,
+  HistoryProps,
+} from '../types/index';
 
 const request = async <T>(
   url: string,
@@ -25,7 +22,7 @@ export const getCategories = async (): Promise<PaymentCategory[]> => {
 };
 
 export const getHistories = async (
-  option?: Partial<getHistoryProps>
+  option?: Partial<HistoryProps>
 ): Promise<PaymentHistory[]> => {
   return await request<PaymentHistory[]>(
     '/api/histories?' + qs.stringify(option)
