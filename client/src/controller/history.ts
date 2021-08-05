@@ -3,7 +3,7 @@ import { BaseState } from '../store/store';
 import historyStore, { HistoryState } from '../store/history';
 import { PaymentHistory } from '../types';
 import { getHistories, getHistoryProps } from '@/api/histories';
-import { getHistories as getHistoriesByApi } from '../api/apis';
+import { getHistories as getHistoriesByApi } from '../api/histories';
 
 interface State {
   history: HistoryState;
@@ -62,6 +62,15 @@ class HistoryController extends Controller<State> {
     const response = await getHistories(options);
 
     this.setHistories(response);
+  };
+
+  getHistoryOfDate = (query: Date) => {
+    return historyStore.getState().histories.filter((history) => {
+      history.payDate.setHours(0, 0, 0, 0);
+      query.setHours(0, 0, 0, 0);
+      if (history.payDate.getTime() == query.getTime()) return true;
+      return false;
+    });
   };
 }
 

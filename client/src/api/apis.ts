@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { PaymentCategory, PaymentHistory, PaymentMethod } from '../types/index';
-
+import { categoryPostForm } from '../DTO/category';
 interface getHistoryProps {
   category: string;
   isIncome: boolean;
@@ -40,6 +40,16 @@ export const createHistory = async (body: any): Promise<PaymentHistory> => {
   return await request<PaymentHistory>('/api/histories', {
     method: 'post',
     body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
+export const postHistories = async (histories: categoryPostForm[]) => {
+  return await request<{ result: string }>('/api/histories/apply', {
+    method: 'post',
+    body: JSON.stringify(histories),
     headers: {
       'Content-Type': 'application/json',
     },

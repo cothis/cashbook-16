@@ -6,4 +6,14 @@ type categoryType =
   | '의료/건강'
   | '교통';
 
-export { categoryType };
+type categoryPostForm = {
+  categoryName: string;
+  content: string;
+  methodName: string;
+  amount: number;
+  isIncome?: boolean;
+  uuid?: number;
+  payDate?: string;
+};
+
+export { categoryType, categoryPostForm };

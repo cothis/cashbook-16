@@ -1,3 +1,4 @@
+import { TimeState } from '@/store/time';
 const { stringify } = JSON;
 
 /**
@@ -61,6 +62,58 @@ export const dateToString = (date: Date | string, splitter: string = '-') => {
   let day = String(date.getDate());
   day = Number(day) < 10 ? '0' + day : day;
   return year + splitter + month + splitter + day;
+};
+
+/**
+ *
+ * @returns [해당달의 처음 Date, 다음달의 처음 Date]
+ */
+export const monthRangeFactory = (year: number, month: number) => {
+  const start = new Date(
+    `${year}-${String(month).padStart(2, '0')}-01T00:00:00`
+  );
+  const end = new Date(
+    `${year}-${String(month + 1).padStart(2, '0')}-01T00:00:00Z`
+  );
+
+  return [start, end];
+};
+
+/**
+ * @param timeState
+ * @returns 7월 8일 목 이런식으로 리턴함
+ */
+export const toMonthDateDay = (timeState: TimeState) => {
+  const { year, month, date } = timeState;
+  const d = new Date(
+    `${timeState.year}-${String(month).padStart(2, '0')}-${String(
+      date
+    ).padStart(2, '0')}T00:00:00Z`
+  );
+  const day = d.getDay();
+  const dow = '일월화수목금토'[day];
+
+  return `${month}월 ${date}일 ${dow}`;
+};
+
+export const timeStateToString = (timeState: TimeState) => {
+  return `${timeState.year}-${String(timeState.month).padStart(
+    2,
+    '0'
+  )}-${String(timeState.date).padStart(2, '0')}T00:00:00Z`;
+};
+
+/**
+ * @returns Date 객체 반환
+ */
+export const timeStateToDate = (timeState: TimeState) => {
+  const d = new Date(
+    `${timeState.year}-${String(timeState.month).padStart(2, '0')}-${String(
+      timeState.date
+    ).padStart(2, '0')}T00:00:00Z`
+  );
+
+  return d;
 };
 
 export const urlencodeFormData = (fd: FormData) => {

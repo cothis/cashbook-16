@@ -1,10 +1,31 @@
 import { PaymentHistory } from '../entity/paymentHistory.entity';
 import { HistoryQuery } from '../controllers/historyController';
-import { Between } from 'typeorm';
+import { Between, getConnection } from 'typeorm';
 import { PaymentMethod } from '../entity/paymentMethod.entity';
 import { PaymentCategory } from '../entity/paymentCategory.entity';
 
 class HistoryService {
+  deleteHistories = async (payDate: string, githubId: string) => {
+    getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(PaymentHistory)
+      .where('DATE(payDate) = DATE(:payDate)', { payDate: new Date(payDate) })
+      .andWhere('githubId = :githubId', { githubId })
+      .execute();
+  };
+
+  createHistories = async (
+    datas: Partial<PaymentHistory>[],
+    githubId: string
+  ) => {
+    console.log(datas);
+    datas.forEach((history) => {
+      history.githubId = githubId;
+      this.createHistory(history);
+    });
+  };
+
   applyChanges = async (
     histories: Partial<PaymentHistory>[],
     githubId: string

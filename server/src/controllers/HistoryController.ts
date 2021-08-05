@@ -42,23 +42,21 @@ class HistoryController {
 
   applyChanges = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const histories: Partial<HistoryApplyDto>[] = req.body;
+      const dto: Partial<HistoryApplyDto> = req.body;
 
-      const getMethodIds = histories.map(async (history) => {
+      const getMethodIds = dto.datas!.map(async (history) => {
         if (!history.methodName) return;
         const method = await methodService.getMethodByName(history.methodName);
         history.methodId = method.id;
       });
 
       await Promise.all(getMethodIds);
+      await historyService.deleteHistories(dto.payDate!, req.session.githubId!);
+      await historyService.createHistories(dto.datas!, req.session.githubId!);
 
-      const result: boolean = await historyService.applyChanges(
-        histories,
-        req.session.githubId!
-      );
-
-      res.json({ result });
+      res.json({ result: true });
     } catch (err) {
+      console.error(err);
       next(err);
     }
   };

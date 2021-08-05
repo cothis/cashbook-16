@@ -10,7 +10,7 @@ interface getHistoryProps {
   method: methodType;
 }
 
-const getHistories = async (prop: Partial<getHistoryProps>) => {
+const getHistories = async (prop?: Partial<getHistoryProps>) => {
   const response = await fetch('/api/histories?' + qs.stringify(prop), {
     credentials: 'include',
   })
@@ -20,7 +20,15 @@ const getHistories = async (prop: Partial<getHistoryProps>) => {
       }
       return res;
     })
-    .then((res) => res.json());
+    .then((res) => res.json())
+    .then((histories: getHistoryPiece[]) => {
+      return histories.map((history) => {
+        return {
+          ...history,
+          payDate: new Date(history.payDate),
+        };
+      });
+    });
 
   return response as getHistoryPiece[];
 };

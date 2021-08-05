@@ -1,6 +1,7 @@
 import Component from './Component';
 import html from '../../core/jsx';
-import { getRandomInt } from '../../utils';
+import CalendarController from '../../controller/calendar';
+import { $ } from '../../utils';
 
 interface Cell {
   day: number;
@@ -12,25 +13,24 @@ interface CalendarState {
   cells: Cell[];
 }
 
-interface CalendarProps {
-  openModal: () => void;
-}
+class Calendar extends Component<{}, CalendarState> {
+  // state: CalendarState;
 
-class Calendar extends Component<CalendarProps, {}> {
-  state: CalendarState;
-
-  constructor(props: CalendarProps) {
-    super(props);
-    this.state = {
-      cells: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15].map(
-        (val, idx, arr) => ({
-          day: val,
-          minus: getRandomInt(-20000, 0),
-          plus: getRandomInt(0, 20000),
-        })
-      ),
-    };
+  constructor() {
+    super();
+    this.state = { cells: [] };
+    this.clearCells();
   }
+
+  clearCells = () => {
+    this.state = {
+      cells: [...Array(30).keys()].map((val) => ({
+        day: val + 1,
+        minus: 0,
+        plus: 0,
+      })),
+    };
+  };
 
   createDom(): HTMLElement {
     const { cells } = this.state;
@@ -48,7 +48,12 @@ class Calendar extends Component<CalendarProps, {}> {
                 plus="${cell.plus}"
                 minus="${cell.minus}"
                 onClick=${() => {
-                  this.props?.openModal();
+                  const time = CalendarController.getCalendar();
+                  CalendarController.setCalendar({
+                    ...time,
+                    date: cell.day,
+                  });
+                  $('.modal-bg')?.classList.remove('hidden');
                 }}
               >
               </calendar-cell>

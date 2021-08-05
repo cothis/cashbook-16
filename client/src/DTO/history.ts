@@ -12,7 +12,6 @@ type getHistoryPiece = {
   categoryName: categoryType;
   method: {
     id: number;
-    githubId: string;
     name: methodType;
   };
   category: {

@@ -2,10 +2,11 @@ import View from '@/view/view';
 
 export default class Page implements View {
   $root: HTMLElement;
-  $this!: HTMLElement;
+  $this: HTMLElement;
 
   constructor($root: HTMLElement) {
     this.$root = $root;
+    this.$this = document.createElement('code');
   }
 
   async beforeMount() {}
