@@ -3,7 +3,7 @@ import html from '../../core/jsx';
 import CalendarController from '../../controller/calendar';
 import HistoryController from '../../controller/history';
 import {
-  monthRangeFactory,
+  timeStateToString,
   timeStateToDate,
   toKRW,
   toMonthDateDay,
@@ -115,6 +115,33 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$this?.classList.add('hidden');
   };
 
+  onSubmit = () => {
+    const $forms = this.$this?.querySelectorAll('form');
+    if (!$forms) return;
+    const forms = Array.from($forms);
+    const datas = forms.reduce((acc: EditableRowState[], form) => {
+      const uuidString = (form.querySelector('#uuid') as HTMLInputElement)
+        .value;
+      const uuid = uuidString === '' ? undefined : parseInt(uuidString);
+      const category = (form.querySelector('#category') as HTMLSelectElement)
+        .value;
+      const content = (form.querySelector('#ioContent') as HTMLInputElement)
+        .value;
+      const method = (form.querySelector('#method') as HTMLSelectElement).value;
+      const amount = (form.querySelector('#amount') as HTMLInputElement).value;
+      acc.push({
+        uuid,
+        category,
+        content,
+        method,
+        amount: Number(amount),
+        payDate: timeStateToString(this.state.time),
+      });
+      return acc;
+    }, []);
+    console.log(datas);
+  };
+
   createDom(): HTMLElement {
     console.log(`${this.state.time.month} ${this.state.time.date} n요일`);
     return html`
@@ -173,6 +200,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
                   pr-3
                 "
                 value="변경사항 적용"
+                onClick=${this.onSubmit.bind(this)}
               />
             </div>
           </article>

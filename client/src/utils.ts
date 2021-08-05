@@ -96,6 +96,13 @@ export const toMonthDateDay = (timeState: TimeState) => {
   return `${month}월 ${date}일 ${dow}`;
 };
 
+export const timeStateToString = (timeState: TimeState) => {
+  return `${timeState.year}-${String(timeState.month).padStart(
+    2,
+    '0'
+  )}-${String(timeState.date).padStart(2, '0')}T00:00:00Z`;
+};
+
 /**
  * @returns Date 객체 반환
  */
