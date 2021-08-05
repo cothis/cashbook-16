@@ -136,7 +136,7 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
           class="w-24 truncate sm:right-0 ${
             amount >= 0 ? 'text-green-400' : 'text-red-400'
           } text-right"
-          placeholder="금액 (원)"
+          placeholder="-지출/+수입 (원)"
           autocomplete="off"
           title="형식: 숫자"
           value="${amount === 0 ? false : amount}"
