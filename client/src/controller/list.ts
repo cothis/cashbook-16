@@ -19,8 +19,10 @@ class ListController extends Controller<State> {
     switch (key) {
       case 'category':
         newState = this.getCategories();
+        break;
       case 'method':
         newState = this.getMethods();
+        break;
     }
 
     return newState;

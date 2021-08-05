@@ -17,9 +17,9 @@ export default class Store<S extends BaseState = BaseState> {
    */
   setState(newState: Partial<S>) {
     const nextState = { ...this.state, ...newState };
-    if (cmpState(this.state, nextState)) {
-      return false;
-    }
+    // if (cmpState(this.state, nextState)) {
+    //   return false;
+    // }
     this.state = nextState;
     return true;
   }

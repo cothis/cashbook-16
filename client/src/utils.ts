@@ -107,6 +107,8 @@ export const timeStateToDate = (timeState: TimeState) => {
   );
 
   return d;
+};
+
 export const urlencodeFormData = (fd: FormData) => {
   const params = new URLSearchParams();
   for (const pair of fd.entries()) {

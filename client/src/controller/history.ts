@@ -20,8 +20,10 @@ class HistoryController extends Controller<State> {
     switch (key) {
       case 'history':
         newState = this.getHistories();
+        break;
       case 'isIncome':
         newState = this.getIsIncome();
+        break;
     }
 
     return newState;
