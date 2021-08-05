@@ -7,8 +7,7 @@ class MethodController {
 
   getMethods = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const githubId = req.session.githubId;
-      const methods: PaymentMethod[] = await methodService.getMethods(githubId);
+      const methods: PaymentMethod[] = await methodService.getMethods();
 
       res.json(methods);
     } catch (err) {
