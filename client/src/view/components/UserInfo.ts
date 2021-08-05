@@ -1,4 +1,4 @@
-import Component from '@/view/components/component';
+import Component from '../components/Component';
 import html from '@/core/jsx';
 import MainController from '@/controller/main';
 import { UserState } from '@/store/user';
@@ -16,9 +16,9 @@ export default class UserInfoComponent extends Component {
   updateUser(user: UserState) {
     console.log(user);
     this.state = user;
-    const $parent = this.$this.parentElement;
+    const $parent = this.$this?.parentElement;
     const $new = this.createDom();
-    $parent?.replaceChild($new, this.$this);
+    $parent?.replaceChild($new, this.$this!);
     this.$this = $new;
   }
 

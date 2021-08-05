@@ -1,62 +1,74 @@
 import Page from '@/view/pages/page';
+import HistoryController from '../controller/history';
+
+const BACK_METHOD = '@back';
 
 export default class Router {
+  default?: typeof Page;
   history: Page[];
-  map: Map<string, Page>;
+  map: Map<string, typeof Page>;
 
   constructor() {
     this.history = [];
     this.map = new Map();
-
-    this.registerCustomEventListener();
-    this.registerPopstateEventListener();
+    this.registerEvents();
   }
 
-  registerPopstateEventListener() {
-    window.addEventListener('popstate', (e: Event) => {
-      const prevPage = this.history.pop();
-      if (prevPage) {
-        prevPage.$root.innerHTML = '';
-      }
-
-      const lastPage = this.history[this.history.length - 1];
-      if (lastPage) {
-        lastPage.render();
-      }
-    });
+  private registerEvents() {
+    window.addEventListener('popstate', this.popstateEventHandler.bind(this));
+    window.addEventListener('route', this.routeEventHandler.bind(this));
   }
 
-  registerCustomEventListener() {
-    window.addEventListener('route', (e: CustomEventInit) => {
-      const pathname = e.detail.pathname;
-      if (this.isBack(pathname)) {
-        window.history.back();
-        return;
-      }
+  private popstateEventHandler(e: Event) {
+    const prevPage = this.history.pop();
+    this.detachPage(prevPage);
 
-      this.route(pathname);
-    });
+    this.getLastPage().render();
+  }
+
+  private routeEventHandler(e: CustomEventInit): void {
+    const pathname = e.detail.pathname;
+    if (this.isBack(pathname)) {
+      window.history.back();
+      return;
+    }
+
+    this.route(pathname);
+  }
+
+  private detachPage(page?: Page) {
+    if (page) page.$this.remove();
+  }
+
+  private getLastPage(): Page {
+    return this.history[this.history.length - 1];
   }
 
   private isBack(pathname: string) {
-    return pathname === '@back';
+    return pathname === BACK_METHOD;
   }
 
-  addRoutePath(pathname: string, page: Page) {
+  setDefaultPage(page: typeof Page) {
+    this.default = page;
+  }
+
+  addRoutePath(pathname: string, page: typeof Page) {
     this.map.set(pathname, page);
   }
 
   route(pathname: string) {
-    const page = this.map.get(pathname);
-    if (!page) throw new Error('Route 페이지가 등록되지 않았습니다.');
-
-    const lastPage = this.history[this.history.length - 1];
-    if (lastPage) {
-      lastPage.$root.innerHTML = '';
+    let pageContructor = this.map.get(pathname);
+    if (!pageContructor) {
+      if (!this.default) throw new Error('routing할 페이지가 없습니다.');
+      pageContructor = this.default;
     }
 
+    this.detachPage(this.getLastPage());
+    HistoryController.unsubscribe();
+
     window.history.pushState({}, 'view', pathname);
-    this.history.push(page);
-    page.render();
+    const $newPage = new pageContructor(document.body);
+    this.history.push($newPage);
+    $newPage.render();
   }
 }

@@ -1,0 +1,141 @@
+.modal-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.05);
+  height: 100%;
+  z-index: 5;
+}
+
+.blur {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 94%;
+  max-width: 1024px;
+  height: 60%;
+  background-color: rgba(255, 255, 255, 0.5);
+  filter: blur(0);
+}
+
+.month-summary {
+  width: 96vw;
+  max-width: 1024px;
+}
+
+.calendar {
+  width: 96vw;
+  max-width: 1024px;
+  height: calc(96vw * 0.8);
+  max-height: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-grid {
+  height: 100%;
+  grid-column-gap: 0.8rem;
+  grid-row-gap: 0.8rem;
+}
+
+.calendar-cell:nth-child(1) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(7) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(8) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(14) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(15) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(21) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(22) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(28) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(29) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell:nth-child(35) .calendar-cell__day {
+  color: rgb(96, 165, 250) !important;
+}
+
+.calendar-cell:nth-child(36) .calendar-cell__day {
+  color: rgb(248, 113, 113) !important;
+}
+
+.calendar-cell {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  background-color: rgba(20, 135, 135, 0.05);
+  border-radius: 0.8rem;
+  justify-content: flex-end;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.calendar-cell:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.08);
+  transition: 0.3s;
+}
+
+@media (min-width: 768px) {
+  .calendar {
+    width: 80vw;
+    height: calc(80vw * 0.8);
+    max-height: 860px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .month-summary {
+    width: 80vw;
+    max-width: 1024px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .calendar-cell {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .calendar-cell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .modal {
+    /* background-color: rgba(200, 205, 205, 0.55); */
+    background-color: rgba(20, 30, 30, 0.4);
+  }
+}

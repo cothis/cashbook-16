@@ -1,6 +1,6 @@
 import Page from '@/view/pages/page';
-import Component from '@/view/components/component';
-import UserInfoComponent from '@/view/components/userinfo.comp';
+import Component from '../components/Component';
+import UserInfoComponent from '@/view/components/UserInfo';
 import html from '@/core/jsx';
 import MainController from '@/controller/main';
 

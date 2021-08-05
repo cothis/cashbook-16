@@ -25,6 +25,7 @@ module.exports = {
               implementation: require('node-sass'),
             },
           },
+          'postcss-loader',
         ],
       },
       {
@@ -34,6 +35,13 @@ module.exports = {
           name: '[name].[ext]?[hash]',
           publicPath: './dist/',
           limit: 10000, // 10kb
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
         },
       },
     ],

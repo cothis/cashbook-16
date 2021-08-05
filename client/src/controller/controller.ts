@@ -12,8 +12,8 @@ export default abstract class Controller<S> {
     this.subscribers.set([key as string, view], cb);
   }
 
-  unsubscribe(view: View) {
-    // this.subscribers.delete(view);
+  unsubscribe() {
+    this.subscribers.clear();
   }
 
   notify(key: keyof S): void {
@@ -24,5 +24,5 @@ export default abstract class Controller<S> {
     });
   }
 
-  abstract reduceFrom(key: keyof S): BaseState;
+  abstract reduceFrom(key: keyof S): BaseState | undefined;
 }

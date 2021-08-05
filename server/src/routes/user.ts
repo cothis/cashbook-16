@@ -1,17 +1,8 @@
 import express, { Request, Response } from 'express';
-const userRouter = express.Router();
+import UserController from '../controllers/UserController';
+const router = express.Router();
 
-userRouter.get('/', (req: Request, res: Response) => {
-  const { githubId } = req.session;
-  if (githubId) {
-    res.json({
-      githubId,
-    });
-  } else {
-    res.json({
-      githubId: 'not-logged-in',
-    });
-  }
-});
+router.get('/', UserController.login);
+router.get('/test', UserController.test);
 
-export default userRouter;
+export default router;
