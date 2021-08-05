@@ -116,6 +116,13 @@ export const timeStateToDate = (timeState: TimeState) => {
   return d;
 };
 
+export const timeStateToFirstDayOfWeek = (timeState: TimeState) => {
+  const firstDay = new Date(
+    `${timeState.year}-${String(timeState.month).padStart(2, '0')}-01T00:00:00Z`
+  );
+  return firstDay.getDay();
+};
+
 export const urlencodeFormData = (fd: FormData) => {
   const params = new URLSearchParams();
   for (const pair of fd.entries()) {

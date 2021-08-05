@@ -111,6 +111,7 @@ export default class CalendarPage extends Page {
 
   createDom(): HTMLElement {
     const { month } = this.state.time;
+
     return html` <section onClick=${this.onOuterClick}>
       ${Banner()} ${this.$calendarModal.$this}
       <app-header active="calendar"></app-header>
