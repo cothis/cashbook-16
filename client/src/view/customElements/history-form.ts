@@ -2,8 +2,10 @@ import html from '../../core/jsx';
 import View from '../view';
 import { createHistory } from '../../api/apis';
 import HistoryController from '../../controller/history';
+import { dateToString } from '../../utils';
 
 const THIS_CLASS = 'w-full md:w-3/4 flex flex-col';
+const TODAY = dateToString(new Date());
 
 export default class HistoryForm extends HTMLElement implements View {
   constructor() {
@@ -44,7 +46,7 @@ export default class HistoryForm extends HTMLElement implements View {
             type="date"
             name="payDate"
             class="w-full sm:w-36 truncate text-black dark:text-white mb-4"
-            value="2021-08-01"
+            value="${TODAY}"
           />
           <div
             class="flex flex-col sm:flex-row w-full sm:h-12 gap-6 sm:gap-0 items-start sm:items-center pl-1 sm:pl-0 justify-between"
