@@ -19,7 +19,11 @@ class HistoryService {
     datas: Partial<PaymentHistory>[],
     githubId: string
   ) => {
-    throw new Error('Method not implemented.');
+    console.log(datas);
+    datas.forEach((history) => {
+      history.githubId = githubId;
+      this.createHistory(history);
+    });
   };
 
   applyChanges = async (
