@@ -5,9 +5,6 @@ import { getCategories, getMethods } from '../../api/apis';
 import { getHistories } from '../../api/histories';
 import ListController from '../../controller/list';
 
-const BUTTON_CLASS =
-  'md:w-24 sm:w-20 w-16 h-full hover:text-green-400 dark:text-white';
-const ACTIVE_CLASS = 'border-b-2 border-solid border-green-300';
 const THIS_MONTH = new Date().getMonth() + 1;
 
 export default class ListPage extends Page {
@@ -16,13 +13,11 @@ export default class ListPage extends Page {
   }
 
   async beforeMount() {
-    const [histories, categoreis, methods] = await Promise.all([
-      getHistories(),
+    const [categoreis, methods] = await Promise.all([
       getCategories(),
       getMethods(),
     ]);
 
-    HistoryController.setHistories(histories);
     ListController.setCategories(categoreis);
     ListController.setMethods(methods);
   }

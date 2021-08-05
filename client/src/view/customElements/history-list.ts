@@ -4,6 +4,7 @@ import { PaymentHistory } from '../../types/index';
 import HistoryController from '../../controller/history';
 import { HistoryState } from '../../store/history';
 import { dateToString } from '../../utils';
+import { getHistories } from '@/api/histories';
 
 interface HistoryBoard {
   date: string;
@@ -27,8 +28,15 @@ export default class HistoryList extends HTMLElement implements View {
 
     this.className = THIS_CLASS;
     this.historyBoard = [];
-    HistoryController.subscribe(this, this.toHistoryBoardFromStore, 'history');
-    this.toHistoryBoardFromStore();
+    getHistories().then((histories) => {
+      HistoryController.setHistories(histories);
+      HistoryController.subscribe(
+        this,
+        this.toHistoryBoardFromStore,
+        'history'
+      );
+      this.toHistoryBoardFromStore();
+    });
   }
 
   static define() {

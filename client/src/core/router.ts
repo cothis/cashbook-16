@@ -1,4 +1,5 @@
 import Page from '@/view/pages/page';
+import HistoryController from '../controller/history';
 
 const BACK_METHOD = '@back';
 
@@ -36,7 +37,7 @@ export default class Router {
   }
 
   private detachPage(page?: Page) {
-    if (page) page.$root.innerHTML = '';
+    if (page) page.$this.remove();
   }
 
   private getLastPage(): Page {
@@ -63,6 +64,7 @@ export default class Router {
     }
 
     this.detachPage(this.getLastPage());
+    HistoryController.unsubscribe();
 
     window.history.pushState({}, 'view', pathname);
     const $newPage = new pageContructor(document.body);
