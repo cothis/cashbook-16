@@ -5,7 +5,7 @@ export interface HistoryApplyDto {
     content: string;
     amount: number;
     isIncome: boolean;
-    payDate: string;
+    payDate: Date;
     methodId?: number;
     methodName?: string;
     categoryName: string;
