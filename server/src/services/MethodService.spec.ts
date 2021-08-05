@@ -19,11 +19,10 @@ describe('메소드 서비스 테스트', () => {
 
   it('메소드 생성하고 검색했을때 있어야 한다. 그리고 삭제한다.', async () => {
     const method = await methodService.createMethod({
-      githubId: 'cothis',
       name: rs.generate(),
     });
 
-    const cothisMethods = await methodService.getMethods('cothis');
+    const cothisMethods = await methodService.getMethods();
     const result = await methodService.deleteMethod(method.id);
 
     expect(cothisMethods).toContainEqual(method);

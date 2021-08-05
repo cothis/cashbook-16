@@ -9,8 +9,8 @@ import { loginCheck } from '../middlewares/auth';
 const router = express.Router();
 
 router.use('/githublogin', githubLoginRouter);
-router.use('/user', loginCheck, userRouter);
-router.use('/histories', loginCheck, historyRouter);
+router.use('/user', userRouter);
+router.use('/histories', historyRouter);
 router.use('/methods', loginCheck, methodRouter);
 router.use('/categories', loginCheck, categoryRouter);
 

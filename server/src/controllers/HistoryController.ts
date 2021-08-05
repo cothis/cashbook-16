@@ -1,6 +1,8 @@
 import { PaymentHistory } from '../entity/paymentHistory.entity';
 import { NextFunction, Request, Response } from 'express';
 import historyService from '../services/HistoryService';
+import { HistoryApplyDto } from '../DTO/HistoryApplyDto';
+import methodService from '../services/MethodService';
 
 export interface HistoryQuery {
   githubId?: string;
@@ -40,7 +42,16 @@ class HistoryController {
 
   applyChanges = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const histories: Partial<PaymentHistory>[] = req.body;
+      const histories: Partial<HistoryApplyDto>[] = req.body;
+
+      const getMethodIds = histories.map(async (history) => {
+        if (!history.methodName) return;
+        const method = await methodService.getMethodByName(history.methodName);
+        history.methodId = method.id;
+      });
+
+      await Promise.all(getMethodIds);
+
       const result: boolean = await historyService.applyChanges(
         histories,
         req.session.githubId!
