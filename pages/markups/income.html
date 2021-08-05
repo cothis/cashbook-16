@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/navbar.css" />
-    <link rel="stylesheet" href="../styles/income.tailwind.css" />
+    <link rel="stylesheet" href="../styles/tailwind.css" />
+    <!-- <link rel="stylesheet" href="../styles/income.tailwind.css" /> -->
     <title>입출금</title>
     <script type="module">
       /**
@@ -142,9 +143,19 @@
         pb-12
       "
     >
-      <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
-        7 월 내 역
-      </h1>
+      <div class="flex flex-row w-screen items-center justify-between mt-8">
+        <div></div>
+        <div class="block sm:hidden text-gray-600 dark:text-white p-3">
+          전달
+        </div>
+        <h1 class="text-4xl font-sans text-gray-600 dark:text-white">
+          7 월 내 역
+        </h1>
+        <div class="block sm:hidden text-gray-600 dark:text-white p-3">
+          담달
+        </div>
+        <div></div>
+      </div>
 
       <form
         action="/api"

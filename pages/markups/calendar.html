@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/navbar.css" />
     <link rel="stylesheet" href="../styles/calendar.css" />
-    <link rel="stylesheet" href="../styles/calendar.tailwind.css" />
+    <link rel="stylesheet" href="../styles/tailwind.css" />
+    <!-- <link rel="stylesheet" href="../styles/calendar.tailwind.css" /> -->
     <script type="module">
       /** @returns {HTMLElement} */
       const $ = (selector) => document.querySelector(selector);
@@ -537,9 +538,13 @@
         pb-12
       "
     >
-      <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-white">
-        7 월 내 역
-      </h1>
+      <div class="flex flex-row w-full items-center justify-between mt-8">
+        <div class="block sm:hidden text-gray-600 dark:text-white">이전 달</div>
+        <h1 class="text-4xl font-sans text-gray-600 dark:text-white">
+          7 월 내 역
+        </h1>
+        <div class="block sm:hidden text-gray-600 dark:text-white">다음 달</div>
+      </div>
 
       <div class="month-summary flex flex-row justify-end items-center">
         <div>
