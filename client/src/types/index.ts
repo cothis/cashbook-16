@@ -11,7 +11,6 @@ export interface PaymentHistory {
 
 export interface PaymentMethod {
   id: number;
-  githubId: string;
   name: string;
 }
 
