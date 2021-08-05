@@ -82,7 +82,6 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$editableRows = this.state.histories.map((history) => {
       const $newRow = new EditableRow({
         ...history,
-        onDeleteRow: this.onDeleteRow.bind(this),
       });
       $newRow.render();
       return $newRow;
@@ -91,6 +90,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
   };
 
   onAddRow = (rowInfo: EditableRowState) => {
+    console.log(rowInfo);
     this.state.histories.push({
       day: this.state.time.date,
       category: rowInfo.category,
@@ -98,18 +98,25 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       content: rowInfo.content,
       method: rowInfo.method,
     });
+    const $prevLastRow = new EditableRow({
+      category: rowInfo.category,
+      amount: rowInfo.amount,
+      content: rowInfo.content,
+      method: rowInfo.method,
+    });
+    $prevLastRow.render();
+    this.$editableRows.push($prevLastRow);
     const $newLastRow = new EditableRow({
       category: '미분류',
       amount: 0,
-      content: '새로운 항목',
+      content: '',
       method: '카드',
       onAddRow: this.onAddRow.bind(this),
     });
     $newLastRow.render();
     this.$lastRow = $newLastRow;
+    this.render();
   };
-
-  onDeleteRow = () => {};
 
   open = () => {
     this.$this?.classList.remove('hidden');
