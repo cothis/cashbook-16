@@ -105,11 +105,11 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
             현금
           </option>
           <option
-            value="현대카드"
+            value="계좌이체"
             class="hidden sm:block w-40 truncate dark:text-white"
-            selected=${method === '현대카드'}
+            selected=${method === '계좌이체'}
           >
-            현대카드
+            계좌이체
           </option>
         </select>
         <input

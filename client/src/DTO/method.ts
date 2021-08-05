@@ -1,3 +1,3 @@
-type methodType = '카드' | '현금' | '현대카드';
+type methodType = '카드' | '현금' | '계좌이체';
 
 export { methodType };
