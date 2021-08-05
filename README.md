@@ -48,6 +48,12 @@ package.json
 
 ---
 
+## API 문서
+
+[API Document v1.0.0](https://documenter.getpostman.com/view/16850329/Tzsik4TR)
+
+---
+
 ## install
 
 root, client, server 각 폴더에서 yarn install 을 해야합니다. (yarn 은 npm 으로 대체 가능합니다.)
