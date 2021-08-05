@@ -46,9 +46,9 @@ export default class AppHeader extends HTMLElement implements View {
 
   createDom(): HTMLElement {
     return html`<header>
-      <span class="cursor-pointer h-full sm:ml-16 ml-2 mr-4 p-2">
+      <a href="/" class="cursor-pointer h-full sm:ml-16 ml-2 mr-4 p-2">
         <img src="${logo}" alt="" class="h-full w-auto object-fill" />
-      </span>
+      </a>
       <router-link
         to="list"
         class="${BUTTON_CLASS} ${this.state.active === 'list'

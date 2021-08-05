@@ -1,6 +1,16 @@
-# cashbook-16
+# 16팀 윤민호 오인규
 
-## 윤민호 오인규
+<h2 align="center">
+  <a href="https://banksalad.ssu.life">LIVE DEMO</a>
+</h2>
+
+<div align="center">
+  <img width="400" alt="qr-code" src="https://user-images.githubusercontent.com/13645032/128349430-c865610e-9f3d-4a51-bd1e-7446f55d3479.png">
+</div>
+
+<div align="center">
+  네이버, 카카오톡 APP안에서 QR 코드로 스캔하면 웹뷰안에서 볼 수 있어요.
+</div>
 
 ### Database 설계(EER)
 
