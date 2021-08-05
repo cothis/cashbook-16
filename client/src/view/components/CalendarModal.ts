@@ -7,11 +7,13 @@ import {
   timeStateToDate,
   toKRW,
   toMonthDateDay,
+  monthRangeFactory,
 } from '../../utils';
 import EditableRow, { EditableRowState } from './EditableRow';
 import { postHistories } from '../../api/apis';
 import { TimeState } from '@/store/time';
 import { categoryPostForm } from '@/DTO/category';
+import { PaymentHistory } from '@/types';
 
 type CalendarModalState = {
   netPlus: number;
@@ -50,7 +52,16 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$lastRow.render();
 
     CalendarController.subscribe(this, this.onTimeChange.bind(this), 'time');
+    HistoryController.subscribe(
+      this,
+      this.onHistoryChange.bind(this),
+      'history'
+    );
   }
+
+  onHistoryChange = async (histories: PaymentHistory[]) => {
+    this.updateModalChilds();
+  };
 
   onTimeChange = async (timeState: TimeState) => {
     this.state.time = timeState;
@@ -140,7 +151,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$this?.classList.add('hidden');
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     const $forms = this.$this?.querySelectorAll('form');
     if (!$forms) return;
     const forms = Array.from($forms);
@@ -166,7 +177,20 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       });
       return acc;
     }, []);
-    postHistories(datas);
+    await postHistories({
+      payDate: timeStateToString(this.state.time),
+      datas,
+    });
+    const [startDate, endDate] = monthRangeFactory(
+      this.state.time.year,
+      this.state.time.month
+    );
+    await HistoryController.fetchHistory({
+      startDate,
+      endDate,
+    });
+    CalendarController.setCalendar(this.state.time);
+    this.render();
   };
 
   createDom(): HTMLElement {

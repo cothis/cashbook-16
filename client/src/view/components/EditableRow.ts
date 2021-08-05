@@ -59,7 +59,15 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
   };
 
   onChangeAmount = (ev: Event) => {
-    this.state.amount = (ev.target as any).value;
+    this.state.amount = Number((ev.target as any).value);
+    const $amount = this.$this?.querySelector('#amount') as HTMLInputElement;
+    if (this.state.amount < 0) {
+      $amount.classList.remove('text-green-400');
+      $amount.classList.add('text-red-400');
+    } else {
+      $amount.classList.remove('text-red-400');
+      $amount.classList.add('text-green-400');
+    }
   };
 
   createDom(): HTMLElement {
@@ -136,11 +144,11 @@ class EditableRow extends Component<EditableRowProps, EditableRowState> {
           class="w-24 truncate sm:right-0 ${
             amount >= 0 ? 'text-green-400' : 'text-red-400'
           } text-right"
-          placeholder="-지출/+수입 (원)"
+          placeholder="금액 (원)"
           autocomplete="off"
           title="형식: 숫자"
           value="${amount === 0 ? false : amount}"
-          onChange=${this.onChangeAmount.bind(this)}
+          onInput=${this.onChangeAmount.bind(this)}
         />
         <button class="p-2" onClick=${() => {
           this.props?.onAddRow
