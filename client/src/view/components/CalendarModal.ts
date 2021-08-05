@@ -103,11 +103,19 @@ class CalendarModal extends Component<{}, CalendarModalState> {
 
   onDeleteRow = (rowInfo: EditableRowState) => {
     this.state.histories = this.state.histories.filter((history) => {
-      if (history.content === rowInfo.content) return false;
+      if (
+        history.content === rowInfo.content &&
+        history.amount === rowInfo.amount
+      )
+        return false;
       return true;
     });
     this.$editableRows = this.$editableRows.filter(($row) => {
-      if ($row.props?.content === rowInfo.content) return false;
+      if (
+        $row.props?.content === rowInfo.content &&
+        $row.props?.amount === rowInfo.amount
+      )
+        return false;
       return true;
     });
     this.render();
@@ -190,6 +198,14 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       endDate,
     });
     CalendarController.setCalendar(this.state.time);
+    this.$lastRow = new EditableRow({
+      category: '미분류',
+      amount: 0,
+      content: '',
+      method: '카드',
+      onAddRow: this.onAddRow.bind(this),
+    });
+    this.$lastRow.render();
     this.render();
   };
 
