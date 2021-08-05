@@ -5,8 +5,6 @@ import { getCategories, getMethods } from '../../api/apis';
 import { getHistories } from '../../api/histories';
 import ListController from '../../controller/list';
 
-const THIS_MONTH = new Date().getMonth() + 1;
-
 export default class ListPage extends Page {
   constructor(root: HTMLElement) {
     super(root);
@@ -34,10 +32,6 @@ export default class ListPage extends Page {
       <section
         class="m-auto max-w-screen-xl flex flex-col w-full justify-start items-center box-border sm:gap-24 gap-12 pb-12"
       >
-        <h1 class="mt-8 text-4xl font-sans text-gray-600 dark:text-purple-100">
-          ${THIS_MONTH} 월 내 역
-        </h1>
-
         <history-form></history-form>
         <history-list></history-list>
       </section>

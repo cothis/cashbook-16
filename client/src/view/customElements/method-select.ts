@@ -3,7 +3,7 @@ import html from '../../core/jsx';
 import { PaymentMethod } from '../../types';
 import ListController from '../../controller/list';
 
-const THIS_CLASS = 'w-full sm:w-28 dark:text-white';
+const THIS_CLASS = 'w-full sm:w-40 dark:text-white';
 
 export default class MethodSelect extends HTMLElement implements View {
   methods: PaymentMethod[] = [];

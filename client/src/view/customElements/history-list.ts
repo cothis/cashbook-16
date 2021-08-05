@@ -101,13 +101,6 @@ export default class HistoryList extends HTMLElement implements View {
             )}
           </section>`
         )}
-
-        <div class="hidden sm:block fixed top-1/2 left-0 p-8 w-10 slide-btn">
-          <
-        </div>
-        <div class="hidden sm:block fixed top-1/2 right-0 p-8 w-10 slide-btn">
-          >
-        </div>
       </div>
     `;
   }

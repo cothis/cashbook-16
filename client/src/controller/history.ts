@@ -32,8 +32,7 @@ class HistoryController extends Controller<State> {
   registerNewHistory(history: PaymentHistory) {
     this.getHistories().push(history);
     this.getHistories().sort(
-      (a, b) =>
-        new Date(a.payDate).getSeconds() - new Date(b.payDate).getSeconds()
+      (a, b) => Number(new Date(b.payDate)) - Number(new Date(a.payDate))
     );
     this.notify('history');
   }

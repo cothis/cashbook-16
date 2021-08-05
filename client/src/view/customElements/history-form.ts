@@ -4,7 +4,7 @@ import { createHistory } from '../../api/apis';
 import HistoryController from '../../controller/history';
 import { dateToString } from '../../utils';
 
-const THIS_CLASS = 'w-full md:w-3/4 flex flex-col';
+const THIS_CLASS = 'w-full md:w-3/4 flex flex-col mt-8';
 const TODAY = dateToString(new Date());
 
 export default class HistoryForm extends HTMLElement implements View {
