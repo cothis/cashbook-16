@@ -1,7 +1,8 @@
 import Component from './Component';
 import html from '../../core/jsx';
 import CalendarController from '../../controller/calendar';
-import { $ } from '../../utils';
+import { $, timeStateToFirstDayOfWeek } from '../../utils';
+import { TimeState } from '../../store/time';
 
 interface Cell {
   day: number;
@@ -11,6 +12,8 @@ interface Cell {
 
 interface CalendarState {
   cells: Cell[];
+  offset: number;
+  time: TimeState;
 }
 
 class Calendar extends Component<{}, CalendarState> {
@@ -18,29 +21,39 @@ class Calendar extends Component<{}, CalendarState> {
 
   constructor() {
     super();
-    this.state = { cells: [] };
+    this.state = {
+      cells: [],
+      time: CalendarController.getCalendar(),
+      offset: 2,
+    };
+    this.state.offset = timeStateToFirstDayOfWeek(this.state.time);
+    CalendarController.subscribe(this, this.onTimeChange.bind(this), 'time');
     this.clearCells();
   }
 
+  onTimeChange(time: TimeState) {
+    this.state.time = time;
+    this.state.offset = timeStateToFirstDayOfWeek(this.state.time);
+    this.render();
+  }
+
   clearCells = () => {
-    this.state = {
-      cells: [...Array(30).keys()].map((val) => ({
-        day: val + 1,
-        minus: 0,
-        plus: 0,
-      })),
-    };
+    this.state.cells = [...Array(30).keys()].map((val) => ({
+      day: val + 1,
+      minus: 0,
+      plus: 0,
+    }));
   };
 
   createDom(): HTMLElement {
-    const { cells } = this.state;
+    const { cells, offset } = this.state;
 
     return html`
       <section class="calendar">
         <div class="calendar-grid w-full h-full grid grid-cols-7 grid-rows-6">
-          <span class="calendar-cell invisible"> </span>
-          <span class="calendar-cell invisible"> </span>
-
+          ${[...Array(offset)].map(() => {
+            return html` <span class="calendar-cell invisible"> </span> `;
+          })}
           ${cells.map((cell) => {
             return html`
               <calendar-cell

@@ -1,5 +1,5 @@
 import { PaymentHistory } from '../entity/paymentHistory.entity';
-import { HistoryQuery } from '../controllers/historyController';
+import { HistoryQuery } from '../controllers/HistoryController';
 import { Between, getConnection } from 'typeorm';
 import { PaymentMethod } from '../entity/paymentMethod.entity';
 import { PaymentCategory } from '../entity/paymentCategory.entity';

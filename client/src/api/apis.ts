@@ -46,7 +46,12 @@ export const createHistory = async (body: any): Promise<PaymentHistory> => {
   });
 };
 
-export const postHistories = async (histories: categoryPostForm[]) => {
+type postHistoriesParam = {
+  payDate: string;
+  datas: categoryPostForm[];
+};
+
+export const postHistories = async (histories: postHistoriesParam) => {
   return await request<{ result: string }>('/api/histories/apply', {
     method: 'post',
     body: JSON.stringify(histories),

@@ -65,7 +65,7 @@ export default class HistoryForm extends HTMLElement implements View {
               type="number"
               name="amount"
               class="w-full sm:w-32 truncate sm:right-0 dark:text-white sm:text-right"
-              placeholder="금액 (원)"
+              placeholder="-지출/+수입 (원)"
               autocomplete="off"
               title="형식: 숫자"
             />

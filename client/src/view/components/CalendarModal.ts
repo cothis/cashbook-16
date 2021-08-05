@@ -7,11 +7,13 @@ import {
   timeStateToDate,
   toKRW,
   toMonthDateDay,
+  monthRangeFactory,
 } from '../../utils';
 import EditableRow, { EditableRowState } from './EditableRow';
 import { postHistories } from '../../api/apis';
 import { TimeState } from '@/store/time';
 import { categoryPostForm } from '@/DTO/category';
+import { PaymentHistory } from '@/types';
 
 type CalendarModalState = {
   netPlus: number;
@@ -50,7 +52,16 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$lastRow.render();
 
     CalendarController.subscribe(this, this.onTimeChange.bind(this), 'time');
+    HistoryController.subscribe(
+      this,
+      this.onHistoryChange.bind(this),
+      'history'
+    );
   }
+
+  onHistoryChange = async (histories: PaymentHistory[]) => {
+    this.updateModalChilds();
+  };
 
   onTimeChange = async (timeState: TimeState) => {
     this.state.time = timeState;
@@ -90,7 +101,28 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.render();
   };
 
+  onDeleteRow = (rowInfo: EditableRowState) => {
+    this.state.histories = this.state.histories.filter((history) => {
+      if (
+        history.content === rowInfo.content &&
+        history.amount === rowInfo.amount
+      )
+        return false;
+      return true;
+    });
+    this.$editableRows = this.$editableRows.filter(($row) => {
+      if (
+        $row.props?.content === rowInfo.content &&
+        $row.props?.amount === rowInfo.amount
+      )
+        return false;
+      return true;
+    });
+    this.render();
+  };
+
   onAddRow = (rowInfo: EditableRowState) => {
+    console.log(rowInfo);
     this.state.histories.push({
       day: this.state.time.date,
       category: rowInfo.category,
@@ -98,18 +130,26 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       content: rowInfo.content,
       method: rowInfo.method,
     });
+    const $prevLastRow = new EditableRow({
+      category: rowInfo.category,
+      amount: rowInfo.amount,
+      content: rowInfo.content,
+      method: rowInfo.method,
+      onDeleteRow: this.onDeleteRow.bind(this),
+    });
+    $prevLastRow.render();
+    this.$editableRows.push($prevLastRow);
     const $newLastRow = new EditableRow({
       category: '미분류',
       amount: 0,
-      content: '새로운 항목',
+      content: '',
       method: '카드',
       onAddRow: this.onAddRow.bind(this),
     });
     $newLastRow.render();
     this.$lastRow = $newLastRow;
+    this.render();
   };
-
-  onDeleteRow = () => {};
 
   open = () => {
     this.$this?.classList.remove('hidden');
@@ -119,7 +159,7 @@ class CalendarModal extends Component<{}, CalendarModalState> {
     this.$this?.classList.add('hidden');
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     const $forms = this.$this?.querySelectorAll('form');
     if (!$forms) return;
     const forms = Array.from($forms);
@@ -145,7 +185,28 @@ class CalendarModal extends Component<{}, CalendarModalState> {
       });
       return acc;
     }, []);
-    postHistories(datas);
+    await postHistories({
+      payDate: timeStateToString(this.state.time),
+      datas,
+    });
+    const [startDate, endDate] = monthRangeFactory(
+      this.state.time.year,
+      this.state.time.month
+    );
+    await HistoryController.fetchHistory({
+      startDate,
+      endDate,
+    });
+    CalendarController.setCalendar(this.state.time);
+    this.$lastRow = new EditableRow({
+      category: '미분류',
+      amount: 0,
+      content: '',
+      method: '카드',
+      onAddRow: this.onAddRow.bind(this),
+    });
+    this.$lastRow.render();
+    this.render();
   };
 
   createDom(): HTMLElement {
